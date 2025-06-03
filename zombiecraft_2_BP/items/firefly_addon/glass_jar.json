@@ -1,0 +1,20 @@
+{
+	"format_version": "1.21.70",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:glass_jar"
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:display_name": {
+				"value": "Glass Jar"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:icon": "glass_jar",
+			"minecraft:block_placer": {
+				"block": "zombie:empty_jar_block"
+			},
+			"minecraft:allow_off_hand": true
+		}
+	}
+}

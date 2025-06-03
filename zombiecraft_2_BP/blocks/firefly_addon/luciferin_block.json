@@ -1,0 +1,33 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:luciferin_block",
+			"menu_category": {
+				"category": "nature",
+				"group": "itemGroup.name.element"
+			},
+			"states": {
+				"zombie:powered": [
+					false,
+					true
+				]
+			}
+		},
+		"components": {
+			"minecraft:collision_box": true,
+			"minecraft:destructible_by_explosion": true,
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 0.5
+			},
+			"minecraft:display_name": "Luciferin Block",
+			"minecraft:redstone_conductivity": {
+				"allows_wire_to_step_down": true,
+				"redstone_conductor": true
+			},
+			"minecraft:map_color": "#FFFFFF",
+			"minecraft:flammable": true,
+			"minecraft:light_emission": 15
+		}
+	}
+}

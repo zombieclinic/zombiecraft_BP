@@ -1,0 +1,26 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.zombie.elf": {
+			"states": {
+				"default": {
+					"transitions": [
+						{
+							"function_1": "query.skin_id==1"
+						}
+					]
+				},
+				"function_1": {
+					"transitions": [
+						{
+							"default": "query.skin_id!=1"
+						}
+					],
+					"on_entry": [
+						"/scriptevent zombie:elfmenu"
+					]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:firefly_luciferin"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "zombie:firefly_luciferin"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "zombie:luciferin_block",
+				"count": 1
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:firefly_luciferin",
+				"count": 9
+			}
+		]
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:firefly_luciferin_fire",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:display_name": {
+				"value": "Luciferin Fire"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:icon": "firefly_luciferin_fire",
+			"minecraft:allow_off_hand": true,
+			"minecraft:tags": {
+				"tags": [
+					"minecraft:transform_templates"
+				]
+			}
+		}
+	}
+}

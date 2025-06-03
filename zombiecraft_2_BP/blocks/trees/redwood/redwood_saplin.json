@@ -1,0 +1,192 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:redwood_saplin",
+			"menu_category": {
+				"category": "none",
+				"is_hidden_in_commands": true
+			},
+			"states": {
+				"starter:crop_age": [
+					0,
+					1,
+					2,
+					3,
+					4,
+					5
+				]
+			}
+		},
+		"permutations": [
+			{
+				"condition": "query.block_state('starter:crop_age') == 0",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "zombie_saplin",
+							"render_method": "alpha_test"
+						}
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-2
+						],
+						"size": [
+							6,
+							11,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('starter:crop_age') == 1",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "zombie_saplin2",
+							"render_method": "alpha_test"
+						}
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-2
+						],
+						"size": [
+							6,
+							12,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('starter:crop_age') == 2",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "zombie_saplin3",
+							"render_method": "alpha_test"
+						}
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-2
+						],
+						"size": [
+							6,
+							14,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('starter:crop_age') == 3",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "zombie_saplin3",
+							"render_method": "alpha_test"
+						}
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-2
+						],
+						"size": [
+							6,
+							14,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('starter:crop_age') == 4",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "zombie_saplin4",
+							"render_method": "alpha_test"
+						}
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6,
+							0,
+							-4
+						],
+						"size": [
+							10,
+							15,
+							10
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('starter:crop_age') == 5",
+				"components": {
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "zombie_saplin5",
+							"render_method": "alpha_test"
+						}
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6,
+							0,
+							-4
+						],
+						"size": [
+							10,
+							16,
+							10
+						]
+					}
+				}
+			}
+		],
+		"components": {
+			"minecraft:collision_box": true,
+			"minecraft:selection_box": true,
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 0.4
+			},
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 15
+			},
+			"minecraft:flammable": {
+				"destroy_chance_modifier": 20,
+				"catch_chance_modifier": 5
+			},
+			"minecraft:map_color": "#944214",
+			"minecraft:display_name": "Redwood Sapling",
+			"minecraft:light_dampening": 1,
+			"minecraft:light_emission": 0,
+			"minecraft:material_instances": {
+				"*": {
+					"ambient_occlusion": true,
+					"face_dimming": false,
+					"render_method": "alpha_test",
+					"texture": "zombie_saplin"
+				}
+			},
+			"minecraft:geometry": "geometry.red_wood_saplin",
+			"minecraft:custom_components": [
+				"zombie:redwood_saplin"
+			]
+		}
+	}
+}

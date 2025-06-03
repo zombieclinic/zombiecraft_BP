@@ -1,0 +1,29 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:magma_lime_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:magma"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:magma"
+			},
+			{
+				"item": "minecraft:lime_dye"
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:magma_lime"
+			}
+		]
+	}
+}

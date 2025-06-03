@@ -1,0 +1,521 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "zombie:whale_orca",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false
+		},
+		"component_groups": {
+			"baby": {
+				"minecraft:health": {
+					"value": 3,
+					"max": 3
+				},
+				"minecraft:behavior.follow_parent": {
+					"priority": 0
+				},
+				"minecraft:scale": {
+					"value": 0.5
+				},
+				"minecraft:ageable": {
+					"duration": 2400,
+					"feed_items": [
+						"salmon",
+						"cod",
+						"tropical_fish"
+					],
+					"grow_up": {
+						"event": "growup",
+						"target": "self"
+					}
+				},
+				"minecraft:navigation.generic": {
+					"is_amphibious": false,
+					"can_path_over_water": false,
+					"can_swim": true,
+					"can_walk": false,
+					"can_breach": false,
+					"can_sink": false,
+					"can_float": true
+				},
+				"minecraft:behavior.swim_wander": {
+					"interval": 0.00833,
+					"look_ahead": 3,
+					"priority": 0,
+					"speed_multiplier": 1.5,
+					"wander_time": 60
+				},
+				"minecraft:behavior.random_swim": {
+					"priority": 3,
+					"speed_multiplier": 1,
+					"xz_dist": 32,
+					"y_dist": 8,
+					"interval": 60
+				}
+			},
+			"adult": {
+				"minecraft:scale": {
+					"value": 2.5
+				},
+				"minecraft:breedable": {
+					"blend_attributes": true,
+					"breed_cooldown": 60,
+					"breeds_with": {
+						"breed_event": {
+							"event": "minecraft:entity_born",
+							"target": "baby"
+						}
+					},
+					"breed_items": [
+						"minecraft:tropical_fish",
+						"salmon",
+						"cod"
+					]
+				},
+				"minecraft:inventory": {
+					"inventory_size": 16,
+					"container_type": "horse"
+				},
+				"minecraft:behavior.breed": {
+					"priority": 1,
+					"speed_multiplier": 1
+				}
+			},
+			"tamed_orca": {
+				"minecraft:equippable": {
+					"slots": [
+						{
+							"slot": 0,
+							"item": "saddle",
+							"accepted_items": [
+								"saddle"
+							],
+							"on_equip": {
+								"event": "saddled"
+							},
+							"on_unequip": {
+								"event": "unsaddled"
+							}
+						}
+					]
+				},
+				"minecraft:is_tamed": {},
+				"minecraft:behavior.follow_owner": {},
+				"minecraft:rideable": {
+					"seat_count": 1,
+					"crouching_skip_interact": true,
+					"family_types": [
+						"player"
+					],
+					"interact_text": "action.interact.ride.orca",
+					"seats": {
+						"position": [
+							0,
+							0.35,
+							-0.3
+						]
+					}
+				},
+				"minecraft:behavior.player_ride_tamed": {}
+			},
+			"wild_orca": {
+				"minecraft:variant": {
+					"value": 0
+				},
+				"minecraft:navigation.generic": {
+					"is_amphibious": false,
+					"can_path_over_water": false,
+					"can_swim": true,
+					"can_walk": false,
+					"can_breach": false,
+					"can_sink": false,
+					"can_float": true
+				},
+				"minecraft:behavior.swim_wander": {
+					"interval": 0.00833,
+					"look_ahead": 3,
+					"priority": 0,
+					"speed_multiplier": 1.5,
+					"wander_time": 60
+				},
+				"minecraft:behavior.random_swim": {
+					"priority": 3,
+					"speed_multiplier": 1,
+					"xz_dist": 32,
+					"y_dist": 8,
+					"interval": 60
+				},
+				"minecraft:behavior.hurt_by_target": {
+					"priority": 1
+				},
+				"minecraft:behavior.melee_box_attack": {
+					"can_spread_on_fire": true,
+					"priority": 3
+				},
+				"minecraft:tameable": {
+					"probability": 0.2,
+					"tame_event": {
+						"event": "tamed",
+						"target": "self"
+					},
+					"tame_items": [
+						"tropical_fish",
+						"cod",
+						"salmon"
+					]
+				},
+				"minecraft:attack": {
+					"damage": {
+						"range_max": 1,
+						"range_min": 0
+					}
+				},
+				"minecraft:attack_damage": {
+					"value": 5
+				}
+			},
+			"mouted": {
+				"minecraft:buoyant": {
+					"apply_gravity": true,
+					"base_buoyancy": 1,
+					"big_wave_probability": 0.03,
+					"big_wave_speed": 10,
+					"drag_down_on_buoyancy_removed": 0,
+					"simulate_waves": true,
+					"liquid_blocks": [
+						"water"
+					]
+				},
+				"minecraft:can_power_jump": {},
+				"minecraft:horse.jump_strength": {
+					"value": 1
+				},
+				"minecraft:input_ground_controlled": {},
+				"minecraft:variant": {
+					"value": 2
+				},
+				"minecraft:interact": {
+					"interactions": [
+						{
+							"play_sounds": "armor.equip_generic",
+							"on_interact": {
+								"filters": {
+									"all_of": [
+										{
+											"test": "is_family",
+											"subject": "other",
+											"value": "player"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "hand",
+											"subject": "other",
+											"value": "chest"
+										}
+									]
+								},
+								"event": "chested",
+								"target": "self"
+							},
+							"use_item": true,
+							"interact_text": "action.interact.attachchest"
+						}
+					]
+				}
+			},
+			"notmouted": {
+				"minecraft:variant": {
+					"value": 0
+				},
+				"minecraft:navigation.generic": {
+					"is_amphibious": false,
+					"can_path_over_water": false,
+					"can_swim": true,
+					"can_walk": false,
+					"can_breach": false,
+					"can_sink": false,
+					"can_float": true
+				},
+				"minecraft:behavior.swim_wander": {
+					"interval": 0.00833,
+					"look_ahead": 3,
+					"priority": 0,
+					"speed_multiplier": 1.5,
+					"wander_time": 60
+				},
+				"minecraft:behavior.random_swim": {
+					"priority": 3,
+					"speed_multiplier": 1,
+					"xz_dist": 32,
+					"y_dist": 8,
+					"interval": 60
+				}
+			},
+			"chested": {
+				"minecraft:is_chested": {},
+				"minecraft:variant": {
+					"value": 1
+				}
+			}
+		},
+		"components": {
+			"minecraft:behavior.random_breach": {
+				"priority": 6,
+				"interval": 50,
+				"xz_dist": 6,
+				"cooldown_time": 2
+			},
+			"minecraft:inventory": {
+				"container_type": "horse",
+				"inventory_size": 16
+			},
+			"minecraft:nameable": {},
+			"minecraft:type_family": {
+				"family": [
+					"orca",
+					"mob",
+					"whale"
+				]
+			},
+			"minecraft:collision_box": {
+				"width": 2.5,
+				"height": 0.5
+			},
+			"minecraft:health": {
+				"value": 60,
+				"max": 60
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					},
+					{
+						"cause": "drowning",
+						"damage_per_tick": 1,
+						"filters": {
+							"all_of": [
+								{
+									"test": "in_block",
+									"value": "water",
+									"operator": "!="
+								}
+							]
+						}}
+					
+				]
+			},
+			"minecraft:follow_range": {
+				"value": 48,
+				"max": 48
+			},
+			"minecraft:experience_reward": {
+				"on_death": "!query.is_baby && query.last_hit_by_player ? Math.Random(1,3) : 0"
+			  },
+			"minecraft:behavior.swim_idle": {
+				"priority": 5,
+				"idle_time": 5,
+				"success_rate": 0.1
+			},
+			"minecraft:attack": {
+				"damage": 3
+			},
+			"minecraft:movement.sway": {
+				"sway_amplitude": 0
+			},
+			"minecraft:underwater_movement": {
+				"value": 0.10
+			},
+			"minecraft:jump.static": {
+				"jump_power": 0.6
+			},
+			"minecraft:can_climb": {},
+			"minecraft:despawn": {
+				"despawn_from_distance": {},
+				"despawn_from_simulation_edge": true
+			},
+			"minecraft:behavior.avoid_mob_type": {
+				"priority": 2,
+				"entity_types": [
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "guardian_elder"
+								},
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "guardian"
+								}
+							]
+						},
+						"max_dist": 8,
+						"walk_speed_multiplier": 1,
+						"sprint_speed_multiplier": 1
+					}
+				],
+				"probability_per_strength": 0.14
+			},
+			"minecraft:behavior.move_to_water": {
+				"priority": 1,
+				"search_range": 15,
+				"search_height": 5
+			},
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:flocking": {
+				"in_water": false,
+				"match_variants": false,
+				"use_center_of_mass": false,
+				"low_flock_limit": 4,
+				"high_flock_limit": 8,
+				"goal_weight": 2,
+				"loner_chance": 0.1,
+				"influence_radius": 6,
+				"breach_influence": 0,
+				"separation_weight": 1.75,
+				"separation_threshold": 3,
+				"cohesion_weight": 1.85,
+				"cohesion_threshold": 6.5,
+				"innner_cohesion_threshold": 3.5,
+				"min_height": 4,
+				"max_height": 4,
+				"block_distance": 1,
+				"block_weight": 0
+			},
+			"minecraft:physics": {
+				"has_collision": true,
+				"has_gravity": true
+			},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:leashable": {
+				"soft_distance": 4,
+				"hard_distance": 6,
+				"max_distance": 10
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:scale": {
+				"value": 2.5
+			},
+			"minecraft:healable": {
+				"items": [
+					{
+						"item": "cod",
+						"heal_amount": 30
+					},
+					{
+						"heal_amount": 30,
+						"item": "salmon"
+					},
+					{
+						"heal_amount": 30,
+						"item": "tropical_fish"
+					}
+				]
+			}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+				"randomize": [
+					{
+						"add": {
+							"component_groups": [
+								"baby"
+							]
+						},
+						"weight": 1
+					},
+					{
+						"add": {
+							"component_groups": [
+								"adult",
+								"wild_orca"
+							]
+						},
+						"weight": 4
+					}
+				]
+			},
+			"minecraft:entity_born": {
+				"add": {
+					"component_groups": [
+						"baby"
+					]
+				}
+			},
+			"growup": {
+				"add": {
+					"component_groups": [
+						"adult",
+						"wild_orca"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"baby"
+					]
+				}
+			},
+			"tamed": {
+				"add": {
+					"component_groups": [
+						"tamed_orca",
+						"notmouted"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"wild_orca"
+					]
+				}
+			},
+			"saddled": {
+				"add": {
+					"component_groups": [
+						"mouted"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"notmouted"
+					]
+				}
+			},
+			"unsaddled": {
+				"add": {
+					"component_groups": [
+						"notmouted"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"mouted"
+					]
+				}
+			},
+			"chested": {
+				"add": {
+					"component_groups": [
+						"chested"
+					]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,35 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:mana_great_potion",
+			"menu_category": {
+				"category": "equipment",
+				"group": "itemGroup.name.sword"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Mana Great Potion"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:icon": "zombie_mana_great_potion",
+			"minecraft:custom_components": [
+				"zombie:manapotion"
+			],
+			"minecraft:use_animation": "drink",
+			"minecraft:food": {
+				"can_always_eat": true,
+				"nutrition": 0,
+				"saturation_modifier": 0,
+				"using_converts_to": "glass_bottle"
+			},
+			"minecraft:use_modifiers": {
+				"movement_modifier": 0.5,
+				"use_duration": 1
+			}
+		}
+	}
+}

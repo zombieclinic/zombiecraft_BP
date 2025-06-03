@@ -1,0 +1,37 @@
+{
+	"format_version": "1.21.70",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:atlantis_transparent_brown",
+			"menu_category": {
+				"category": "construction",
+				"group": "minecraft:itemGroup.name.glass"
+			}
+		},
+		"components": {
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 0.5
+			},
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 32
+			},
+			"minecraft:map_color": "#804C09",
+			"minecraft:light_dampening": 1,
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "zombie_brown_atlantis_transparent",
+					"ambient_occlusion": true,
+					"face_dimming": true,
+					"render_method": "blend_to_opaque"
+				}
+			},
+			"minecraft:geometry": "minecraft:geometry.full_block",
+			"minecraft:display_name": "Atlantis Transparent Brown",
+			"tag:glass": {},
+			"minecraft:custom_components": [
+				"zombie:atlantis"
+			],
+			"minecraft:collision_box": false
+		}
+	}
+}

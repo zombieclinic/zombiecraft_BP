@@ -1,0 +1,21 @@
+{
+    "format_version": "1.20.80",
+    "minecraft:item": {
+        "description": {
+            "identifier": "zombie:chaos_shovel",
+            "menu_category": {
+                "category": "equipment"
+            }
+        },
+        "components": {
+            "minecraft:icon": "zombie_chaos_axe",
+            "minecraft:display_name": {
+                "value": "Choas Shovel"
+            },
+            "minecraft:use_modifiers": {
+                "movement_modifier": 0,
+                "use_duration": 3600
+            }
+        }
+    }
+}

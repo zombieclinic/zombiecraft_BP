@@ -1,0 +1,31 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "zombie:demon_door_recipe"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "group": "custom",
+    "pattern": [
+      "##",
+      "##",
+      "##"
+    ],
+    "key": {
+      "#": {
+        "item": "zombie:demon_steel"
+      }
+    },
+    "unlock": [
+      {
+        "item": "zombie:demon_steel"
+      }
+    ],
+    "result": {
+      "item": "zombie:demon_steel_slab",
+      "count": 3
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:bear_raw_meat",
+			"menu_category": {
+				"category": "nature",
+				"group": "itemGroup.name.rawFood"
+			}
+		},
+		"components": {
+			"minecraft:icon": "zombie_bear_raw",
+			"minecraft:display_name": {
+				"value": "Bear Raw Meat"
+			},
+			"minecraft:food": {
+				"can_always_eat": true,
+				"nutrition": 1,
+				"saturation_modifier": 0
+			},
+			"minecraft:use_modifiers": {
+				"movement_modifier": 0,
+				"use_duration": 1
+			},
+			"minecraft:tags": {
+				"tags": [
+					"minecraft:is_food",
+					"minecraft:is_meat"
+				]
+			},
+			"minecraft:custom_components": [
+				"zombie:rottenfood"
+			],
+			"minecraft:use_animation": "eat"
+		}
+	}
+}

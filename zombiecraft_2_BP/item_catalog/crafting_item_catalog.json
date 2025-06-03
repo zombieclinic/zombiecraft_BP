@@ -1,0 +1,31 @@
+{
+  "format_version": "1.21.60",
+  "minecraft:crafting_items_catalog": {
+    "categories": [
+      {
+     
+        "category_name": "equipment",
+        "groups": [
+          {
+       
+            "group_identifier": {
+              "icon": "zombie:chaos_bow",
+              "name": "minecraft:itemGroup.name.choas"
+            },
+            "items": [
+              "zombie:chaos_bow",
+              "zombie:chaos_crossbow",
+              "zombie:chaos_axe",
+              "zombie:chaos_fishing_rod",
+              "zombie:chaos_arrow",
+              "zombie:coffin_backpack",
+              "zombie:chaos_bfc_arrow",
+              "zombie:chaos_hammer",
+              "zombie:chaos_helmet"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

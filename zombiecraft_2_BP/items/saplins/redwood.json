@@ -1,0 +1,27 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:redwood_saplin_item",
+			"menu_category": {
+				"category": "nature",
+				"group": "itemGroup.name.sapling"
+			}
+		},
+		"components": {
+			"minecraft:icon": "zombie_redwood_sap",
+			"minecraft:display_name": {
+				"value": "Redwood Saplin"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:redwood_saplin",
+				"use_on": [
+					"grass_block",
+					"dirt",
+					"dirt_with_roots",
+					"coarse_dirt"
+				]
+			}
+		}
+	}
+}

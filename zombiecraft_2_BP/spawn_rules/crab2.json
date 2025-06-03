@@ -1,0 +1,54 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "yyfool:crab2",
+			"population_control": "animal"
+		},
+		"conditions": [
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underwater": {},
+				"minecraft:distance_filter": {
+					"min": 24,
+					"max": 32
+				},
+				"minecraft:weight": {
+					"default": 25
+				},
+				"minecraft:density_limit": {
+					"surface": 20
+				},
+				"minecraft:height_filter": {
+					"min": 30,
+					"max": 67
+				},
+				"minecraft:herd": {
+					"min_size": 1,
+					"max_size": 3
+				},
+				"minecraft:biome_filter": [
+					{
+						"test": "has_biome_tag",
+						"operator": "==",
+						"value": "ocean"
+					},
+					{
+						"any_of": [
+							{
+								"test": "has_biome_tag",
+								"operator": "==",
+								"value": "warm"
+							},
+							{
+								"test": "has_biome_tag",
+								"operator": "==",
+								"value": "lukewarm"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

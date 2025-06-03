@@ -1,0 +1,96 @@
+{
+  "format_version": "1.21.40",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "zombie:fishing_hook",
+      "is_spawnable": true,
+      "is_summonable": true
+    },
+
+    "component_groups": {
+      "loot_jungle": {
+        "minecraft:loot": {
+          "table": "loot_tables/gameplay/jungle_fishing.json"
+        }
+      }
+    },
+
+    "components": {
+        "minecraft:navigation.generic": {
+            "can_sink": false
+        },
+        "minecraft:floats_in_liquid": {},
+        "minecraft:collision_box": {
+        "width": 0.15,
+        "height": 0.15
+      },
+      "minecraft:water_movement": {
+        "drag_factor": 0.8
+      },
+      "minecraft:movement": {
+        "value": 1,
+        "max": 1
+      },
+      "minecraft:behavior.move_to_block": {
+        "start_chance": 1,
+        "search_range": 8,
+        "goal_radius": 1,
+        "stay_duration": 5,
+        "target_blocks": [
+            "minecraft:water"
+        ]
+      },
+      
+      "minecraft:damage_sensor": {
+        "triggers": [
+            {
+                "cause": "all",
+                "deals_damage": "no"
+            }
+        ]
+      },
+      "minecraft:movement.basic": {
+        "max_turn": 30
+      },
+      "minecraft:behavior.float": {
+        "priority": 1
+      },
+      "minecraft:loot": {
+        "table": "loot_tables/gameplay/fishing.json"
+      },
+      "minecraft:physics": {
+        "has_gravity": false
+        
+      },
+      "minecraft:dimension_bound": {
+      },
+      "minecraft:transient": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      
+      "minecraft:conditional_bandwidth_optimization": {
+        "default_values": {
+          "max_optimized_distance": 80.0,
+          "max_dropped_ticks": 7,
+          "use_motion_prediction_hints": true
+        }
+      }
+    },
+
+    "events": {
+      "minecraft:entity_spawned": {
+        "sequence": [
+          {
+            "filters": {
+              "test": "is_biome", "value": "jungle"
+            },
+            "add": { "component_groups": [ "loot_jungle" ] }
+          }
+        ]
+      }
+    }
+  }
+}

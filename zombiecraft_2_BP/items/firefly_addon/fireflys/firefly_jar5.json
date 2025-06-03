@@ -1,0 +1,26 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:firefly_jar_5",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:icon": "firefly_jar_5",
+			"minecraft:display_name": {
+				"value": "Firefly Jar 5"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:allow_off_hand": true,
+			"minecraft:block_placer": {
+				"block": "zombie:glass_jar_05_block"
+			},
+			"minecraft:custom_components": [
+				"zombie:firefly_flicker"
+			]
+		}
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.zombie.santa_zombie_medium": {
+			"states": {
+				"default": {
+					"transitions": [
+						{
+							"function_1": "query.skin_id==3"
+						}
+					]
+				},
+				"function_1": {
+					"transitions": [
+						{
+							"default": "query.skin_id!=3"
+						}
+					],
+					"on_entry": [
+						"/summon zombie:zombiesanta_hard",
+						"/particle zombie:santa_particle ~~1~",
+						"/particle zombie:gingerbread_particle ~~1~",
+						"/particle zombie:ortiment_particle ~~1~",
+						"/particle zombie:ribbon_particle ~~1~",
+						"/particle zombie:snow_particle ~~1~",
+						"/particle zombie:stocking_present ~~1~",
+						"/particle zombie:tree_present ~~1~"
+					]
+				}
+			}
+		}
+	}
+}

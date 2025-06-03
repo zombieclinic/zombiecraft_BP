@@ -1,0 +1,22 @@
+{
+	"format_version": "1.21.50",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:gilded_blackstone_lime",
+			"menu_category": {
+				"category": "construction"
+			}
+		},
+		"components": {
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1
+			},
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 32
+			},
+			"minecraft:map_color": "#71EB14",
+			"minecraft:light_dampening": 1,
+			"minecraft:display_name": "Gilded Blackstone Lime"
+		}
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:world_menu",
+			"menu_category": {
+				"category": "equipment",
+				"group": "itemGroup.name.sword"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "World Menu"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:icon": "zombie_world_menu",
+			"minecraft:custom_components": [
+				"zombie:worldmenu"
+			]
+		}
+	}
+}

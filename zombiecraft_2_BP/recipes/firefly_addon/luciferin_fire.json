@@ -1,0 +1,15 @@
+{
+	"format_version": "1.20.40",
+	"minecraft:recipe_furnace": {
+		"description": {
+			"identifier": "zombie:firefly_luciferin_fire"
+		},
+		"tags": [
+			"blast_furnace"
+		],
+		"input": {
+			"item": "zombie:firefly_luciferin"
+		},
+		"output": "zombie:firefly_luciferin_fire"
+	}
+}

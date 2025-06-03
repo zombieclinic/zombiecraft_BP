@@ -1,0 +1,32 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:atlantis_solid_yellow_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "prismarine_crystals"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "prismarine_crystals"
+			},
+			{
+				"item": "minecraft:yellow_dye"
+			},
+			{
+				"item": "minecraft:glass"
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:atlantis_solid_yellow"
+			}
+		]
+	}
+}

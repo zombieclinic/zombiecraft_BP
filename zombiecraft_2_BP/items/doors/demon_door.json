@@ -1,0 +1,24 @@
+{
+    "format_version": "1.21.60",
+    "minecraft:item": {
+        "description": {
+            "identifier": "zombie:demon_door",
+            "menu_category":
+            {
+                "category": "construction",
+       			"group": "minecraft:itemGroup.name.door"
+            }
+        },
+        "components": {
+            "minecraft:allow_off_hand": false,
+            "minecraft:block_placer": 
+            {
+                "block": "zombie:demon_door_bottom"
+            },
+            "minecraft:icon": "zombie_demon_door",
+            "minecraft:display_name": {
+                "value": "Demon Door"
+            }
+        }
+    }
+}

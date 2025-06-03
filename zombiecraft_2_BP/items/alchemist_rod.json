@@ -1,0 +1,28 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:alchemist_rod",
+			"menu_category": {
+				"category": "equipment",
+				"group": "itemGroup.name.sword"
+			}
+		},
+		"components": {
+			"minecraft:enchantable": {
+				"slot": "sword",
+				"value": 5
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Alchemist's Rod"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:icon": "zombie_alchemist_rod",
+			"minecraft:custom_components": [
+				"zombie:onhitdamage"
+			]
+		}
+	}
+}

@@ -1,0 +1,106 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "zombie:hammerhead",
+			"population_control": "water_animal"
+		},
+		"conditions": [
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underwater": {},
+				"minecraft:weight": {
+					"default": 0.5
+				},
+				"minecraft:herd": {
+					"min_size": 2,
+					"max_size": 2
+				},
+				"minecraft:biome_filter": [
+					{
+						"test": "has_biome_tag",
+						"operator": "==",
+						"value": "ocean"
+					},
+					{
+						"test": "has_biome_tag",
+						"operator": "==",
+						"value": "deep"
+					},
+					{
+						"test": "has_biome_tag",
+						"operator": "!=",
+						"value": "frozen"
+					}
+				],
+				"minecraft:height_filter": {
+					"min": -64,
+					"max": 63
+				}
+			},
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underwater": {},
+				"minecraft:weight": {
+					"default": 0.5
+				},
+				"minecraft:herd": {
+					"min_size": 2,
+					"max_size": 2
+				},
+				"minecraft:density_limit": {
+					"surface": 2,
+					"underground": 1
+				},
+				"minecraft:biome_filter": [
+					{
+						"test": "has_biome_tag",
+						"operator": "==",
+						"value": "ocean"
+					},
+					{
+						"test": "has_biome_tag",
+						"operator": "==",
+						"value": "frozen"
+					}
+				],
+				"minecraft:height_filter": {
+					"min": -64,
+					"max": 63
+				}
+			},
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underwater": {},
+				"minecraft:weight": {
+					"default": 0.5
+				},
+				"minecraft:herd": {
+					"min_size": 2,
+					"max_size": 2
+				},
+				"minecraft:biome_filter": [
+					{
+						"test": "has_biome_tag",
+						"operator": "==",
+						"value": "ocean"
+					},
+					{
+						"test": "has_biome_tag",
+						"operator": "!=",
+						"value": "deep"
+					},
+					{
+						"test": "has_biome_tag",
+						"operator": "!=",
+						"value": "frozen"
+					}
+				],
+				"minecraft:height_filter": {
+					"min": -64,
+					"max": 63
+				}
+			}
+		]
+	}
+}

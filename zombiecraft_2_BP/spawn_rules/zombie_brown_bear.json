@@ -1,0 +1,123 @@
+{
+	"format_version": "1.19.10",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "zombie:zombie_brown_bear",
+			"population_control": "monster"
+		},
+		"conditions": [
+			{
+				"minecraft:height_filter": {
+					"min": -64,
+					"max": 0
+				},
+				"minecraft:difficulty_filter": {
+					"min": "easy",
+					"max": "hard"
+				},
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underground": {},
+				"minecraft:brightness_filter": {
+					"min": 0,
+					"max": 0
+				},
+				"minecraft:biome_filter": {
+					"all_of": [
+						{
+							"test": "has_biome_tag",
+							"value": "cold"
+						},
+						{
+							"test": "has_biome_tag",
+							"value": "forest"
+						}
+					]
+				},
+				"minecraft:herd": {
+					"min_size": 1
+				},
+				"minecraft:weight": {
+					"default": 100
+				}
+			},
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underground": {},
+				"minecraft:brightness_filter": {
+					"min": 0,
+					"max": 3
+				},
+				"minecraft:biome_filter": {
+					"all_of": [
+						{
+							"test": "has_biome_tag",
+							"value": "cold"
+						},
+						{
+							"test": "has_biome_tag",
+							"value": "taiga"
+						}
+					]
+				},
+				"minecraft:herd": {
+					"min_size": 1
+				},
+				"minecraft:weight": {
+					"default": 100
+				}
+			},
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underground": {},
+				"minecraft:brightness_filter": {
+					"min": 0,
+					"max": 3
+				},
+				"minecraft:biome_filter": {
+					"all_of": [
+						{
+							"test": "has_biome_tag",
+							"value": "cold"
+						},
+						{
+							"test": "has_biome_tag",
+							"value": "hills"
+						}
+					]
+				},
+				"minecraft:herd": {
+					"min_size": 1
+				},
+				"minecraft:weight": {
+					"default": 100
+				}
+			},
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:spawns_underground": {},
+				"minecraft:brightness_filter": {
+					"min": 0,
+					"max": 3
+				},
+				"minecraft:biome_filter": {
+					"all_of": [
+						{
+							"test": "has_biome_tag",
+							"value": "cold"
+						},
+						{
+							"test": "has_biome_tag",
+							"value": "extreme_hills"
+						}
+					]
+				},
+				"minecraft:herd": {
+					"min_size": 1
+				},
+				"minecraft:weight": {
+					"default": 100
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,30 @@
+
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "zombie:demon_stone_slab"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "group": "wooden_slab",
+    "pattern": [
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "zombie:demon_stone"
+      }
+    },
+	"unlock": [
+        {
+          "item": "zombie:demon_stone"
+        }
+    ],
+    "result": {
+      "item": "zombie:demon_stone_slab",
+      "count": 6
+    }
+  }
+}

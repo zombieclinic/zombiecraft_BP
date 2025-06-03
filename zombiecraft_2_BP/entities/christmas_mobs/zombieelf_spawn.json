@@ -1,0 +1,218 @@
+{
+	"format_version": "1.21.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "zombie:zombieelf_spawn",
+			"spawn_category": "monster",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"animations": {
+				"script": "controller.animation.zombie.elf"
+			},
+			"scripts": {
+				"animate": [
+					"script"
+				]
+			}
+		},
+		"component_groups": {
+			"skin_id=1": {
+				"minecraft:skin_id": {
+					"value": 1
+				},
+				"minecraft:timer": {
+					"time": [
+						1,
+						1
+					],
+					"time_down_event": {
+						"event": "despawn"
+					}
+				}
+			},
+			"despawn": {
+				"minecraft:instant_despawn": {}
+			},
+			"minecraft:zombie_baby": {
+				"minecraft:experience_reward": {
+					"on_death": "query.last_hit_by_player?12+(query.equipment_count*math.random(1,3)):0"
+				},
+				"minecraft:is_baby": {},
+				"minecraft:scale": {
+					"value": 0.5
+				},
+				"minecraft:movement": {
+					"value": 0.35
+				}
+			},
+			"minecraft:zombie_jockey": {
+				"minecraft:behavior.find_mount": {
+					"priority": 1,
+					"within_radius": 16,
+					"start_delay": 15,
+					"max_failed_attempts": 20
+				}
+			},
+			"minecraft:can_have_equipment": {
+				"minecraft:equipment": {
+					"table": "loot_tables/entities/zombie_equipment.json"
+				}
+			},
+			"minecraft:can_break_doors": {
+				"minecraft:annotation.break_door": {}
+			}
+		},
+		"components": {
+			"minecraft:is_hidden_when_invisible": {},
+			"minecraft:nameable": {},
+			"minecraft:type_family": {
+				"family": [
+					"zombie",
+					"undead",
+					"monster",
+					"mob",
+					"christmas"
+				]
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.9
+			},
+			"minecraft:movement.basic": {},
+			"minecraft:navigation.walk": {
+				"is_amphibious": true,
+				"can_pass_doors": true,
+				"can_walk": true,
+				"can_break_doors": true
+			},
+			"minecraft:jump.static": {},
+			"minecraft:can_climb": {},
+			"minecraft:health": {
+				"value": 20,
+				"max": 20
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:breathable": {
+				"total_supply": 15,
+				"suffocate_time": 0,
+				"breathes_air": true,
+				"breathes_water": true
+			},
+			"minecraft:attack": {
+				"damage": 5
+			},
+			"minecraft:despawn": {
+				"despawn_from_distance": {},
+				"despawn_from_simulation_edge": true
+			},
+			"minecraft:behavior.random_stroll": {
+				"priority": 7,
+				"speed_multiplier": 1
+			},
+			"minecraft:behavior.look_at_player": {
+				"priority": 8,
+				"look_distance": 6,
+				"probability": 0.02
+			},
+			"minecraft:behavior.random_look_around": {
+				"priority": 9
+			},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:interact": {
+				"interactions": [
+					{
+						"on_interact": {
+							"target": "self",
+							"event": "skinid=1"
+						}
+					}
+				]
+			}
+		},
+		"events": {
+			"despawn": {
+				"add": {
+					"component_groups": [
+						"despawn"
+					]
+				}
+			},
+			"skinid=1": {
+				"add": {
+					"component_groups": [
+						"skin_id=1"
+					]
+				}
+			},
+			"minecraft:entity_spawned": {
+				"sequence": [
+					{
+						"randomize": [
+							{
+								"weight": 17,
+								"remove": {},
+								"add": {
+									"component_groups": [
+										"minecraft:zombie_baby",
+										"minecraft:can_have_equipment"
+									]
+								}
+							},
+							{
+								"weight": 3,
+								"remove": {},
+								"add": {
+									"component_groups": [
+										"minecraft:zombie_baby",
+										"minecraft:zombie_jockey",
+										"minecraft:can_have_equipment"
+									]
+								}
+							}
+						]
+					},
+					{
+						"randomize": [
+							{
+								"weight": 10,
+								"add": {
+									"component_groups": [
+										"minecraft:can_break_doors"
+									]
+								}
+							},
+							{
+								"weight": 90
+							}
+						]
+					}
+				]
+			},
+			"minecraft:as_baby": {
+				"add": {
+					"component_groups": [
+						"minecraft:zombie_baby"
+					]
+				}
+			}
+		}
+	}
+}

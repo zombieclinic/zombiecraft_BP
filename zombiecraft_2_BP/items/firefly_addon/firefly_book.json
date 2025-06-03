@@ -1,0 +1,23 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:stat_book",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:display_name": {
+				"value": "Stats Book"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:icon": "firefly_book",
+			"minecraft:allow_off_hand": true,
+			"minecraft:custom_components": [
+				"zombie:guidebook"
+			]
+		}
+	}
+}

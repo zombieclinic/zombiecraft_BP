@@ -1,0 +1,55 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:aetherlight_leggings",
+			"menu_category": {
+				"category": "equipment",
+				"group": "itemGroup.name.leggings"
+			}
+		},
+		"components": {
+			"minecraft:repairable": {
+				"repair_items": [
+					{
+						"items": [
+							"zombie:firefly_luciferin",
+							"zombie:aetherlight_leggings",
+							"minecraft:lead"
+						],
+						"repair_amount": "math.min(q.remaining_durability+c.other->q.remaining_durability+math.floor(q.max_durability/20),c.other->q.max_durability)"
+					}
+				]
+			},
+			"minecraft:icon": "firefly_leggings",
+			"minecraft:display_name": {
+				"value": "Aetherlight Leggings"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:allow_off_hand": true,
+			"minecraft:hand_equipped": true,
+			"minecraft:wearable": {
+				"protection": 6,
+				"slot": "slot.armor.legs"
+			},
+			"minecraft:durability": {
+				"max_durability": 900,
+				"damage_chance": {
+					"max": 100,
+					"min": 60
+				}
+			},
+			"minecraft:enchantable": {
+				"value": 15,
+				"slot": "armor_legs"
+			},
+			"minecraft:max_stack_size": 1,
+			"minecraft:damage_absorption": {
+				"absorbable_causes": [
+					"fall",
+					"wither"
+				]
+			}
+		}
+	}
+}

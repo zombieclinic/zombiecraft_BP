@@ -1,0 +1,20 @@
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:zcoin",
+			"category": "nature"
+		},
+		"components": {
+			"minecraft:icon": {
+				"texture": "zcoin"
+			},
+			"minecraft:display_name": {
+				"value": "§4Z§2Coin"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:zcoin_block"
+			}
+		}
+	}
+}

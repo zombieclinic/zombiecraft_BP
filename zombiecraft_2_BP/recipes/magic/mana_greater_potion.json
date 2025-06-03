@@ -1,0 +1,14 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:recipe_brewing_container": {
+		"description": {
+			"identifier": "zombie:mana_greater_potion_brewing"
+		},
+		"tags": [
+			"brewing_stand"
+		],
+		"input": "zombie:mana_great_potion",
+		"reagent": "zombie:firefly_luciferin_fire",
+		"output": "zombie:mana_greater_potion"
+	}
+}

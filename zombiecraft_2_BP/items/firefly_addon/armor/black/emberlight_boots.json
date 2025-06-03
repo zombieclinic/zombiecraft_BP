@@ -1,0 +1,65 @@
+{
+	"format_version": "1.21.10",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:emberlight_boots",
+			"menu_category": {
+				"category": "equipment",
+				"group": "itemGroup.name.boots"
+			}
+		},
+		"components": {
+			"minecraft:icon": "dark_firefly_boots",
+			"minecraft:display_name": {
+				"value": "Emberlight Boots"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:allow_off_hand": true,
+			"minecraft:hand_equipped": true,
+			"minecraft:wearable": {
+				"protection": 3,
+				"slot": "slot.armor.feet"
+			},
+			"minecraft:durability": {
+				"max_durability": 600,
+				"damage_chance": {
+					"max": 100,
+					"min": 60
+				}
+			},
+			"minecraft:repairable": {
+				"repair_items": [
+					{
+						"items": [
+							"zombie:emberlight_boots",
+							"minecraft:lead"
+						],
+						"repair_amount": "math.min(q.remaining_durability+c.other->q.remaining_durability+math.floor(q.max_durability/20),c.other->q.max_durability)"
+					},
+					{
+						"items": [
+							"zombie:firefly_luciferin_fire"
+						],
+						"repair_amount": "math.random(4,25)"
+					}
+				]
+			},
+			"minecraft:enchantable": {
+				"value": 20,
+				"slot": "armor_feet"
+			},
+			"minecraft:damage_absorption": {
+				"absorbable_causes": [
+					"fire",
+					"lava",
+					"fire_tick"
+				]
+			},
+			"minecraft:tags": {
+				"tags": [
+					"minecraft:transformable_items"
+				]
+			}
+		}
+	}
+}

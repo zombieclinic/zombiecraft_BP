@@ -1,0 +1,518 @@
+{
+	"format_version": "1.21.60",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:happy_shop",
+			"traits": {
+				"minecraft:placement_direction": {
+					"enabled_states": [
+						"minecraft:cardinal_direction"
+					]
+				},
+				"minecraft:placement_position": {
+					"enabled_states": [
+						"minecraft:block_face"
+					]
+				}
+			}
+		},
+		"components": {
+			"minecraft:collision_box": {
+				"origin": [
+					-7,
+					0,
+					-7
+				],
+				"size": [
+					14,
+					14,
+					14
+				]
+			},
+			"minecraft:selection_box": {
+				"origin": [
+					-7,
+					0,
+					-7
+				],
+				"size": [
+					14,
+					14,
+					14
+				]
+			},
+			"minecraft:destructible_by_mining": false,
+			"minecraft:flammable": false,
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "zombie_happyshop",
+					"ambient_occlusion": true,
+					"face_dimming": true,
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:display_name": "Happy Shop Block",
+			"minecraft:map_color": "#FF00E6",
+			"minecraft:geometry": "geometry.shop_block",
+			"minecraft:liquid_detection": {
+				"detection_rules": [
+					{
+						"liquid_type": "water",
+						"can_contain_liquid": true,
+						"on_liquid_touches": "blocking"
+					}
+				]
+			},
+			"minecraft:custom_components": [
+				"zombie:shopblock"
+			]
+		},
+		"permutations": [
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'north'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_wall",
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'south'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_wall",
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'east'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							-90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_wall",
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'west'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_wall",
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							1,
+							-6
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_roof"
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							2,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block",
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block",
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block",
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.shop_block",
+					"minecraft:collision_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-7,
+							0,
+							-7
+						],
+						"size": [
+							14,
+							14,
+							14
+						]
+					}
+				}
+			}
+		]
+	}
+}

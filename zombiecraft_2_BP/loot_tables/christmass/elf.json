@@ -1,0 +1,25 @@
+{
+    "pools": [
+        {
+            "rolls": {
+                "min": 0,
+                "max": 1
+            },
+            "entries": [
+                {
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 1
+                            }
+                        }
+                    ],
+                    "type": "item",
+                    "name": "zombie:green_present"
+                }
+            ]
+        }
+    ]
+}

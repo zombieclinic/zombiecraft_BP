@@ -1,0 +1,40 @@
+{
+	"format_version": "1.21.60",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:warpaltar"
+		},
+		"components": {
+			"minecraft:collision_box": true,
+			"minecraft:geometry": "geometry.warpaltar",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "zombie_warpaltar",
+					"ambient_occlusion": 0.5,
+					"face_dimming": true,
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:light_emission": 5,
+			"minecraft:selection_box": true,
+			"minecraft:custom_components": [
+				"zombie:warpalter"
+			],
+			"minecraft:destructible_by_mining": false,
+			"minecraft:liquid_detection": {
+				"detection_rules": [
+					{
+						"liquid_type": "water",
+						"can_contain_liquid": true,
+						"on_liquid_touches": "no_reaction"
+					}
+				]
+			},
+			"minecraft:display_name": "Warp Altar",
+			"minecraft:redstone_conductivity": {
+				"allows_wire_to_step_down": true,
+				"redstone_conductor": true
+			}
+		}
+	}
+}

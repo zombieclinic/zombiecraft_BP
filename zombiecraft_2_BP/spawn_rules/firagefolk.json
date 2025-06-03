@@ -1,0 +1,70 @@
+{
+    "format_version": "1.19.10",
+    "minecraft:spawn_rules": {
+        "description": {
+            "identifier": "zombie:foragefolk",
+            "population_control": "animal"
+        },
+        "conditions": [
+            {
+                "minecraft:spawns_on_surface": {},
+                "minecraft:spawns_underground": {},
+                "minecraft:difficulty_filter": {
+                    "min": "easy",
+                    "max": "hard"
+                },
+                "minecraft:weight": {
+                    "default": 0.5
+                },
+                "minecraft:herd": {
+                    "min_size": 1,
+                    "max_size": 1
+                },
+                "minecraft:biome_filter": {
+                    "any_of": [
+                        {
+                            "test": "has_biome_tag",
+                            "operator": "==",
+                            "value": "swamp"
+                        },
+                        {
+                            "test": "has_biome_tag",
+                            "operator": "==",
+                            "value": "jungle"
+                        },
+                        {
+                            "test": "has_biome_tag",
+                            "operator": "==",
+                            "value": "mangrove_swamp"
+                        },
+                        {
+                            "test": "has_biome_tag",
+                            "operator": "==",
+                            "value": "mountains"
+                        },
+                        {
+                            "test": "has_biome_tag",
+                            "operator": "==",
+                            "value": "mountain"
+                        },
+                        {
+                            "test": "has_biome_tag",
+                            "operator": "==",
+                            "value": "forest"
+                        },
+                        {
+                            "test": "has_biome_tag",
+                            "operator": "==",
+                            "value": "lush_caves"
+                        }
+                    ]
+                },
+                "minecraft:brightness_filter": {
+                    "min": 0,
+                    "max": 12,
+                    "adjust_for_weather": true
+                }
+            }
+        ]
+    }
+}

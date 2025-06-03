@@ -1,0 +1,28 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:conjuration",
+			"menu_category": {
+				"category": "equipment",
+				"group": "itemGroup.name.sword"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:should_despawn": true,
+			"minecraft:rarity": "rare",
+			"minecraft:display_name": {
+				"value": "Conjuration  Book"
+			},
+			"minecraft:icon": "zombie_ui_book",
+			"minecraft:custom_components": [
+				"zombie:conjuration"
+			],
+			"minecraft:use_modifiers": {
+				"movement_modifier": 1,
+				"use_duration": 100
+			}
+		}
+	}
+}

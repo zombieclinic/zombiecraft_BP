@@ -1,0 +1,29 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:stat_book_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:dirt"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:dirt"
+			},
+			{
+				"item": "minecraft:dirt"
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:stat_book"
+			}
+		]
+	}
+}

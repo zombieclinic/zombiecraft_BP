@@ -1,0 +1,15 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:recipe_smithing_transform": {
+		"description": {
+			"identifier": "zombie:aetherlight_helmet"
+		},
+		"tags": [
+			"smithing_table"
+		],
+		"template": "zombie:firefly_luciferin",
+		"base": "netherite_helmet",
+		"addition": "minecraft:netherite_ingot",
+		"result": "zombie:aetherlight_helmet"
+	}
+}

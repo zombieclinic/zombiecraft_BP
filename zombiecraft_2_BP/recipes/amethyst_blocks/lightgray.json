@@ -1,0 +1,29 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:amethyst_lightgray_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:amethyst_block"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:amethyst_block"
+			},
+			{
+				"item": "minecraft:light_gray_dye"
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:amethyst_lightgray"
+			}
+		]
+	}
+}

@@ -1,0 +1,433 @@
+{
+	"tiers": [
+		{
+			"groups": [
+				{
+					"num_to_select": 5,
+					"trades": [
+						{
+							"wants": [
+								{
+									"item": "bone_meal",
+									"quantity": {
+										"min": 5,
+										"max": 10
+									}
+								},
+								{
+									"item": "glowstone_dust",
+									"quantity": {
+										"min": 3,
+										"max": 12
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:strawberry_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "emerald",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "phantom_membrane",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:strawberry_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "honey_bottle",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "amethyst_shard",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:strawberry_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "bone_meal",
+									"quantity": {
+										"min": 5,
+										"max": 10
+									}
+								},
+								{
+									"item": "glowstone_dust",
+									"quantity": {
+										"min": 3,
+										"max": 12
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:redcandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "emerald",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "phantom_membrane",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:redcandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "honey_bottle",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "amethyst_shard",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:redcandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "bone_meal",
+									"quantity": {
+										"min": 5,
+										"max": 10
+									}
+								},
+								{
+									"item": "glowstone_dust",
+									"quantity": {
+										"min": 3,
+										"max": 12
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:purplecandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "emerald",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "phantom_membrane",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:purplecandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "honey_bottle",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "amethyst_shard",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:purplecandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "bone_meal",
+									"quantity": {
+										"min": 5,
+										"max": 10
+									}
+								},
+								{
+									"item": "glowstone_dust",
+									"quantity": {
+										"min": 3,
+										"max": 12
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:bluecandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "emerald",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "phantom_membrane",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:bluecandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "honey_bottle",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "amethyst_shard",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:bluecandycane_seeds",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "bone_meal",
+									"quantity": {
+										"min": 5,
+										"max": 10
+									}
+								},
+								{
+									"item": "glowstone_dust",
+									"quantity": {
+										"min": 3,
+										"max": 12
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:redwood_saplin_item",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "emerald",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "phantom_membrane",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:redwood_saplin_item",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						},
+						{
+							"wants": [
+								{
+									"item": "honey_bottle",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								},
+								{
+									"item": "amethyst_shard",
+									"quantity": {
+										"min": 1,
+										"max": 2
+									}
+								}
+							],
+							"gives": [
+								{
+									"item": "zombie:redwood_saplin_item",
+									"quantity": {
+										"min": 1,
+										"max": 3
+									}
+								}
+							],
+							"reward_exp": true
+						}
+					]
+				}
+			]
+		}
+	]
+}

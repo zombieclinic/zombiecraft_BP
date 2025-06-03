@@ -1,0 +1,158 @@
+{
+  "format_version": "1.21.60",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "zombie:impaler",
+      "spawn_category": "monster",
+      "is_spawnable": true,
+      "is_summonable": true
+    },
+
+    "component_groups": {       "range": {
+      "minecraft:skin_id": {
+        "value": 1
+      },
+      "minecraft:behavior.move_towards_target": {
+        "priority": 2,
+        "speed_multiplier": 1,
+        "within_radius": 5
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 2,
+        "entity_types": [
+          {
+            "filters": {
+              "any_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "player"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "zombie"
+                }
+              ]
+            },
+            "max_dist": 30
+          }
+        ],
+        "must_see": true,
+        "reselect_targets": true,
+        "within_radius": 30
+      }
+
+    }
+},
+
+    "components": {
+        "minecraft:health": {
+          "value": 100,
+          "max": 120
+        },
+        "minecraft:movement_sound_distance_offset": {
+          "value": 1
+        },
+        "minecraft:vibration_damper": {},
+        "minecraft:suspect_tracking": {},
+        "minecraft:anger_level": {
+          "max_anger": 150,
+          "angry_threshold": 80,
+          "remove_targets_below_angry_threshold": true,
+          "angry_boost": 20,
+          "anger_decrement_interval": 1.0,
+          "default_annoyingness": 35,
+          "default_projectile_annoyingness":  10,
+          "on_increase_sounds": [
+            { "sound": "listening_angry", "condition" : "query.anger_level(this) >= 40" },
+            { "sound": "listening", "condition" : "query.anger_level(this) >= 0" }
+          ],
+          "nuisance_filter": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "operator": "not", "value": "mutated_zombie" },
+              { "test": "is_family", "subject": "other", "operator": "not", "value": "inanimate" }
+            ]
+          }
+        },
+        "minecraft:is_hidden_when_invisible": {
+        },
+        "minecraft:type_family": {
+          "family": [
+            "mutated_zombie",
+            "monster",
+            "mob"
+          ]
+        },
+        "minecraft:breathable": {
+          "total_supply": 100,
+          "suffocate_time": 0
+        },
+        "minecraft:navigation.walk": {
+          "can_path_over_water": true,
+          "can_path_over_lava": true,
+          "avoid_damage_blocks": true
+        },
+        "minecraft:preferred_path": {
+          "max_fall_blocks": 20
+        },
+        "minecraft:ambient_sound_interval": {
+          "value": 2.0,
+          "range": 4.0,
+          "event_name": "ambient",
+          "event_names": [
+            {
+              "event_name" : "angry",
+              "condition" : "query.anger_level(this) >= 80"
+            },
+            {
+              "event_name" : "agitated",
+              "condition" : "query.anger_level(this) >= 40"
+            }
+          ]
+        },
+        "minecraft:movement.basic": {},
+        "minecraft:jump.static": {},
+        "minecraft:can_climb": {},
+        "minecraft:movement": {
+          "value": 0.3
+        },
+        "minecraft:knockback_resistance": {
+          "value": 1.0
+        },
+        "minecraft:behavior.float": {
+          "priority": 0
+        },
+        "minecraft:behavior.melee_box_attack": {
+        "priority": 4,
+        "speed_multiplier": 1.2,
+        "melee_fov": 360
+      },
+      "minecraft:behavior.sniff": {
+        "priority": 6,
+        "duration": 4.16,
+        "sniffing_radius": 24.0,
+        "suspicion_radius_horizontal" : 6.0,
+        "suspicion_radius_vertical": 20.0,
+        "cooldown_range": [ 5.0, 10.0 ]
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 11
+      },
+      "minecraft:physics": {},
+      "minecraft:follow_range": 30,
+      "minecraft:nameable": {},
+      "minecraft:collision_box": {
+            "width": 0.6,
+            "height": 1.9
+          }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": []
+        }
+      }
+    }
+  }
+}

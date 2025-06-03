@@ -1,0 +1,24 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "zombie:demon_steel_chiseled_recipe"
+    },
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "zombie:demon_steel"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "zombie:demon_steel"
+      }
+    ],
+    "result": {
+      "item": "zombie:demon_steel_chiseled",
+      "count": 1
+    },
+    "priority": 1
+  }
+}

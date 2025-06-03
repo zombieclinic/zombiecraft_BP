@@ -1,0 +1,44 @@
+{
+	"format_version": "1.21.40",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:redwood_leaves",
+			"menu_category": {
+				"category": "nature"
+			},
+			"states": {
+				"zombie:leaves_state": [
+					0,
+					1
+				]
+			}
+		},
+		"components": {
+			"minecraft:collision_box": true,
+			"minecraft:selection_box": true,
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 0.4
+			},
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 15
+			},
+			"minecraft:flammable": {
+				"destroy_chance_modifier": 20,
+				"catch_chance_modifier": 5
+			},
+			"minecraft:map_color": "#1C9414",
+			"minecraft:display_name": "Redwood Leaves",
+			"tag:wood": {},
+			"minecraft:light_dampening": 1,
+			"minecraft:light_emission": 0,
+			"minecraft:loot": "loot_tables/blocks/leaves/redwood_leaves_black.json",
+			"minecraft:tick": {
+				"interval_range": [
+					2,
+					5
+				],
+				"looping": true
+			}
+		}
+	}
+}

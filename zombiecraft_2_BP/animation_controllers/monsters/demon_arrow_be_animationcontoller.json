@@ -1,0 +1,24 @@
+{
+    "format_version": "1.10.0",
+    "animation_controllers": {
+        "controller.animation.zombie_demon_arrow": {
+            "initial_state": "default",
+            "states": {
+                "default": {
+                    "transitions": [
+                        {
+                            "state_1": "query.skin_id == 1"
+                        }
+                    ]
+                },
+                "state_1": {
+                    "on_entry":
+                    [
+                        "/setblock ~~1~ fire"
+                        
+                    ]
+                }
+            }
+        }
+    }
+}

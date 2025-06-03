@@ -1,0 +1,26 @@
+{"format_version": "1.21.60",
+"minecraft:entity":
+    {
+        "description": {
+            "identifier": "zombie:corrupted_spire",
+            "is_spawnable": true,
+            "is_summonable": true,
+            "spawn_category": "monster"
+        },
+        "components": {
+            "minecraft:health": {
+                "value": 30,
+                "max": 30
+            },
+            "minecraft:area_attack": {
+                "damage_per_tick": 1,
+                "damage_range": 3,
+                "cause": "void"
+            },
+            "minecraft:collision_box": {
+                "height": 1,
+                "width": 1
+            }
+        }
+    }
+}
