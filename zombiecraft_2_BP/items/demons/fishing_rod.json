@@ -5,7 +5,7 @@
             "identifier": "zombie:chaos_fishing_rod",
             "menu_category": {
                 "category": "equipment",
-                "group": "minecraft:itemGroup.name.Chaos"
+                "group": "minecraft:itemGroup.name.chaos"
             }
         },
         "components": {

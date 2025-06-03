@@ -10,7 +10,7 @@
        
             "group_identifier": {
               "icon": "zombie:chaos_bow",
-              "name": "minecraft:itemGroup.name.choas"
+              "name": "minecraft:itemGroup.name.chaos"
             },
             "items": [
               "zombie:chaos_bow",
