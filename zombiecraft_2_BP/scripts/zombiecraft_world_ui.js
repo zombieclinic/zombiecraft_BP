@@ -22,7 +22,7 @@ import {BrownbearChanceEffect,
         chaosCrossbowExplosion,
         CustomFishingRod
         } from "./custom_components";
-import {Firefly2, Fireflys, FireflyFlicker,} from "./fireflys";
+import {Firefly2, FireflyFlicker,} from "./fireflys";
 import {RedwoodGrowthComponent} from "./plants/custom_trees";
 import {Atlantis, OpenableComponent, FencePlaceComponent, ZombieDoor, ZombieSlab,} from "./blocks";
 import { CropGrowthComponent } from "./plants/grow";
@@ -34,7 +34,6 @@ world.beforeEvents.worldInitialize.subscribe((initEvent) => {
     initEvent.blockComponentRegistry.registerCustomComponent("zombie:redwood_saplin", new RedwoodGrowthComponent());
     initEvent.itemComponentRegistry.registerCustomComponent("zombie:bearcheck", new BrownbearChanceEffect)
     initEvent.itemComponentRegistry.registerCustomComponent("zombie:onhitdamage", new OnHitDamage)
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:firefly", new Fireflys());
     initEvent.itemComponentRegistry.registerCustomComponent("zombie:firefly_flicker", new FireflyFlicker());
     initEvent.blockComponentRegistry.registerCustomComponent("zombie:open2", new Open2());
     initEvent.blockComponentRegistry.registerCustomComponent("zombie:open", new Openbox());

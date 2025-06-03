@@ -3,7 +3,7 @@
   "format_version": "1.20.10",
   "minecraft:recipe_shaped": {
     "description": {
-    "identifier": "zombie:demon_steel_block_to_ignot"
+    "identifier": "zombie:demon_steel_block_to_ingot"
     },
 
     
@@ -23,7 +23,7 @@
         }
     ],
     "result": {
-      "item": "zombie:demon_steel_ignot",
+      "item": "zombie:demon_steel_ingot",
       "count": 9
     }
   }

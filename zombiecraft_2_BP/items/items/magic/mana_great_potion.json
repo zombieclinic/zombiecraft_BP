@@ -16,9 +16,6 @@
 			},
 			"minecraft:hover_text_color": "green",
 			"minecraft:icon": "zombie_mana_great_potion",
-			"minecraft:custom_components": [
-				"zombie:manapotion"
-			],
 			"minecraft:use_animation": "drink",
 			"minecraft:food": {
 				"can_always_eat": true,

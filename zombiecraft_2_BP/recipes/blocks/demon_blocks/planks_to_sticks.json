@@ -13,12 +13,12 @@
         ],
         "key": {
             "A": {
-                "tag": "zombie:demon_planks"
+                "item": "zombie:demon_planks"
             }
         },
         "unlock": [
           {
-            "tag": "zombie:demon_planks"
+            "item": "zombie:demon_planks"
           }
         ],
         "result": {

@@ -4,7 +4,7 @@
 		"description": {
 			"identifier": "zombie:strawberry_crop",
 			"states": {
-				"starter:crop_age": [
+				"zombie:crop_age": [
 					0,
 					1,
 					2,
@@ -16,7 +16,7 @@
 		},
 		"permutations": [
 			{
-				"condition": "query.block_state('starter:crop_age') == 0",
+				"condition": "query.block_state('zombie:crop_age') == 0",
 				"components": {
 					"minecraft:loot": "loot_tables/plants/crops/strawberry/strawberry_crop.json",
 					"minecraft:material_instances": {
@@ -40,7 +40,7 @@
 				}
 			},
 			{
-				"condition": "query.block_state('starter:crop_age') == 1",
+				"condition": "query.block_state('zombie:crop_age') == 1",
 				"components": {
 					"minecraft:loot": "loot_tables/plants/crops/strawberry/strawberry_crop.json",
 					"minecraft:material_instances": {
@@ -64,7 +64,7 @@
 				}
 			},
 			{
-				"condition": "query.block_state('starter:crop_age') == 2",
+				"condition": "query.block_state('zombie:crop_age') == 2",
 				"components": {
 					"minecraft:material_instances": {
 						"*": {
@@ -87,7 +87,7 @@
 				}
 			},
 			{
-				"condition": "query.block_state('starter:crop_age') == 3",
+				"condition": "query.block_state('zombie:crop_age') == 3",
 				"components": {
 					"minecraft:loot": "loot_tables/plants/crops/strawberry/strawberry_crop.json",
 					"minecraft:material_instances": {
@@ -111,7 +111,7 @@
 				}
 			},
 			{
-				"condition": "query.block_state('starter:crop_age') == 4",
+				"condition": "query.block_state('zombie:crop_age') == 4",
 				"components": {
 					"minecraft:loot": "loot_tables/plants/crops/strawberry/strawberry_crop.json",
 					"minecraft:material_instances": {
@@ -135,7 +135,7 @@
 				}
 			},
 			{
-				"condition": "query.block_state('starter:crop_age') == 5",
+				"condition": "query.block_state('zombie:crop_age') == 5",
 				"components": {
 					"minecraft:material_instances": {
 						"*": {
@@ -162,7 +162,7 @@
 		"components": {
 			"minecraft:geometry": "geometry.starter_crop_geo",
 			"minecraft:custom_components": [
-				"starter:crop_grow"
+				"zombie:crop_grow"
 			],
 			"minecraft:destructible_by_mining": {
 				"seconds_to_destroy": 0

@@ -3,7 +3,7 @@
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:glass_jar_01_block",
-			"is_experimental": false,
+
 			"states": {
 				"zombie:firefly_block": [
 					0,
@@ -28,9 +28,7 @@
 			}
 		},
 		"components": {
-			"minecraft:custom_components": [
-				"zombie:firefly"
-			],
+			"minecraft:light_emission": 7,
 			"minecraft:destructible_by_mining": {
 				"seconds_to_destroy": 1
 			},
@@ -39,7 +37,7 @@
 				"explosion_resistance": 76
 			},
 			"minecraft:display_name": "Fire Fly Jar 1",
-			"minecraft:geometry": "geometry.firefly_jar_01_1_block",
+			"minecraft:geometry": "geometry.firefly_jar_01_block",
 			"minecraft:material_instances": {
 				"*": {
 					"texture": "zombie_firefly_jar_1_block",
@@ -48,94 +46,13 @@
 					"render_method": "alpha_test"
 				}
 			},
-			"minecraft:loot": "loot_tables/fireflys/firefly_jar_1.json",
-			"minecraft:tick": {
-				"interval_range": [
-					5,
-					5
-				]
-			}
+			"minecraft:loot": "loot_tables/fireflys/firefly_jar_1.json"
 		},
 		"permutations": [
 			{
-				"condition": "query.block_state('minecraft:block_face') == 'north' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
+				"condition": "query.block_state('minecraft:block_face') == 'north'",
 				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'north' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'north' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -171,121 +88,9 @@
 				}
 			},
 			{
-				"condition": "query.block_state('minecraft:block_face') == 'north' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "query.block_state('minecraft:block_face') == 'south'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'south' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'south' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'south' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -321,121 +126,9 @@
 				}
 			},
 			{
-				"condition": "query.block_state('minecraft:block_face') == 'south' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "query.block_state('minecraft:block_face') == 'east'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'east' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							-90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'east' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							-90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'east' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -471,121 +164,9 @@
 				}
 			},
 			{
-				"condition": "query.block_state('minecraft:block_face') == 'east' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "query.block_state('minecraft:block_face') == 'west'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							-90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_block_wall",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'west' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall"
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'west' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_2_block_wall"
-				}
-			},
-			{
-				"condition": "query.block_state('minecraft:block_face') == 'west' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -621,46 +202,9 @@
 				}
 			},
 			{
-				"condition": "query.block_state('minecraft:block_face') == 'west' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							4.8,
-							2
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_block_wall"
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -668,7 +212,7 @@
 							0
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof",
+					"minecraft:geometry": "geometry.firefly_jar_01_block_roof",
 					"minecraft:collision_box": {
 						"origin": [
 							-3,
@@ -696,121 +240,9 @@
 				}
 			},
 			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -818,7 +250,7 @@
 							0
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof",
+					"minecraft:geometry": "geometry.firefly_jar_01_block_roof",
 					"minecraft:collision_box": {
 						"origin": [
 							-3,
@@ -846,121 +278,9 @@
 				}
 			},
 			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -968,7 +288,7 @@
 							0
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof",
+					"minecraft:geometry": "geometry.firefly_jar_01_block_roof",
 					"minecraft:collision_box": {
 						"origin": [
 							-3,
@@ -996,121 +316,9 @@
 				}
 			},
 			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -1142,125 +350,13 @@
 							6
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof"
+					"minecraft:geometry": "geometry.firefly_jar_01_block_roof"
 				}
 			},
 			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							270,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block_roof"
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							270,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof"
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							270,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							8.8,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block_roof"
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -1268,7 +364,7 @@
 							0
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block",
+					"minecraft:geometry": "geometry.firefly_jar_01_block",
 					"minecraft:collision_box": {
 						"origin": [
 							-3,
@@ -1296,121 +392,9 @@
 				}
 			},
 			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							180,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -1418,7 +402,7 @@
 							0
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block",
+					"minecraft:geometry": "geometry.firefly_jar_01_block",
 					"minecraft:collision_box": {
 						"origin": [
 							-3,
@@ -1446,121 +430,9 @@
 				}
 			},
 			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							0,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up'  && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -1568,7 +440,7 @@
 							0
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block",
+					"minecraft:geometry": "geometry.firefly_jar_01_block",
 					"minecraft:collision_box": {
 						"origin": [
 							-3,
@@ -1596,121 +468,9 @@
 				}
 			},
 			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up'  && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up'",
 				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up'  && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up'  && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							90,
-							0
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block",
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					}
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
+					
 					"minecraft:transformation": {
 						"rotation": [
 							0,
@@ -1742,119 +502,7 @@
 							6
 						]
 					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block"
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 1 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							270,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_3_block"
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 1",
-				"components": {
-					"minecraft:light_emission": 7,
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							270,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block"
-				}
-			},
-			{
-				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up' && query.block_state('zombie:firefly_block') == 0 && query.block_state('zombie:firefly_light') == 0",
-				"components": {
-					"minecraft:transformation": {
-						"rotation": [
-							0,
-							270,
-							0
-						]
-					},
-					"minecraft:collision_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							4
-						]
-					},
-					"minecraft:selection_box": {
-						"origin": [
-							-3,
-							0,
-							-3
-						],
-						"size": [
-							6,
-							6.2,
-							6
-						]
-					},
-					"minecraft:geometry": "geometry.firefly_jar_01_1_block"
+					"minecraft:geometry": "geometry.firefly_jar_01_block"
 				}
 			}
 		]

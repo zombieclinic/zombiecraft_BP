@@ -1,75 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 
-export class Fireflys {
-    tickCounter = 0;
-    lightStateCounter = 0;
-    isLightOn = true;
-
-    onTick = (event) => {
-        const { block, dimension } = event;
-
-        // Get block location and current permutation
-        const blockPos = block.location;
-        const currentBlock = dimension.getBlock(blockPos);
-        const currentPermutation = currentBlock.permutation;
-
-        // Toggle zombie:firefly_block state (block animation toggle)
-        const currentBlockState = currentPermutation.getState("zombie:firefly_block");
-        const newBlockState = currentBlockState === 2 ? 0 : currentBlockState + 1;
-        currentBlock.setPermutation(
-            currentPermutation.withState("zombie:firefly_block", newBlockState)
-        );
-
-        // Handle zombie:firefly_light state (light flicker and particles)
-        const currentLightState = currentPermutation.getState("zombie:firefly_light");
-
-        // Start light on if in state 0
-        if (currentLightState === 0) {
-            currentBlock.setPermutation(
-                currentPermutation.withState("zombie:firefly_light", 1)
-            );
-        }
-
-        // 5% chance to flicker light off for 1 tick
-        if (Math.random() < 0.05 && currentLightState === 1) {
-            currentBlock.setPermutation(
-                currentPermutation.withState("zombie:firefly_light", 0)
-            );
-
-            system.runTimeout(() => {
-                currentBlock.setPermutation(
-                    currentPermutation.withState("zombie:firefly_light", 2)
-                );
-            }, 1);
-        }
-
-        // Particle spawn logic using tick counter
-        this.tickCounter++;
-        if (this.tickCounter >= 20 && currentLightState === 1) { // Adjust tick count for frequency
-            this.spawnParticle(dimension, currentPermutation, blockPos);
-            this.tickCounter = 0; // Reset counter
-        }
-    }
-
-    spawnParticle(dimension, currentPermutation, blockPos) {
-        const blockFace = currentPermutation.getState("minecraft:block_face");
-        const particleType = "yyfool:jarred_firefly";
-        let particlePos = { x: blockPos.x + 0.5, y: blockPos.y + 0.5, z: blockPos.z + 0.5 };
-
-        switch (blockFace) {
-            case "down": particlePos.y += 0.5; break;
-            case "up": particlePos.y -= 0.3; break;
-            case "north": particlePos.z += 0.35; break;
-            case "south": particlePos.z -= 0.35; break;
-            case "west": particlePos.x += 0.35; break;
-            case "east": particlePos.x -= 0.35; break;
-        }
-
-        dimension.spawnParticle(particleType, particlePos);
-    }
-}
-
+//////////////////////////flicker///////////////////////////
 export class FireflyFlicker {
     onUse(event) {
       const { itemStack, source: player } = event;

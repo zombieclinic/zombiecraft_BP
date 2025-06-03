@@ -14,10 +14,7 @@
 			},
 			"minecraft:hover_text_color": "green",
 			"minecraft:icon": "firefly_book",
-			"minecraft:allow_off_hand": true,
-			"minecraft:custom_components": [
-				"zombie:guidebook"
-			]
+			"minecraft:allow_off_hand": true
 		}
 	}
 }

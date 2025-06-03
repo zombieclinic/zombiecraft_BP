@@ -14,12 +14,12 @@
     ],
     "key": {
       "#": {
-        "item": "zombie:demon_steel_ignot"
+        "item": "zombie:demon_steel_ingot"
       }
     },
 	"unlock": [
         {
-          "item": "zombie:demon_steel_ignot"
+          "item": "zombie:demon_steel_ingot"
         }
     ],
     "result": {

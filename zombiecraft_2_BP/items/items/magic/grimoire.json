@@ -16,9 +16,7 @@
 				"value": "Conjuration  Book"
 			},
 			"minecraft:icon": "zombie_ui_book",
-			"minecraft:custom_components": [
-				"zombie:conjuration"
-			],
+			
 			"minecraft:use_modifiers": {
 				"movement_modifier": 1,
 				"use_duration": 100
