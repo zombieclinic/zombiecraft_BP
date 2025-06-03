@@ -71,9 +71,6 @@
 				},
 				"minecraft:scale": {
 					"value": 0.1
-				},
-				"minecraft:loot": {
-					"table": "loot_tables/fireflys/fireflys_mask_mob.json"
 				}
 			},
 			"capture": {
