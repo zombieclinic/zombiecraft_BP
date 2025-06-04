@@ -1,0 +1,53 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.crickets": {
+			"initial_state": "selector",
+			"states": {
+				"selector": {
+					"transitions": [
+						{
+							"cricket1": "math.random(0.0,300.0) <= 5.0"
+						},
+						{
+							"cricket2": "math.random(0.0,300.0) >= 30.0 && math.random(0.0,300.0) <= 35.0"
+						},
+						{
+							"cricket3": "math.random(0.0,300.0) >= 80.0 && math.random(0.0,300.0) <= 85.0"
+						}
+					]
+				},
+				"cricket1": {
+					"on_entry": [
+						"/playsound cricket @a[r=30]"
+					],
+					"transitions": [
+						{
+							"selector": "math.random(0.0,300.0) <= 5.0"
+						}
+					]
+				},
+				"cricket2": {
+					"on_entry": [
+						"/playsound cricket2 @a[r=30]"
+					],
+					"transitions": [
+						{
+							"selector": "math.random(0.0,300.0) <= 5.0"
+						}
+					]
+				},
+				"cricket3": {
+					"on_entry": [
+						"/playsound cricket3 @a[r=30]"
+					],
+					"transitions": [
+						{
+							"selector": "math.random(0.0,300.0) <= 5.0"
+						}
+					]
+				}
+			}
+		}
+	}
+}
