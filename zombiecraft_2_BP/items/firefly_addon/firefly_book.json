@@ -13,7 +13,7 @@
 				"value": "Stats Book"
 			},
 			"minecraft:hover_text_color": "green",
-			"minecraft:icon": "firefly_book",
+			"minecraft:icon": "glass_jar",
 			"minecraft:allow_off_hand": true
 		}
 	}

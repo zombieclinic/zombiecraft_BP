@@ -1,0 +1,489 @@
+{
+	"format_version": "1.21.60",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:green_peeper_block",
+			"menu_category": {
+				"category": "equipment"
+			},
+			"traits": {
+				"minecraft:placement_direction": {
+					"enabled_states": [
+						"minecraft:cardinal_direction"
+					]
+				},
+				"minecraft:placement_position": {
+					"enabled_states": [
+						"minecraft:block_face"
+					]
+				}
+			}
+		},
+		"components": {
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1
+			},
+			"minecraft:map_color": "#FFFFFF",
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 76
+			},
+			"minecraft:display_name": "Peeper Green Jar",
+			"minecraft:geometry": "geometry.peeper_jar_block",
+			"minecraft:material_instances": {
+				"*": {
+					"ambient_occlusion": false,
+					"face_dimming": false,
+					"render_method": "alpha_test",
+					"texture": "zombie_peeper_green"
+				}
+			},
+			"minecraft:loot": "loot_tables/jars/peeper_jar/peeper.json"
+		},
+		"permutations": [
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'north'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_wall",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'south'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_wall",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'east'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							-90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_wall",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'west'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							4.8,
+							2
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_wall"
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							8.8,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block_roof"
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							4
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							4
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block",
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							4
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							4
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-3,
+							0,
+							-3
+						],
+						"size": [
+							6,
+							6.2,
+							6
+						]
+					},
+					"minecraft:geometry": "geometry.peeper_jar_block"
+				}
+			}
+		]
+	}
+}

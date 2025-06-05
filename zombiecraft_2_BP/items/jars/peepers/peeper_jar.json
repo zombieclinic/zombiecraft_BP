@@ -1,0 +1,23 @@
+{
+	"format_version": "1.21.70",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:peeper_jar_item",
+			"menu_category": {
+				"category": "equipment"
+			}	
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:icon": "zombie_peeper_green_icon",
+			"minecraft:display_name": {
+				"value": "Peeper Green Jar"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:block_placer": {
+				"block": "zombie:green_peeper_block"
+			},
+			"minecraft:allow_off_hand": true
+		}
+	}
+}

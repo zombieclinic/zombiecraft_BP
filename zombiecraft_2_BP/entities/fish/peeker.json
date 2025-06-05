@@ -54,21 +54,95 @@
 			"green": {
 				"minecraft:variant": {
 					"value": 0
+				},
+				"minecraft:interact": {
+					"interactions": [
+						{
+							"on_interact": {
+								"filters": {
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "hand",
+									"value": "zombie:glass_jar"
+								},
+								"target": "self",
+								"event": "despawn"
+							},
+							"use_item": true,
+							"transform_to_item": "zombie:peeper_jar_item"
+						}
+					]
 				}
+		
 			},
 			"blue": {
 				"minecraft:variant": {
 					"value": 1
+				},
+				"minecraft:interact": {
+					"interactions": [
+						{
+							"on_interact": {
+								"filters": {
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "hand",
+									"value": "zombie:glass_jar"
+								},
+								"target": "self",
+								"event": "despawn"
+							},
+							"use_item": true,
+							"transform_to_item": "zombie:peeper_jar_blue_item"
+						}
+					]
 				}
 			},
 			"purple": {
 				"minecraft:variant": {
 					"value": 2
+				},
+				"minecraft:interact": {
+					"interactions": [
+						{
+							"on_interact": {
+								"filters": {
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "hand",
+									"value": "zombie:glass_jar"
+								},
+								"target": "self",
+								"event": "despawn"
+							},
+							"use_item": true,
+							"transform_to_item": "zombie:peeper_jar_purple_item"
+						}
+					]
 				}
+				
 			},
 			"red": {
 				"minecraft:variant": {
 					"value": 3
+				},
+				"minecraft:interact": {
+					"interactions": [
+						{
+							"on_interact": {
+								"filters": {
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "hand",
+									"value": "zombie:glass_jar"
+								},
+								"target": "self",
+								"event": "despawn"
+							},
+							"use_item": true,
+							"transform_to_item": "zombie:peeper_jar_red_item"
+						}
+					]
 				}
 			}
 		},

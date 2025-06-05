@@ -1,0 +1,23 @@
+{
+	"format_version": "1.21.70",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:peeper_jar_purple_item",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:icon": "zombie_peeper_purple_icon",
+			"minecraft:display_name": {
+				"value": "Peeper Purple Jar"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:purple_peeper_block"
+			},
+			"minecraft:allow_off_hand": true,
+			"minecraft:hover_text_color": "light_purple"
+		}
+	}
+}
