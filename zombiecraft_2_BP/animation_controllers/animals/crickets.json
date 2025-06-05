@@ -29,7 +29,7 @@
 				},
 				"cricket2": {
 					"on_entry": [
-						"/playsound cricket2 @a[r=30]"
+						"/playsound cricket @a[r=30]"
 					],
 					"transitions": [
 						{
@@ -39,7 +39,7 @@
 				},
 				"cricket3": {
 					"on_entry": [
-						"/playsound cricket3 @a[r=30]"
+						"/playsound cricket @a[r=30]"
 					],
 					"transitions": [
 						{

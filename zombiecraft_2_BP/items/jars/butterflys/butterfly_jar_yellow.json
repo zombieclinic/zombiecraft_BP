@@ -1,0 +1,23 @@
+{
+	"format_version": "1.20.30",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:butterfly_jar_yellow_item",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:icon": "zombie_butterfly_jar_yellow",
+			"minecraft:display_name": {
+				"value": "Yellow Butterfly Jar"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:allow_off_hand": true,
+			"minecraft:block_placer": {
+				"block": "zombie:yellow_butterfly_block"
+			}
+		}
+	}
+}
