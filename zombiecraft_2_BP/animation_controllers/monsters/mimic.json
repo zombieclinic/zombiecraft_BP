@@ -1,0 +1,39 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.mimic.functions": {
+			"states": {
+				"default": {
+					"transitions": [
+						{
+							"function_1": "query.skin_id==1"
+						},
+						{
+							"attackmode": "query.skin_id==2"
+						}
+					]
+				},
+				"function_1": {
+					"transitions": [
+						{
+							"default": "query.skin_id!=1"
+						}
+					],
+					"on_entry": [
+						"/tp @e[family=monsterchest,c=1,r=3] ~ ~ ~ 0 0"
+					]
+				},
+				"attackmode": {
+					"transitions": [
+						{
+							"default": "query.skin_id!=2"
+						}
+					],
+					"on_entry": [
+						"@s attack_mode"
+					]
+				}
+			}
+		}
+	}
+}

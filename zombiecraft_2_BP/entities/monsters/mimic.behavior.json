@@ -1,0 +1,362 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "zombie:mimic",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"animations": {"mimic": "controller.animation.mimic.functions"},
+			"scripts": {
+				"animate": ["mimic"]
+			}
+		},
+		"component_groups": {
+			"born": {
+				"minecraft:skin_id": {
+					"value": 1
+				},
+				"minecraft:knockback_resistance": {
+					"value": 999,
+					"max": 999
+				},
+				"minecraft:collision_box": {
+					"width": 0.6,
+					"height": 0.6
+				},
+				"minecraft:interact": {
+					"interactions": [
+						{
+							"on_interact": {
+								"event": "attack_mode"
+							}
+						}
+					]
+				}
+			},
+			"attack": {
+				"minecraft:is_hidden_when_invisible": {},
+				"minecraft:movement.basic": {},
+				"minecraft:navigation.walk": {
+					"is_amphibious": true,
+					"can_pass_doors": true,
+					"can_walk": true,
+					"can_break_doors": true
+				},
+				"minecraft:annotation.break_door": {},
+				"minecraft:can_climb": {},
+				"minecraft:jump.static": {},
+				"minecraft:breathable": {
+					"total_supply": 15,
+					"suffocate_time": 0,
+					"breathes_air": true,
+					"breathes_water": true
+				},
+				"minecraft:hurt_on_condition": {
+					"damage_conditions": [
+						{
+							"filters": {
+								"test": "in_lava",
+								"subject": "self",
+								"operator": "==",
+								"value": true
+							},
+							"cause": "lava",
+							"damage_per_tick": 4
+						}
+					]
+				},
+				"minecraft:behavior.melee_attack": {
+					"priority": 3
+				},
+				"minecraft:attack": {
+					"damage": 10
+				},
+				"minecraft:behavior.hurt_by_target": {
+					"priority": 2
+				},
+				"minecraft:behavior.nearest_attackable_target": {
+					"priority": 1,
+					"must_see": true,
+					"reselect_targets": true,
+					"within_radius": 25,
+					"must_see_forget_duration": 17,
+					"entity_types": [
+						{
+							"filters": {
+								"any_of": [
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "player"
+									},
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "snowgolem"
+									},
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "irongolem"
+									}
+								]
+							},
+							"max_dist": 35
+						},
+						{
+							"filters": {
+								"any_of": [
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "villager"
+									},
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "wandering_trader"
+									}
+								]
+							},
+							"max_dist": 35,
+							"must_see": false
+						},
+						{
+							"filters": {
+								"all_of": [
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "baby_turtle"
+									},
+									{
+										"test": "in_water",
+										"subject": "other",
+										"operator": "!=",
+										"value": true
+									}
+								]
+							},
+							"max_dist": 35
+						}
+					]
+				},
+				"minecraft:behavior.look_at_player": {
+					"priority": 8,
+					"look_distance": 6,
+					"probability": 0.02
+				},
+				"minecraft:physics": {},
+				"minecraft:conditional_bandwidth_optimization": {},
+				"minecraft:pushable": {
+					"is_pushable": true,
+					"is_pushable_by_piston": true
+				},
+				"minecraft:boss": {
+					"should_darken_sky": true,
+					"hud_range": 20,
+					"name": "Monster Chest"
+				},
+				"minecraft:loot": {
+					"table": "loot_tables/luckyblock.json"
+				},
+				"minecraft:knockback_resistance": {
+					"value": 50,
+					"max": 50
+				},
+				"minecraft:collision_box": {
+					"width": 1,
+					"height": 1
+				},
+				"minecraft:teleport": {
+					"random_teleports": true,
+					"max_random_teleport_time": 30,
+					"random_teleport_cube": [
+						1,
+						1,
+						1
+					],
+					"target_distance": 6,
+					"target_teleport_chance": 0,
+					"light_teleport_chance": 0
+				}
+			},
+			"prime": {
+				"minecraft:skin_id": {
+					"value": 2
+				}
+			},
+			"despawn": {
+				"minecraft:instant_despawn": {}
+			},
+			"check_for_player": {
+				"minecraft:entity_sensor": {
+					"sensor_range": 45,
+					"event_filters": {
+						"none_of": [
+							{
+								"subject": "other",
+								"test": "is_family",
+								"value": "player"
+							}
+						]
+					},
+					"event": "no_players"
+				}
+			},
+			"no_players": {
+				"minecraft:entity_sensor": {
+					"sensor_range": 45,
+					"event_filters": {
+						"all_of": [
+							{
+								"subject": "other",
+								"test": "is_family",
+								"value": "player"
+							}
+						]
+					},
+					"event": "players"
+				},
+				"minecraft:timer": {
+					"time": [
+						20,
+						20
+					],
+					"time_down_event": {
+						"event": "despawn"
+					}
+				}
+			}
+		},
+		"components": {
+			"minecraft:physics": {
+				"has_gravity": false,
+				"has_collision": false
+			},
+			"minecraft:type_family": {
+				"family": [
+					"monster",
+					"mob",
+					"monsterchest"
+				]
+			},
+			"minecraft:nameable": {
+				"allow_name_tag_renaming": true
+			},
+			"minecraft:health": {
+				"max": 100,
+				"value": 100
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:despawn": {
+				"despawn_from_distance": {},
+				"despawn_from_simulation_edge": true
+			},
+			"minecraft:damage_sensor": {
+				"triggers": [
+					{
+						"on_damage": {
+							"event": "attack_mode"
+						}
+					}
+				]
+			}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+				"add": {
+					"component_groups": [
+						"born"
+					]
+				}
+			},
+			"minecraft:entity_born": {
+				"add": {
+					"component_groups": [
+						"born"
+					]
+				}
+			},
+			"attack_mode": {
+				"sequence": [
+					{
+						"add": {
+							"component_groups": [
+								"attack",
+								"check_for_player"
+							]
+						}
+					},
+					{
+						"remove": {
+							"component_groups": [
+								"born"
+							]
+						}
+					}
+				]
+			},
+			"minecraft:on_prime": {
+				"sequence": [
+					{
+						"add": {
+							"component_groups": [
+								"prime"
+							]
+						},
+						"remove": {
+							"component_groups": [
+								"born"
+							]
+						}
+					}
+				]
+			},
+			"despawn": {
+				"add": {
+					"component_groups": [
+						"despawn"
+					]
+				}
+			},
+			"no_players": {
+				"add": {
+					"component_groups": [
+						"no_players"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"check_for_player"
+					]
+				}
+			},
+			"players": {
+				"add": {
+					"component_groups": [
+						"check_for_player"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"no_players"
+					]
+				}
+			}
+		}
+	}
+}
