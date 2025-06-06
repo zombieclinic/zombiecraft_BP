@@ -1,0 +1,21 @@
+{
+	"format_version": "1.20.50",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:glow_spider_item",
+			"menu_category": {"category": "equipment"}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:icon": "zombie_glow_spider",
+			"minecraft:display_name": {
+				"value": "Glow Spider Jar"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:block_placer": {
+				"block": "zombie:glow_spider_jar"
+			},
+			"minecraft:allow_off_hand": true
+		}
+	}
+}
