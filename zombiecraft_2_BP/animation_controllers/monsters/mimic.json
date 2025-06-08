@@ -16,7 +16,7 @@
 				"function_1": {
 					"transitions": [
 						{
-							"default": "query.skin_id!=1"
+							"attackmode": "query.variant==2"
 						}
 					],
 					"on_entry": [
@@ -24,13 +24,10 @@
 					]
 				},
 				"attackmode": {
-					"transitions": [
-						{
-							"default": "query.skin_id!=2"
-						}
-					],
+
 					"on_entry": [
-						"@s attack_mode"
+						"/playsound mimic @a[r=64]"
+
 					]
 				}
 			}
