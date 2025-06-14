@@ -20,7 +20,8 @@ import {BrownbearChanceEffect,
         TppAxeSwing,
         BowHold,
         chaosCrossbowExplosion,
-        CustomFishingRod
+        CustomFishingRod,
+        DemonSword
         } from "./custom_components";
 import {Firefly2, FireflyFlicker,} from "./fireflys";
 import {RedwoodGrowthComponent} from "./plants/custom_trees";
@@ -29,57 +30,68 @@ import { CropGrowthComponent } from "./plants/grow";
 import {  BlockShop } from "./playertoplayershop";
 import { WarpAtlas } from "./warpalter/warpalter";
 import { securityCheck } from "./warpalter/security";
+import {ChaosBookComponent} from "./magic/chaos"
 
-world.beforeEvents.worldInitialize.subscribe((initEvent) => {
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:redwood_saplin", new RedwoodGrowthComponent());
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:bearcheck", new BrownbearChanceEffect)
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:onhitdamage", new OnHitDamage)
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:firefly_flicker", new FireflyFlicker());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:open2", new Open2());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:open", new Openbox());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:christmas_light", new Lights());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:christmas_light_colors", new ColorLights());
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:santasword", new SantaSword);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:cookie", new Christmas_Cookie);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:rottenfood", new RawFood());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:atlantis", new Atlantis());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:crop_grow", new CropGrowthComponent());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:shopblock", new  BlockShop());
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:warpalter", new  WarpAtlas());
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:candycane", new Candycane);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:tporb", new TpOrb);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:tppAxeSwing", new TppAxeSwing);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:worldmenu", new TestDemon);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:fishing_rod", new CustomFishingRod);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:crablegs", new Crablegs);
-    initEvent.itemComponentRegistry.registerCustomComponent("zombie:BowHold", new BowHold);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:corruptedDamage", new CorruptedDamage);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:demonGrass", new DemonGrass);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:strippedlog", new LogStripper);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:is_open", new OpenableComponent);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:fence_place", new FencePlaceComponent);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:door", new ZombieDoor);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:slab", new ZombieSlab);
-    initEvent.blockComponentRegistry.registerCustomComponent("zombie:ores", new CustomOres);
+// ——— define your component‐lists ———
+const BLOCK_COMPONENTS = [
+  ["zombie:redwood_saplin",       RedwoodGrowthComponent],
+  ["zombie:open2",                Open2],
+  ["zombie:open",                 Openbox],
+  ["zombie:christmas_light",      Lights],
+  ["zombie:christmas_light_colors", ColorLights],
+  ["zombie:atlantis",             Atlantis],
+  ["zombie:crop_grow",            CropGrowthComponent],
+  ["zombie:shopblock",            BlockShop],
+  ["zombie:warpalter",            WarpAtlas],
+  ["zombie:corruptedDamage",      CorruptedDamage],
+  ["zombie:demonGrass",           DemonGrass],
+  ["zombie:strippedlog",          LogStripper],
+  ["zombie:is_open",              OpenableComponent],
+  ["zombie:fence_place",          FencePlaceComponent],
+  ["zombie:door",                 ZombieDoor],
+  ["zombie:slab",                 ZombieSlab],
+  ["zombie:ores",                 CustomOres],
+];
+
+const ITEM_COMPONENTS = [
+  ["zombie:bearcheck",      BrownbearChanceEffect],
+  ["zombie:onhitdamage",    OnHitDamage],
+  ["zombie:firefly_flicker", FireflyFlicker],
+  ["zombie:santasword",     SantaSword],
+  ["zombie:cookie",         Christmas_Cookie],
+  ["zombie:rottenfood",     RawFood],
+  ["zombie:candycane",      Candycane],
+  ["zombie:tporb",          TpOrb],
+  ["zombie:tppAxeSwing",    TppAxeSwing],
+  ["zombie:worldmenu",      TestDemon],
+  ["zombie:fishing_rod",    CustomFishingRod],
+  ["zombie:crablegs",       Crablegs],
+  ["zombie:BowHold",        BowHold],
+  ["zombie:chaos_book",     ChaosBookComponent],
+  ["zombie:chaosSword",     DemonSword]
+];
+
+// ——— register them in one go ———
+world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {
+  BLOCK_COMPONENTS.forEach(([id, Comp]) =>
+    blockComponentRegistry.registerCustomComponent(id, new Comp())
+  );
+  ITEM_COMPONENTS.forEach(([id, Comp]) =>
+    itemComponentRegistry.registerCustomComponent(id, new Comp())
+  );
 });
 
-system.afterEvents.scriptEventReceive.subscribe(({ id, sourceEntity }) => {
-  // if you only ever care about events with a sourceEntity:
-  if (!sourceEntity) return;
+// ——— map your script-event IDs to handlers ———
+const SCRIPT_EVENT_HANDLERS = {
+  "zombie:firefly2":      source => new Firefly2(source),
+  "zombie:arroweffect":   source => arrowEffect(source),
+  "zombie:crossbow":      source => chaosCrossbowExplosion(source),
+};
 
-  switch (id) {
-    case "zombie:firefly2":
-      new Firefly2(sourceEntity);
-      break;
-    case "zombie:arroweffect":
-      arrowEffect(sourceEntity);
-      break;
-    case "zombie:crossbow":
-      chaosCrossbowExplosion(sourceEntity);
-    default:
-     
-      break;
-  }
+system.afterEvents.scriptEventReceive.subscribe(({ id, sourceEntity }) => {
+  if (!sourceEntity) return;
+  const handler = SCRIPT_EVENT_HANDLERS[id];
+  if (handler) handler(sourceEntity);
 });
 
 const checkIntervalTicks = 100;

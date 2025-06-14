@@ -17,7 +17,7 @@
                 "duration": 1
             },
             "minecraft:display_name": {
-                "value": "Choas knife"
+                "value": "Choas Dagger"
             },
             "minecraft:icon": "zombie_chaos_knife",
             "minecraft:hand_equipped": true,
@@ -31,7 +31,8 @@
             "minecraft:use_modifiers": {
                 "movement_modifier": 1,
                 "use_duration": 20
-            }
+            },
+            "minecraft:custom_components": ["zombie:chaosSword"]
         }
     }
 }

@@ -2,7 +2,7 @@
 	"format_version": "1.21.40",
 	"minecraft:item": {
 		"description": {
-			"identifier": "zombie:conjuration",
+			"identifier": "zombie:chaos_book",
 			"menu_category": {
 				"category": "equipment",
 				"group": "itemGroup.name.sword"
@@ -13,14 +13,15 @@
 			"minecraft:should_despawn": true,
 			"minecraft:rarity": "rare",
 			"minecraft:display_name": {
-				"value": "Conjuration  Book"
+				"value": "Liber Chaotica"
 			},
 			"minecraft:icon": "zombie_ui_book",
 			
 			"minecraft:use_modifiers": {
 				"movement_modifier": 1,
 				"use_duration": 100
-			}
+			},
+			"minecraft:custom_components": ["zombie:chaos_book"]
 		}
 	}
 }

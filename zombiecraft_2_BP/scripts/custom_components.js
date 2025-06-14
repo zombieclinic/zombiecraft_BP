@@ -1493,3 +1493,69 @@ export class CustomFishingRod {
     }
   }
 }
+
+
+/////////////////sword/////////////////////////////////////
+
+export class DemonSword {
+  onHitEntity(event) {
+    const attacker = event.attackingEntity;
+    const target = event.hitEntity;
+    if (!(attacker instanceof Player)) return;
+
+    // ——— Health name‐tag display ———
+    const hpComp = target.getComponent(EntityComponentTypes.Health);
+    if (hpComp) {
+      const hp = Math.ceil(hpComp.currentValue);
+      const raw = target.typeId.split(":").pop();
+      const pretty = raw
+        .split("_")
+        .map(w => w[0].toUpperCase() + w.slice(1))
+        .join(" ");
+      const newTag = `§e${pretty} §c❤ §f${hp}`;
+      const ourFmt = /^§e.+ §c❤ §f\d+$/;
+      if (!target.nameTag || ourFmt.test(target.nameTag)) {
+        target.nameTag = newTag;
+        system.runTimeout(() => {
+          try {
+            if (target.nameTag === newTag) target.nameTag = "";
+          } catch {}
+        }, 100);
+      }
+    }
+
+    // ——— Essence‐XP logic ———
+    const groupOne = new Set([
+      "minecraft:allay", "minecraft:armadillo", "minecraft:axolotl", "minecraft:bat",
+      "minecraft:bee", "minecraft:cat", "minecraft:chicken", "minecraft:cod",
+      "minecraft:cow", "minecraft:donkey", "minecraft:fox", "minecraft:glow_squid",
+      "minecraft:horse", "minecraft:mooshroom", "minecraft:mule", "minecraft:ocelot",
+      "minecraft:parrot", "minecraft:pig", "minecraft:pufferfish", "minecraft:rabbit",
+      "minecraft:salmon", "minecraft:sheep", "minecraft:skeleton_horse",
+      "minecraft:snow_golem", "minecraft:squid", "minecraft:strider",
+      "minecraft:tadpole", "minecraft:trader_llama", "minecraft:tropical_fish",
+      "minecraft:turtle", "minecraft:villager", "minecraft:wandering_trader"
+    ]);
+
+    const groupTwo = new Set([
+      "minecraft:villager_v2", "minecraft:wandering_trader"
+    ]);
+
+    const id = target.typeId;
+    const chance = groupOne.has(id) ? 0.008
+                 : groupTwo.has(id) ? 0.02
+                 : 0;
+
+    if (Math.random() > chance) return;
+
+    // ——— Essence gain with private message ———
+    system.runTimeout(() => {
+      try {
+        const oldVal = attacker.getProperty("zombie:essence") ?? 0;
+        const newVal = Math.min(oldVal + 1, 200.0);
+        attacker.setProperty("zombie:essence", newVal);
+        attacker.sendMessage(`§g☠§4 Blood for the Blood God §c${Math.floor(newVal)}§r Chaos XP`);
+      } catch {}
+    }, 0);
+  }
+}

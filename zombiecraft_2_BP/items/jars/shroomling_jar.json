@@ -1,0 +1,22 @@
+{
+	"format_version": "1.20.50",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:shroomling_jar",
+			"menu_category": {"category": "equipment"}
+		},
+		"components": {
+			"minecraft:hand_equipped": true,
+			"minecraft:icon": "zombie_shroomling_jar_icon",
+			"minecraft:display_name": {
+				"value": "Shroomling Jar"
+			},
+			"minecraft:hover_text_color": "green",
+			"minecraft:block_placer": {
+				"block": "zombie:shroomling_jar"
+			},
+			
+			"minecraft:allow_off_hand": true
+		}
+	}
+}
