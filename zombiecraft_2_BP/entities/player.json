@@ -34,25 +34,35 @@
           "range": [0.0, 200.0],
           "default": 0.0
         },
+        "zombie:v_attack": {
+          "type": "int",
+          "default": 0,
+          "range": [0, 20]
+        },
+        "zombie:alt_v_attack": {
+          "type": "int",
+          "default": 0,
+          "range": [0, 20]
+        },
         "zombie:alt_ability_level": {
           "type": "int",
           "default": 1,
-          "range": [1, 20]
+          "range": [0, 20]
         },
         "zombie:sneak_ability_level": {
           "type": "int",
           "default": 1,
-          "range": [1, 20]
+          "range": [0, 20]
         },
         "zombie:jump_ability_level": {
           "type": "int",
           "default": 1,
-          "range": [1, 20]
+          "range": [0, 20]
         },
         "zombie:mana_ability_level": {
           "type": "int",
           "default": 1,
-          "range": [1, 20]
+          "range": [0, 20]
         },
         "zombie:sight_level": {
           "type": "int",
@@ -62,7 +72,8 @@
         "zombie:summon_timer": {
           "type": "int",
           "range": [0, 999],
-          "default": 0
+          "default": 0,
+          "client_sync": true
         }
       }
     },

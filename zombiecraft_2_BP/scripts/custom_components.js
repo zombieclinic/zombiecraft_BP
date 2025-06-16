@@ -1495,67 +1495,264 @@ export class CustomFishingRod {
 }
 
 
-/////////////////sword/////////////////////////////////////
+/////////////////XP/////////////////////////////////////
 
-export class DemonSword {
+const GROUP_ONE = new Set([
+  "minecraft:allay","minecraft:armadillo","minecraft:axolotl","minecraft:bat",
+  "minecraft:bee","minecraft:cat","minecraft:chicken","minecraft:cod",
+  "minecraft:cow","minecraft:donkey","minecraft:fox","minecraft:glow_squid",
+  "minecraft:horse","minecraft:mooshroom","minecraft:mule","minecraft:ocelot",
+  "minecraft:parrot","minecraft:pig","minecraft:pufferfish","minecraft:rabbit",
+  "minecraft:salmon","minecraft:sheep","minecraft:snow_golem","minecraft:squid",
+  "minecraft:strider","minecraft:tadpole","minecraft:trader_llama",
+  "minecraft:tropical_fish","minecraft:turtle","minecraft:villager",
+  "minecraft:wandering_trader"
+]);
+const GROUP_TWO = new Set([
+  "minecraft:villager_v2","minecraft:wandering_trader"
+]);
+
+export class ChaosXp {
+  onHitEntity(event) {
+    const attacker = event.attackingEntity;
+    const target   = event.hitEntity;
+    if (!(attacker instanceof Player)) return;
+
+    const id = target.typeId;
+    const inGroupOne = GROUP_ONE.has(id);
+    const inGroupTwo = GROUP_TWO.has(id);
+
+    // Set the correct chances
+    let chance = 0.0;
+    if (inGroupOne) chance = 0.008; 
+    else if (inGroupTwo) chance = 0.99; 
+
+    // Chance gate
+    if (Math.random() > chance) return;
+
+    // Award Chaos XP (Essence)
+    system.runTimeout(() => {
+      const oldVal = attacker.getProperty("zombie:essence") ?? 0;
+      const newVal = Math.min(oldVal + 1, 200);
+      attacker.setProperty("zombie:essence", newVal);
+
+      attacker.sendMessage(`§g☠§4 Blood for the Blood God §c${Math.floor(newVal)}§r Chaos XP`);
+      attacker.playSound("Demon_talk"); // Replace with "Demon_talk" if your sound is working
+    }, 0);
+  }
+}
+
+
+//////////////////////////thesight/////////////
+
+
+
+export class TheSight {
   onHitEntity(event) {
     const attacker = event.attackingEntity;
     const target = event.hitEntity;
     if (!(attacker instanceof Player)) return;
 
-    // ——— Health name‐tag display ———
+    const sightLevel = attacker.getProperty("zombie:sight_level") ?? 0;
+    if (sightLevel <= 0) return;
+
     const hpComp = target.getComponent(EntityComponentTypes.Health);
-    if (hpComp) {
-      const hp = Math.ceil(hpComp.currentValue);
-      const raw = target.typeId.split(":").pop();
-      const pretty = raw
-        .split("_")
-        .map(w => w[0].toUpperCase() + w.slice(1))
-        .join(" ");
-      const newTag = `§e${pretty} §c❤ §f${hp}`;
-      const ourFmt = /^§e.+ §c❤ §f\d+$/;
-      if (!target.nameTag || ourFmt.test(target.nameTag)) {
-        target.nameTag = newTag;
-        system.runTimeout(() => {
-          try {
-            if (target.nameTag === newTag) target.nameTag = "";
-          } catch {}
-        }, 100);
+    if (!hpComp || !Reflect.has(target, "nameTag")) return;
+
+    const lines = [];
+
+    // Mob name (Level 1+)
+    const rawName = target.typeId.split(":").pop();
+    const prettyName = rawName
+      .split("_")
+      .map(w => w[0].toUpperCase() + w.slice(1))
+      .join(" ");
+    lines.push(`§e${prettyName}`);
+
+    // Heart bar (Level 3+ for hearts, but always show here)
+    const currHp = Math.ceil(hpComp.currentValue);
+    const maxHp = Math.ceil(hpComp.defaultValue ?? 20);
+    let hearts = "";
+    for (let i = 0; i < maxHp / 2; i++) {
+      hearts += (i < currHp / 2) ? "§c" : "§0❤";
+    }
+    lines.push(hearts);
+
+    const finalTag = lines.join("\n");
+
+    const existing = target.nameTag;
+    if (!existing || existing.startsWith("§e")) {
+      try {
+        target.nameTag = finalTag;
+      } catch {}
+
+      const durationTicks = Math.min(Math.max(sightLevel, 1), 10) * 20;
+      system.runTimeout(() => {
+        try {
+          if (target.nameTag === finalTag) {
+            target.nameTag = "";
+          }
+        } catch {}
+      }, durationTicks);
+    }
+  }
+}
+
+
+
+
+
+////////////////////sword////////////////
+
+
+export class SwordHit {
+  onHitEntity(event) {
+    const attacker = event.attackingEntity;
+    const target   = event.hitEntity;
+
+    if (!attacker || !target || !target.isValid()) return;
+
+    const vLevel = attacker.getProperty("zombie:v_attack") ?? 0;
+    const bonusDamage = vLevel * 1.0;
+
+    const hp = target.getComponent("minecraft:health");
+    if (!hp) return;
+
+    system.run(() => {
+      try {
+        if (!target.isValid()) return;
+
+        // —— Apply Manual Damage ——
+        const newHealth = Math.max(hp.currentValue - bonusDamage, 0);
+        hp.setCurrentValue(newHealth);
+
+        // —— Knockback Scaling ——
+        let knockbackStrength = 0;
+        if (vLevel >= 20) {
+          knockbackStrength = 1.0;
+        } else if (vLevel >= 15) {
+          knockbackStrength = 0.7;
+        } else if (vLevel >= 10) {
+          knockbackStrength = 0.5;
+        } else if (vLevel >= 5) {
+          knockbackStrength = 0.3;
+        }
+
+        if (knockbackStrength > 0) {
+          const posA = attacker.location;
+          const posT = target.location;
+
+          let dx = posT.x - posA.x;
+          let dz = posT.z - posA.z;
+          const dist = Math.sqrt(dx * dx + dz * dz);
+          if (dist === 0) return;
+
+          dx /= dist;
+          dz /= dist;
+
+          // Apply knockback
+          target.applyKnockback(dx, dz, knockbackStrength, 0.1);
+        }
+
+      } catch (e) {
+        console.warn("Error applying bonus damage/knockback:", e);
       }
+    });
+  }
+}
+
+////////////////////rage!!!!!/////////////////////////
+
+
+
+
+
+export class Rage {
+  onUse(event) {
+    const player = event.source;
+    const lvl    = player.getProperty("zombie:sneak_ability_level") ?? 0;
+    if (lvl <= 0) {
+      player.sendMessage("§cYou haven’t learned Rage yet!");
+      return;
     }
 
-    // ——— Essence‐XP logic ———
-    const groupOne = new Set([
-      "minecraft:allay", "minecraft:armadillo", "minecraft:axolotl", "minecraft:bat",
-      "minecraft:bee", "minecraft:cat", "minecraft:chicken", "minecraft:cod",
-      "minecraft:cow", "minecraft:donkey", "minecraft:fox", "minecraft:glow_squid",
-      "minecraft:horse", "minecraft:mooshroom", "minecraft:mule", "minecraft:ocelot",
-      "minecraft:parrot", "minecraft:pig", "minecraft:pufferfish", "minecraft:rabbit",
-      "minecraft:salmon", "minecraft:sheep", "minecraft:skeleton_horse",
-      "minecraft:snow_golem", "minecraft:squid", "minecraft:strider",
-      "minecraft:tadpole", "minecraft:trader_llama", "minecraft:tropical_fish",
-      "minecraft:turtle", "minecraft:villager", "minecraft:wandering_trader"
-    ]);
+    // roar at start
+    player.runCommandAsync(`playsound rage @s`);
 
-    const groupTwo = new Set([
-      "minecraft:villager_v2", "minecraft:wandering_trader"
-    ]);
+    // 1) freeze for 3s (60 ticks)
+    player.runCommandAsync(`inputpermission set @s lateral_movement disabled`);
 
-    const id = target.typeId;
-    const chance = groupOne.has(id) ? 0.008
-                 : groupTwo.has(id) ? 0.02
-                 : 0;
+    // 2) particle+damage loop while frozen
+    const loopId = system.runInterval(() => {
+      player.runCommandAsync(
+        `execute at @s run particle zombie:choas_rage ~ ~1 ~`
+      );
+      for (const mob of player.dimension
+        .getEntities({ location: player.location, maxDistance: 6 })
+        .filter(e => e.id !== player.id)
+      ) {
+        if (typeof mob.applyDamage === "function") mob.applyDamage(1);
+      }
+    }, 2);
 
-    if (Math.random() > chance) return;
-
-    // ——— Essence gain with private message ———
+    // 3) after 3s, unfreeze + begin buffs + geometry swap
     system.runTimeout(() => {
-      try {
-        const oldVal = attacker.getProperty("zombie:essence") ?? 0;
-        const newVal = Math.min(oldVal + 1, 200.0);
-        attacker.setProperty("zombie:essence", newVal);
-        attacker.sendMessage(`§g☠§4 Blood for the Blood God §c${Math.floor(newVal)}§r Chaos XP`);
-      } catch {}
-    }, 0);
+      system.clearRun(loopId);
+      player.runCommandAsync(`inputpermission set @s lateral_movement enabled`);
+      player.runCommandAsync(`playsound random.explode @s`);
+      player.runCommandAsync(
+        `execute at @s run particle zombie:rage_2 ~ ~1 ~`
+      );
+
+      // knockback
+      for (const t of player.dimension
+        .getEntities({ location: player.location, maxDistance: 3 })
+        .filter(e => e.id !== player.id)
+      ) {
+        if (typeof t.applyKnockback === "function") {
+          const dx   = t.location.x - player.location.x;
+          const dz   = t.location.z - player.location.z;
+          const dist = Math.hypot(dx, dz) || 1;
+          t.applyKnockback(dx / dist, dz / dist, 3.0, 0.8);
+        }
+      }
+
+      // compute buff duration (2 s per lvl, max 40 s) in ticks
+      const buffDurationTicks = Math.min(lvl * 2, 40) * 20;
+      const strAmp            = Math.min(Math.floor(lvl / 10), 2);
+      const spdAmp            = lvl >= 20 ? 1 : 0;
+
+      // 4) give Strength & Speed together
+      player.addEffect("strength", buffDurationTicks, {
+        amplifier: strAmp,
+        showParticles: false
+      });
+      player.addEffect("speed", buffDurationTicks, {
+        amplifier: spdAmp,
+        showParticles: false
+      });
+
+      // 5) swap geometry now that buffs are on
+      player.setProperty("zombie:summon_timer", Math.min(lvl, 20));
+
+      // 6) schedule geometry reset when buffs expire
+      system.runTimeout(() => {
+        player.setProperty("zombie:summon_timer", 0);
+      }, buffDurationTicks);
+
+      // 7) spend one XP level or 30% HP if none
+      player
+        .runCommandAsync(`xp -1L @s`)
+        .catch(() => {
+          const hpComp = player.getComponent("minecraft:health");
+          if (hpComp) {
+            const dmg = Math.max(
+              1,
+              Math.floor((hpComp.defaultValue ?? 20) * 0.3)
+            );
+            system.run(() => player.applyDamage(dmg));
+          }
+        });
+    }, 60); // end freeze
   }
 }

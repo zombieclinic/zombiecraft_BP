@@ -21,7 +21,10 @@ import {BrownbearChanceEffect,
         BowHold,
         chaosCrossbowExplosion,
         CustomFishingRod,
-        DemonSword
+        ChaosXp,
+        TheSight,
+        SwordHit,
+        Rage
         } from "./custom_components";
 import {Firefly2, FireflyFlicker,} from "./fireflys";
 import {RedwoodGrowthComponent} from "./plants/custom_trees";
@@ -54,21 +57,24 @@ const BLOCK_COMPONENTS = [
 ];
 
 const ITEM_COMPONENTS = [
-  ["zombie:bearcheck",      BrownbearChanceEffect],
-  ["zombie:onhitdamage",    OnHitDamage],
-  ["zombie:firefly_flicker", FireflyFlicker],
-  ["zombie:santasword",     SantaSword],
-  ["zombie:cookie",         Christmas_Cookie],
-  ["zombie:rottenfood",     RawFood],
-  ["zombie:candycane",      Candycane],
-  ["zombie:tporb",          TpOrb],
-  ["zombie:tppAxeSwing",    TppAxeSwing],
-  ["zombie:worldmenu",      TestDemon],
-  ["zombie:fishing_rod",    CustomFishingRod],
-  ["zombie:crablegs",       Crablegs],
-  ["zombie:BowHold",        BowHold],
-  ["zombie:chaos_book",     ChaosBookComponent],
-  ["zombie:chaosSword",     DemonSword]
+  ["zombie:bearcheck",           BrownbearChanceEffect],
+  ["zombie:onhitdamage",         OnHitDamage],
+  ["zombie:firefly_flicker",     FireflyFlicker],
+  ["zombie:santasword",          SantaSword],
+  ["zombie:cookie",              Christmas_Cookie],
+  ["zombie:rottenfood",          RawFood],
+  ["zombie:candycane",           Candycane],
+  ["zombie:tporb",               TpOrb],
+  ["zombie:tppAxeSwing",         TppAxeSwing],
+  ["zombie:worldmenu",           TestDemon],
+  ["zombie:fishing_rod",         CustomFishingRod],
+  ["zombie:crablegs",            Crablegs],
+  ["zombie:BowHold",             BowHold],
+  ["zombie:chaos_book",          ChaosBookComponent],
+  ["zombie:chaosxp",             ChaosXp],
+  ["zombie:thesight",            TheSight],
+  ["zombie:SwordHit",            SwordHit],
+  ["zombie:Rage",                Rage]
 ];
 
 // ——— register them in one go ———
