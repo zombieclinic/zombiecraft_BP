@@ -309,7 +309,7 @@
 					]
 				}
 			},
-			"varent_0": {
+			"firefly_on": {
 				"add": {
 					"component_groups": [
 						"varent_0"
@@ -321,7 +321,7 @@
 					]
 				}
 			},
-			"varent_1": {
+			"firefly_off": {
 				"add": {
 					"component_groups": [
 						"varent_1"

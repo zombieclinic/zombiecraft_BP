@@ -6,12 +6,12 @@
       "spawn_category": "creature",
       "is_spawnable": false,
       "is_summonable": false,
-     "properties": {
+    "properties": {
         "zombie:item_state": {
-          "client_sync": true,
           "type": "int",
           "default": 0,
-          "range": [0, 10]
+          "range": [0, 10],
+          "client_sync": true
         },
         "zombie:class": {
           "type": "enum",
@@ -21,8 +21,7 @@
         "zombie:subclass": {
           "type": "enum",
           "values": [
-            "none",
-            "berserker", "necromancer", "chaos_mage", "juggernaut",
+            "none", "berserker", "necromancer", "chaos_mage", "juggernaut",
             "doom_assassin", "cultist", "blood_reaver",
             "valkyrie", "priestess", "divine_archer",
             "wrecker", "terminator", "mine_specialist"
@@ -31,8 +30,8 @@
         },
         "zombie:essence": {
           "type": "float",
-          "range": [0.0, 200.0],
-          "default": 0.0
+          "default": 0.0,
+          "range": [0.0, 200.0]
         },
         "zombie:v_attack": {
           "type": "int",
@@ -44,40 +43,54 @@
           "default": 0,
           "range": [0, 20]
         },
+        "zombie:ability_level": {
+          "type": "int",
+          "default": 0,
+          "range": [0, 20]
+        },
         "zombie:alt_ability_level": {
           "type": "int",
-          "default": 1,
+          "default": 0,
           "range": [0, 20]
         },
         "zombie:sneak_ability_level": {
           "type": "int",
-          "default": 1,
+          "default": 0,
+          "range": [0, 20]
+        },
+        "zombie:alt_sneak_ability_level": {
+          "type": "int",
+          "default": 0,
           "range": [0, 20]
         },
         "zombie:jump_ability_level": {
           "type": "int",
-          "default": 1,
+          "default": 0,
+          "range": [0, 20]
+        },
+        "zombie:alt_jump_ability_level": {
+          "type": "int",
+          "default": 0,
           "range": [0, 20]
         },
         "zombie:mana_ability_level": {
           "type": "int",
-          "default": 1,
+          "default": 0,
           "range": [0, 20]
         },
         "zombie:sight_level": {
           "type": "int",
-          "range": [0, 10],
-          "default": 0
+          "default": 0,
+          "range": [0, 10]
         },
         "zombie:summon_timer": {
           "type": "int",
-          "range": [0, 999],
           "default": 0,
+          "range": [0, 999],
           "client_sync": true
         }
       }
     },
-
     "component_groups": {
       "minecraft:add_raid_omen": {
         "minecraft:spell_effects": {

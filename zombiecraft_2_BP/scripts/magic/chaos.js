@@ -16,20 +16,27 @@ export class ChaosBookComponent {
   }
 }
 
-function openChaosStats(player) {
-  const essence    = Math.floor(player.getProperty("zombie:essence") ?? 0);
-  const vAttack    = player.getProperty("zombie:v_attack")       ?? 0;
-  const altVAttack = player.getProperty("zombie:alt_v_attack")   ?? 0;
-  const sight      = player.getProperty("zombie:sight_level")    ?? 0;
+// chaos.js — updated openChaosStats and showStatConfirmation
 
-  // Use sneak_ability_level for Berserker's Rage, else alt_ability_level
-  const subclass    = player.getProperty("zombie:subclass");
-  const isBerserker = subclass === "berserker";
-  const rageKey     = isBerserker ? "zombie:sneak_ability_level" : "zombie:alt_ability_level";
-  const rage        = player.getProperty(rageKey) ?? 1;
+function openChaosStats(player) {
+  const essence    = Math.floor(player.getProperty("zombie:essence")       ?? 0);
+  const vAttack    = player.getProperty("zombie:v_attack")                 ?? 0;
+  const altVAttack = player.getProperty("zombie:alt_v_attack")             ?? 0;
+  const sight      = player.getProperty("zombie:sight_level")              ?? 0;
+  const subclass   = player.getProperty("zombie:subclass");
+  const isBerserker= subclass === "berserker";
+  const rageKey    = isBerserker ? "zombie:sneak_ability_level" : "zombie:alt_ability_level";
+  const rage       = player.getProperty(rageKey)                           ?? 1;
+
+  // your new fields:
+  const swordJump = player.getProperty("zombie:jump_ability_level")        ?? 1;
+  const swordSlash= player.getProperty("zombie:ability_level")             ?? 1;
+  const axeJump   = player.getProperty("zombie:alt_jump_ability_level")    ?? 1;
+  const axeSlash  = player.getProperty("zombie:alt_ability_level")         ?? 1;
 
   new ModalFormData()
     .title(`§0Available Chaos XP: §6${essence}`)
+    // existing two
     .textField(
       `§cSight Skill [Lv. ${sight}${sight < 10 ? "" : " - Max"}]\n` +
       `§7Reveals mob health and type on hit.`,
@@ -40,14 +47,36 @@ function openChaosStats(player) {
       `§7Grants strength temporarily.`,
       "0"
     )
+    // Sword group (now three fields)
     .textField(
-      `§cSword Skill [Lv. ${vAttack}${vAttack < 20 ? "" : " - Max"}]\n` +
-      `§7Boosts Sword damage.`,
+      `§cSword Damage [Lv. ${vAttack}${vAttack < 20 ? "" : " - Max"}]\n` +
+      `§7Boosts your basic sword swings.`,
       "0"
     )
     .textField(
-      `§cAxe Skill [Lv. ${altVAttack}${altVAttack < 20 ? "" : " - Max"}]\n` +
-      `§7Boosts Axe damage.`,
+      `§cSword Jump Attack [Lv. ${swordJump}${swordJump < 20 ? "" : " - Max"}]\n` +
+      `§7Adds extra damage when you jump-strike.`,
+      "0"
+    )
+    .textField(
+      `§cSword Slash Attack [Lv. ${swordSlash}${swordSlash < 20 ? "" : " - Max"}]\n` +
+      `§7Unleashes a sweeping slash.`,
+      "0"
+    )
+    // Axe group (three fields)
+    .textField(
+      `§cAxe Damage [Lv. ${altVAttack}${altVAttack < 20 ? "" : " - Max"}]\n` +
+      `§7Boosts your basic axe swings.`,
+      "0"
+    )
+    .textField(
+      `§cAxe Jump Attack [Lv. ${axeJump}${axeJump < 20 ? "" : " - Max"}]\n` +
+      `§7Extra impact when you jump-strike with an axe.`,
+      "0"
+    )
+    .textField(
+      `§cAxe Slash Ability [Lv. ${axeSlash}${axeSlash < 20 ? "" : " - Max"}]\n` +
+      `§7A wide, sweeping cleave.`,
       "0"
     )
     .submitButton("Submit Upgrades")
@@ -59,8 +88,7 @@ function openChaosStats(player) {
       }
 
       const entries = response.formValues.map(v => {
-        const t = v.trim();
-        const n = parseInt(t, 10);
+        const t = v.trim(), n = parseInt(t, 10);
         return t === "" || isNaN(n) ? 0 : n;
       });
 
@@ -77,33 +105,48 @@ function openChaosStats(player) {
 
       // Apply changes
       player.setProperty("zombie:essence", essence - totalSpent);
-      player.setProperty("zombie:sight_level",     Math.min(sight      + entries[0], 10));
-      player.setProperty(rageKey,                  Math.min(rage       + entries[1], 20));
-      player.setProperty("zombie:v_attack",        Math.min(vAttack    + entries[2], 20));
-      player.setProperty("zombie:alt_v_attack",    Math.min(altVAttack + entries[3], 20));
+      player.setProperty("zombie:sight_level",          Math.min(sight        + entries[0], 10));
+      player.setProperty(rageKey,                       Math.min(rage         + entries[1], 20));
+      player.setProperty("zombie:v_attack",             Math.min(vAttack      + entries[2], 20));
+      player.setProperty("zombie:jump_ability_level",   Math.min(swordJump    + entries[3], 20));
+      player.setProperty("zombie:ability_level",        Math.min(swordSlash   + entries[4], 20));
+      player.setProperty("zombie:alt_v_attack",         Math.min(altVAttack   + entries[5], 20));
+      player.setProperty("zombie:alt_jump_ability_level", Math.min(axeJump     + entries[6], 20));
+      player.setProperty("zombie:alt_ability_level",    Math.min(axeSlash      + entries[7], 20));
 
       system.runTimeout(() => showStatConfirmation(player), 1);
     });
 }
 
 function showStatConfirmation(player) {
-  const essence    = Math.floor(player.getProperty("zombie:essence") ?? 0);
-  const vAttack    = player.getProperty("zombie:v_attack")       ?? 0;
-  const altVAttack = player.getProperty("zombie:alt_v_attack")   ?? 0;
-  const sight      = player.getProperty("zombie:sight_level")    ?? 0;
+  const essence    = Math.floor(player.getProperty("zombie:essence")            ?? 0);
+  const vAttack    = player.getProperty("zombie:v_attack")                      ?? 0;
+  const altVAttack = player.getProperty("zombie:alt_v_attack")                  ?? 0;
+  const sight      = player.getProperty("zombie:sight_level")                   ?? 0;
+  const subclass   = player.getProperty("zombie:subclass");
+  const isBerserker= subclass === "berserker";
+  const rageKey    = isBerserker ? "zombie:sneak_ability_level" : "zombie:alt_ability_level";
+  const rage       = player.getProperty(rageKey)                                ?? 1;
 
-  const subclass    = player.getProperty("zombie:subclass");
-  const isBerserker = subclass === "berserker";
-  const rageKey     = isBerserker ? "zombie:sneak_ability_level" : "zombie:alt_ability_level";
-  const rage        = player.getProperty(rageKey) ?? 1;
+  const swordJump = player.getProperty("zombie:jump_ability_level")             ?? 1;
+  const swordSlash= player.getProperty("zombie:ability_level")                  ?? 1;
+  const axeJump   = player.getProperty("zombie:alt_jump_ability_level")         ?? 1;
+  const axeSlash  = player.getProperty("zombie:alt_ability_level")              ?? 1;
 
   const body = `
 §7Your new stats are:
 
 §cSight Skill§7: ${sight}
 §cRage Skill§7: ${rage}
-§cSword Skill§7: ${vAttack}
-§cAxe Skill§7: ${altVAttack}
+
+§cSword Damage§7: ${vAttack}
+§cSword Jump Attack§7: ${swordJump}
+§cSword Slash Attack§7: ${swordSlash}
+
+§cAxe Damage§7: ${altVAttack}
+§cAxe Jump Attack§7: ${axeJump}
+§cAxe Slash Ability§7: ${axeSlash}
+
 §eRemaining Chaos XP§7: ${essence}
   `.trim();
 
@@ -121,6 +164,7 @@ function showStatConfirmation(player) {
       }
     });
 }
+
 
 function showChaosBook(player) {
   const playerClass = player.getProperty("zombie:class");

@@ -13,19 +13,9 @@ import {BrownbearChanceEffect,
         Crablegs, 
         CorruptedDamage, 
         LogStripper, 
-        DemonGrass,
-        CustomOres,
-        TestDemon,
-        arrowEffect,
-        TppAxeSwing,
-        BowHold,
-        chaosCrossbowExplosion,
-        CustomFishingRod,
-        ChaosXp,
-        TheSight,
-        SwordHit,
-        Rage
-        } from "./custom_components";
+        CustomOres} from "./custom_components";
+import { BowHold, chaosCrossbowExplosion} from "./custom_components/chaos_components/crossbow";
+import {TheSight} from "./custom_components/chaos_components/sight";
 import {Firefly2, FireflyFlicker,} from "./fireflys";
 import {RedwoodGrowthComponent} from "./plants/custom_trees";
 import {Atlantis, OpenableComponent, FencePlaceComponent, ZombieDoor, ZombieSlab,} from "./blocks";
@@ -33,7 +23,13 @@ import { CropGrowthComponent } from "./plants/grow";
 import {  BlockShop } from "./playertoplayershop";
 import { WarpAtlas } from "./warpalter/warpalter";
 import { securityCheck } from "./warpalter/security";
-import {ChaosBookComponent} from "./magic/chaos"
+import {ChaosBookComponent} from "./magic/chaos";
+import { SwordHit, BerserkerAttackController} from "./custom_components/chaos_components/chaos_sword";
+import {CustomFishingRod} from "./custom_components/chaos_components/fishingpool"
+import { ChaosXp} from "./custom_components/chaos_components/xp"
+import {TppAxeSwing} from "./custom_components/chaos_components/battleaxe"
+import {arrowEffect} from "./custom_components/chaos_components/chaos_arrow"
+import {DemonGrass,TestDemon} from "./custom_components/chaos_components/generation"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -74,11 +70,10 @@ const ITEM_COMPONENTS = [
   ["zombie:chaosxp",             ChaosXp],
   ["zombie:thesight",            TheSight],
   ["zombie:SwordHit",            SwordHit],
-  ["zombie:Rage",                Rage]
+  ["zombie:sword",               BerserkerAttackController]
 ];
 
-// ——— register them in one go ———
-world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {
+system.beforeEvents.startup.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {
   BLOCK_COMPONENTS.forEach(([id, Comp]) =>
     blockComponentRegistry.registerCustomComponent(id, new Comp())
   );
@@ -87,11 +82,10 @@ world.beforeEvents.worldInitialize.subscribe(({ blockComponentRegistry, itemComp
   );
 });
 
-// ——— map your script-event IDs to handlers ———
 const SCRIPT_EVENT_HANDLERS = {
-  "zombie:firefly2":      source => new Firefly2(source),
-  "zombie:arroweffect":   source => arrowEffect(source),
-  "zombie:crossbow":      source => chaosCrossbowExplosion(source),
+  "zombie:firefly2":    source => new Firefly2(source),
+  "zombie:arroweffect": source => arrowEffect(source),
+  "zombie:crossbow":    source => chaosCrossbowExplosion(source),
 };
 
 system.afterEvents.scriptEventReceive.subscribe(({ id, sourceEntity }) => {
@@ -104,3 +98,9 @@ const checkIntervalTicks = 100;
 system.runInterval(() => {
     securityCheck();
 }, checkIntervalTicks);
+
+
+
+
+
+

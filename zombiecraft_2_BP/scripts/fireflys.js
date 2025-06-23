@@ -74,40 +74,56 @@ export class FireflyFlicker {
 
 
 
-
-// Firefly2 class for managing a light cycle on an entity
 export class Firefly2 {
-    lightOnDuration = 48;
-    lightOffDuration = 50;
+    // Duration in ticks (20 ticks = 1 second)
+    lightOnDuration = 48; // 2.4 seconds
+    lightOffDuration = 50; // 2.5 seconds
+
     sourceEntity;
+
+    // Private fields to manage the firefly's internal state.
+    // The '#' syntax is standard modern JavaScript.
+    #isLightOn = false;
+    #timeoutId;
 
     constructor(sourceEntity) {
         this.sourceEntity = sourceEntity;
-        this.triggerLightEvent(false);
         this.startLightCycle();
     }
 
-    triggerLightEvent(isLightOn) {
-        if (this.sourceEntity && this.sourceEntity.isValid()) {
-            try {
-                this.sourceEntity.triggerEvent(isLightOn ? "varent_0" : "varent_1");
-            } catch (error) {
-                console.error(`Error triggering ${isLightOn ? "varent_0" : "varent_1"} on entity:`, error);
-            }
+    _triggerLightEvent(isLightOn) {
+        // If the entity is removed or becomes invalid, stop the cycle.
+        if (!this.sourceEntity || !this.sourceEntity.isValid) {
+            this.stopLightCycle();
+            return;
+        }
+        try {
+            // These event names MUST match the events in your entity's behavior .json file.
+            const eventToTrigger = isLightOn ? "firefly_on" : "firefly_off";
+            this.sourceEntity.triggerEvent(eventToTrigger);
+        } catch (error) {
+            console.error(`Error triggering event on entity: ${error}`);
         }
     }
 
     startLightCycle() {
-        if (!this.sourceEntity || !this.sourceEntity.isValid()) {
-            return;
-        }
+        // Toggle the light state for the next cycle.
+        this.#isLightOn = !this.#isLightOn;
+        this._triggerLightEvent(this.#isLightOn);
 
-        this.triggerLightEvent(true);
-        system.runTimeout(() => {
-            if (this.sourceEntity && this.sourceEntity.isValid()) {
-                this.triggerLightEvent(false);
-                system.runTimeout(() => this.startLightCycle(), this.lightOffDuration);
-            }
-        }, this.lightOnDuration);
+        // Determine the delay until the next state change.
+        const nextDelay = this.#isLightOn ? this.lightOnDuration : this.lightOffDuration;
+
+        // Schedule the next run.
+        this.#timeoutId = system.runTimeout(() => {
+            this.startLightCycle();
+        }, nextDelay);
     }
-}
+
+    stopLightCycle() {
+        if (this.#timeoutId !== undefined) {
+            system.clearRun(this.#timeoutId);
+            this.#timeoutId = undefined;
+        }
+    }
+} 
