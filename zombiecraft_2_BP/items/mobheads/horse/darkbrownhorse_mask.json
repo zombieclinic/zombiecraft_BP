@@ -1,0 +1,36 @@
+//bridge-file-version: #29
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:darkbrownhorse_mask",
+			"is_experimental": true,
+			"menu_category": {
+				"group": "itemGroup.name.skull",
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Dark Brown Horse Mask"
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.head",
+				"dispensable": true
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_head",
+				"value": 5
+			},
+			"minecraft:icon": {
+				"texture": "fmh_horse_base_darkbrown_item"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:darkbrownhorse_block"
+			},
+			"minecraft:skull": {}
+		},
+		"events": {}
+	}
+}

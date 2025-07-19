@@ -1,0 +1,118 @@
+//bridge-file-version: #32
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_tame_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_wild_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_ashen_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_ashen_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_ashen_tamed_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_black_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_black_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_black_tamed_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_chestnut_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_chestnut_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_chestnut_tamed_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_rusty_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_rusty_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_rusty_tamed_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_spotted_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_spotted_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_spotted_tamed_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_striped_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_striped_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_striped_tamed_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_winter_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_winter_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_winter_tamed_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_wood_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_wood_angry_chance.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/entities/wolf_wood_tamed_chance.json"
+				}
+			]
+		}
+	]
+}

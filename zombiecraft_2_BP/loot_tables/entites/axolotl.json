@@ -1,0 +1,40 @@
+//bridge-file-version: #2
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "loot_table",
+					"name": "loot_tables/mask/axolotl_blue_mask.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/mask/axolotl_cyan_block.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/mask/axolotl_gold_block2.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/mask/axolotl_lucy_mask.json"
+				},
+				{
+					"type": "loot_table",
+					"name": "loot_tables/mask/axolotl_wild_mask.json"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "killed_by_player"
+				},
+				{
+					"condition": "random_chance_with_looting",
+					"chance": 0.1,
+					"looting_multiplier": 0.01
+				}
+			]
+		}
+	]
+}

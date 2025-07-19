@@ -1,0 +1,490 @@
+//bridge-file-version: #67
+{
+	"format_version": "1.20.30",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:camel1_block",
+			"is_experimental": false,
+			"traits": {
+				"minecraft:placement_direction": {
+					"enabled_states": [
+						"minecraft:cardinal_direction"
+					]
+				},
+				"minecraft:placement_position": {
+					"enabled_states": [
+						"minecraft:block_face"
+					]
+				}
+			}
+		},
+		"components": {
+			"tag:custom": {},
+			"minecraft:selection_box": true,
+			"minecraft:light_dampening": 0,
+			"minecraft:material_instances": {
+				"*": {
+					"render_method": "opaque",
+					"texture": "zombie_camel_block1"
+				}
+			},
+			"minecraft:map_color": "#b6b5b5",
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1
+			},
+			"minecraft:display_name": "Camel Mask",
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 13
+			},
+			"minecraft:geometry": "geometry.camel_block1",
+			"minecraft:loot": "loot_tables/mask/camel1_mask.json"
+		},
+		"permutations": [
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'north'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:geometry": "geometry.camel_wall2"
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'south'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_wall2",
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'east'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							-90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_wall2",
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'west'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_wall2",
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							1,
+							-6.2
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_roof1",
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_roof1",
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_roof1",
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							2,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:geometry": "geometry.camel_roof1"
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_block1",
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_block1",
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.camel_block1",
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-6.5,
+							0,
+							-7
+						],
+						"size": [
+							13,
+							14,
+							14
+						]
+					},
+					"minecraft:geometry": "geometry.camel_block1"
+				}
+			}
+		],
+		"events": {}
+	}
+}

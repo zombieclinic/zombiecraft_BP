@@ -1,0 +1,490 @@
+//bridge-file-version: #63
+{
+	"format_version": "1.20.30",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:parrot_yellow_blue_block",
+			"is_experimental": false,
+			"traits": {
+				"minecraft:placement_direction": {
+					"enabled_states": [
+						"minecraft:cardinal_direction"
+					]
+				},
+				"minecraft:placement_position": {
+					"enabled_states": [
+						"minecraft:block_face"
+					]
+				}
+			}
+		},
+		"components": {
+			"tag:custom": {},
+			"minecraft:selection_box": true,
+			"minecraft:light_dampening": 0,
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "zombie_parrot_yellow_blue_block",
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:map_color": "#b6b5b5",
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1
+			},
+			"minecraft:display_name": "Parrot Yellow and Blue Block",
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 13
+			},
+			"minecraft:geometry": "geometry.parrot_block",
+			"minecraft:loot": "loot_tables/mask/parrot_yellow_red_mask.json"
+		},
+		"permutations": [
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'north'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_wall",
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'south'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_wall",
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'east'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							-90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_wall",
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "query.block_state('minecraft:block_face') == 'west'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-3.1
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_wall"
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'down' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_roof",
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'down'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							1.5,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_roof"
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'north' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							180,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_block",
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'south' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							0,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_block",
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'east' && query.block_state('minecraft:block_face') == 'up' ",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							90,
+							0
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_block",
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('minecraft:cardinal_direction') == 'west' && query.block_state('minecraft:block_face') == 'up'",
+				"components": {
+					"minecraft:transformation": {
+						"rotation": [
+							0,
+							270,
+							0
+						]
+					},
+					"minecraft:collision_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:selection_box": {
+						"origin": [
+							-4,
+							0,
+							-5.5
+						],
+						"size": [
+							8,
+							8,
+							11
+						]
+					},
+					"minecraft:geometry": "geometry.parrot_block"
+				}
+			}
+		],
+		"events": {}
+	}
+}

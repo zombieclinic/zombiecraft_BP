@@ -1,0 +1,36 @@
+//bridge-file-version: #25
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:rabbit_white_mask",
+			"is_experimental": true,
+			"menu_category": {
+				"group": "itemGroup.name.skull",
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Rabbit White Mask"
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.head",
+				"dispensable": true
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_head",
+				"value": 5
+			},
+			"minecraft:icon": {
+				"texture": "fmh_rabbit_coat_white_item"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:rabbit_white_block"
+			},
+			"minecraft:skull": {}
+		},
+		"events": {}
+	}
+}

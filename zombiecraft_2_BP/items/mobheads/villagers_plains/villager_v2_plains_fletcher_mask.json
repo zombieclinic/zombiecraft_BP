@@ -1,0 +1,36 @@
+//bridge-file-version: #47
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:villager_v2_plains_fletcher_mask",
+			"is_experimental": true,
+			"menu_category": {
+				"group": "itemGroup.name.skull",
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Plains Fletcher Mask"
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.head",
+				"dispensable": true
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_head",
+				"value": 5
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:villager_v2_plains_fletcher_block"
+			},
+			"minecraft:icon": {
+				"texture": "fmh_villager_v2_plains_fletcher_item"
+			},
+			"minecraft:skull": {}
+		},
+		"events": {}
+	}
+}

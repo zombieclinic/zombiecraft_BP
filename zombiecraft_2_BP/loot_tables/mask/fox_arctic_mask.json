@@ -1,0 +1,18 @@
+//bridge-file-version: #20
+{
+	"pools": [
+		{
+			"rolls": {
+				"min": 1,
+				"max": 1
+			},
+			"entries": [
+				{
+					"type": "item",
+					"name": "zombie:arctic_fox_mask",
+					"weight": 1
+				}
+			]
+		}
+	]
+}

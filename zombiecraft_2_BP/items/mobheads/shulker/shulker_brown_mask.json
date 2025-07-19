@@ -1,0 +1,36 @@
+//bridge-file-version: #15
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:shulker_brown_mask",
+			"is_experimental": true,
+			"menu_category": {
+				"group": "itemGroup.name.skull",
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Shulker Brown Mask"
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.head",
+				"dispensable": true
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_head",
+				"value": 5
+			},
+			"minecraft:icon": {
+				"texture": "zombie_shulker_brown"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:shulker_brown_block"
+			},
+			"minecraft:skull": {}
+		},
+		"events": {}
+	}
+}

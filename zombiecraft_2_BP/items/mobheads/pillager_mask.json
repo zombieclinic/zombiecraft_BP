@@ -1,0 +1,36 @@
+//bridge-file-version: #19
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:pillager_mask",
+			"is_experimental": true,
+			"menu_category": {
+				"group": "itemGroup.name.skull",
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Pillager Mask"
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.head",
+				"dispensable": true
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_head",
+				"value": 5
+			},
+			"minecraft:icon": {
+				"texture": "fmh_pillager_item"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:pillager_block"
+			},
+			"minecraft:skull": {}
+		},
+		"events": {}
+	}
+}

@@ -1,0 +1,36 @@
+//bridge-file-version: #41
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:wolf_winter_tamed_mask",
+			"is_experimental": true,
+			"menu_category": {
+				"group": "itemGroup.name.skull",
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Wolf Winter Tamed Mask"
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.head",
+				"dispensable": true
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_head",
+				"value": 5
+			},
+			"minecraft:icon": {
+				"texture": "zombie_wolf_winter_tamed"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:wolf_winter_tamed_block"
+			},
+			"minecraft:skull": {}
+		},
+		"events": {}
+	}
+}

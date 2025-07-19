@@ -1,0 +1,36 @@
+//bridge-file-version: #17
+{
+	"format_version": "1.20.40",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:tadpole_mask",
+			"is_experimental": true,
+			"menu_category": {
+				"group": "itemGroup.name.skull",
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:should_despawn": true,
+			"minecraft:display_name": {
+				"value": "Tadpole Mask"
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.head",
+				"dispensable": true
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_head",
+				"value": 5
+			},
+			"minecraft:icon": {
+				"texture": "fmh_tadpole_item"
+			},
+			"minecraft:block_placer": {
+				"block": "zombie:tadpole_block"
+			},
+			"minecraft:skull": {}
+		},
+		"events": {}
+	}
+}

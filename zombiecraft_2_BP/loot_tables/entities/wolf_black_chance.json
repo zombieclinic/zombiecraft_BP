@@ -1,0 +1,24 @@
+//bridge-file-version: #2
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "loot_table",
+					"name": "loot_tables/mask/wolf_black_mask.json"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "killed_by_player"
+				},
+				{
+					"condition": "random_chance_with_looting",
+					"chance": 0.2,
+					"looting_multiplier": 0.01
+				}
+			]
+		}
+	]
+}
