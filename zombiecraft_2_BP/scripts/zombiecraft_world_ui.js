@@ -1,4 +1,5 @@
 import { world, system } from "@minecraft/server";
+import {worldsettings} from "./system.run"
 import {BrownbearChanceEffect,
         OnHitDamage,
         Openbox, 
@@ -100,6 +101,7 @@ system.afterEvents.scriptEventReceive.subscribe(({ id, sourceEntity }) => {
 const checkIntervalTicks = 100;
 system.runInterval(() => {
     securityCheck();
+    worldsettings();
 }, checkIntervalTicks);
 
 

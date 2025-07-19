@@ -135,6 +135,7 @@
 		  }
 	  },
 	  "components": {
+		
 		"minecraft:type_family": {
 		  "family": ["mutated_zombie", "monster"]
 		},
@@ -167,7 +168,10 @@
 		  "is_pushable_by_piston": false
 		},
 		"minecraft:physics": {},
-		"minecraft:despawn": {}
+		"minecraft:despawn": {
+			"despawn_from_simulation_edge": true,
+			"despawn_from_distance": {}
+		}
 	  },
 	  "events": {
 		"minecraft:entity_spawned": {
