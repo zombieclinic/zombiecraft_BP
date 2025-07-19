@@ -13,13 +13,13 @@ import {BrownbearChanceEffect,
         Crablegs, 
         CorruptedDamage, 
         LogStripper, 
-        CustomOres} from "./custom_components";
+        CustomOres} from "./custom_components/custom_components";
 import { BowHold, chaosCrossbowExplosion} from "./custom_components/chaos_components/crossbow";
 import {TheSight} from "./custom_components/chaos_components/sight";
 import {Firefly2, FireflyFlicker,} from "./fireflys";
-import {RedwoodGrowthComponent} from "./plants/custom_trees";
-import {Atlantis, OpenableComponent, FencePlaceComponent, ZombieDoor, ZombieSlab,} from "./blocks";
-import { CropGrowthComponent } from "./plants/grow";
+import {RedwoodGrowthComponent} from "./custom_components/plants/custom_trees";
+import {Atlantis, OpenableComponent, FencePlaceComponent, ZombieDoor, ZombieSlab, PaintBrush, Painting} from "./blocks";
+import { CropGrowthComponent } from "./custom_components/plants/grow";
 import {  BlockShop } from "./playertoplayershop";
 import { WarpAtlas } from "./warpalter/warpalter";
 import { securityCheck } from "./warpalter/security";
@@ -27,7 +27,7 @@ import {ChaosBookComponent} from "./magic/chaos";
 import { SwordHit, BerserkerAttackController} from "./custom_components/chaos_components/chaos_sword";
 import {CustomFishingRod} from "./custom_components/chaos_components/fishingpool"
 import { ChaosXp} from "./custom_components/chaos_components/xp"
-import {TppAxeSwing} from "./custom_components/chaos_components/battleaxe"
+import {TppAxeSwing, BerserkerAxeController} from "./custom_components/chaos_components/battleaxe"
 import {arrowEffect} from "./custom_components/chaos_components/chaos_arrow"
 import {DemonGrass,TestDemon} from "./custom_components/chaos_components/generation"
 
@@ -49,7 +49,7 @@ const BLOCK_COMPONENTS = [
   ["zombie:fence_place",          FencePlaceComponent],
   ["zombie:door",                 ZombieDoor],
   ["zombie:slab",                 ZombieSlab],
-  ["zombie:ores",                 CustomOres],
+  ["zombie:ores",                 CustomOres]
 ];
 
 const ITEM_COMPONENTS = [
@@ -70,7 +70,10 @@ const ITEM_COMPONENTS = [
   ["zombie:chaosxp",             ChaosXp],
   ["zombie:thesight",            TheSight],
   ["zombie:SwordHit",            SwordHit],
-  ["zombie:sword",               BerserkerAttackController]
+  ["zombie:sword",               BerserkerAttackController],
+  ["zombie:axecontroller",       BerserkerAxeController],
+  ["zombie:paintbrush",          PaintBrush],
+  ["zombie:paintings",            Painting]
 ];
 
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {

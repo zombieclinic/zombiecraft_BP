@@ -1,0 +1,28 @@
+{
+	"format_version": "1.21.90",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:painters_easel.recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:stick"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:stick",
+				"count": 4
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:painting_easel",
+				"count": 1
+			}
+		]
+	}
+}

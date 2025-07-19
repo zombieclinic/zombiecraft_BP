@@ -1,0 +1,209 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:lighthouse_41"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:catlady_42"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:chained_43"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:cowboy_44"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:freedom_45"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:broken_46"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:darknight_47"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:dragon_48"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:eagle_49"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:angel_50"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:farm_51"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:fish_52"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:forest_53"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:frankenstein_54"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:retro_55"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:cyberpunk_56"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:ghostbusters_57"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:lake_58"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:hungover_59"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:wind_60"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:blackhorse_61"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:country_62"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:moutainhorse_63"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:stuck_64"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:riverview_65"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:lord_66"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:heartshape_67"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:micky_68"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:moonlight_69"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:catlady_70"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_71"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_72"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:flying_73"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_74"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_75"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_76"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_77"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_78"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_79"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_80"
+				}
+			]
+		}
+	]
+}

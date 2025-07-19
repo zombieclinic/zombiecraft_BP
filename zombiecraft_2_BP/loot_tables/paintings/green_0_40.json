@@ -1,0 +1,209 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_1"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_2"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_3"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_4"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_5"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_6"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_7"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_8"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_9"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_10"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_11"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_12"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_13"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_14"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:night_watch_15"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:addiction_16"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_17"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_18"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:rabbit_hole_19"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_20"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_21"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_22"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_23"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:bandaid_24"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_25"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_26"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_27"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:haunted_house_28"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_29"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:devil_30"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:abducted_31"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:pirate_32"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:bigfoot_33"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:harley_quinn_34"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:feild_trip_35"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_36"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:vacation_37"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:blink_38"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:nature_39"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:lost_40"
+				}
+			]
+		}
+	]
+}

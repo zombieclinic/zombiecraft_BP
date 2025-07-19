@@ -1,0 +1,30 @@
+{
+	"format_version": "1.21.90",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:paint_brush",
+			"menu_category": {"category": "equipment"}
+		},
+		"components": {
+			"minecraft:display_name": {
+				"value": "Paint Brush Wood"
+			},
+			"minecraft:max_stack_size": 1,
+			"minecraft:hand_equipped": true,
+			"minecraft:icon": "zombie_paint_palette",
+			"minecraft:should_despawn": true,
+			"minecraft:hover_text_color": "green",
+			"minecraft:use_modifiers": {
+				"use_duration": 1.6
+			},
+			"minecraft:durability": {
+				"damage_chance": {
+					"min": 10,
+					"max": 50
+				},
+				"max_durability": 50
+			},
+			"zombie:paintings": {}
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+    "format_version": "1.21.60",
+    "minecraft:block": {
+        "description": {
+            "identifier": "zombie:blu3winqs_animatedshroom",
+            "menu_category": {
+				"category": "construction"
+			}
+        },
+        "components": {
+            "minecraft:collision_box": true,
+            "minecraft:selection_box": true,
+            "minecraft:flammable": false,
+            "minecraft:destructible_by_explosion": true,
+           	"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1
+			},
+            "minecraft:display_name": "Blu3winqs Animated Mushshroom",
+            "minecraft:light_dampening": 15
+        }
+    }
+}

@@ -34,7 +34,8 @@
             },
             "zombie:thesight": {},
             "zombie:chaosxp": {},
-            "zombie:tppAxeSwing": {}
+            "zombie:tppAxeSwing": {},
+            "zombie:axecontroller": {}
         }
     }
 }

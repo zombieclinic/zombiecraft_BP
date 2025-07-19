@@ -1,0 +1,209 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:fishbowl_81"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_82"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_83"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_84"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_85"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_86"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_87"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:crow_88"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_89"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_90"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_91"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_92"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_93"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:greenskull_94"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:sunset_95"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:grim_96"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:notcrazy_97"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:rabbithole_98"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:fishing_99"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:rose_100"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:samurai_101"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:teapot_102"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:tigar_103"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:time_104"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:patchwork_105"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:tinman_106"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:tinman_107"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:living_108"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mad_109"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_110"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:einstein_111"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_112"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:mystery_girl_113"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:one%_114"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:life_115"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:fallout_116"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:panda_117"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:grim_118"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:grim_119"
+				},
+				{
+					"type": "item",
+					"weight": 1,
+					"name": "zombie:tree_120"
+				}
+			]
+		}
+	]
+}

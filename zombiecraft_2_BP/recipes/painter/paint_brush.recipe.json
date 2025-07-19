@@ -1,0 +1,41 @@
+{
+	"format_version": "1.21.70",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:paint_brush.recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:stick"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:feather"
+			},
+			{
+				"item": "minecraft:stick"
+			},
+			{
+				"item": "minecraft:wooden_slab"
+			},
+			{
+				"item": "minecraft:red_dye"
+			},
+			{
+				"item": "minecraft:blue_dye"
+			},
+			{
+				"item": "minecraft:yellow_dye"
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:paint_brush"
+			}
+		]
+	}
+}

@@ -1,24 +1,22 @@
-
-
-////////////////////////axe_swing///////////////////
+import { system } from "@minecraft/server";
+import { Rage } from "./rage";
 
 // ── Config ─────────────────────────────────────────────
 const HITS_PER_CHARGE      = 3;
 const MAX_CHARGES          = 10;
 
 const BASE_RANGE           = 4;
-const RANGE_PER_CHARGE     = 1;   // +1 block per charge
+const RANGE_PER_CHARGE     = 1;
 
 const BASE_DAMAGE          = 7;
-const DAMAGE_PER_CHARGE    = 1;   // +1 damage per charge
+const DAMAGE_PER_CHARGE    = 1;
 
 const BASE_KNOCKBACK       = 0.8;
-const KNOCKBACK_PER_CHARGE = 0.2; // +0.2 impulse per charge
+const KNOCKBACK_PER_CHARGE = 0.2;
 
 // Penalty attack when no charges:
-const PENALTY_DAMAGE       = 5;   // “level 5” attack
-const PENALTY_KNOCKBACK    = 1;   // moderate knockback
-const PENALTY_SELF_DAMAGE  = 6;   // 3 hearts = 6 HP
+const PENALTY_DAMAGE    = 5;
+const PENALTY_KNOCKBACK = 1;
 
 // ── State ──────────────────────────────────────────────
 const rawHits = new Map();   // Map<playerId, number>
@@ -42,71 +40,140 @@ function applyAxeDamage(player, damageAmount, knockbackStrength, range) {
     const dz = loc.z - player.location.z;
     const len = Math.hypot(dx, dz) || 1;
     const impulse = {
-      x: (dx/len) * knockbackStrength,
+      x: (dx / len) * knockbackStrength,
       y: 0.3,
-      z: (dz/len) * knockbackStrength,
+      z: (dz / len) * knockbackStrength,
     };
 
     try { if (typeof t.clearVelocity === "function") t.clearVelocity(); } catch {}
     try { if (typeof t.applyImpulse  === "function") t.applyImpulse(impulse); } catch {}
   }
 }
-///////////////////////////////axe_swing///////////////////
+
+//////////////////////// Axe Charge Builder ////////////////////////
 export class TppAxeSwing {
-  /**
-   * Build charges on every direct hit.
-   */
   onHitEntity(event) {
     const player    = event.attackingEntity;
-    const target    = event.hitEntity;
     const hadEffect = event.hadEffect;
-    if (!player || !target || !hadEffect) return;
+    if (!player || !hadEffect) return;
 
-    const pid = player.id;
-    let hits = (rawHits.get(pid) || 0) + 1;
+    const pid  = player.id;
+    let hits   = (rawHits.get(pid) || 0) + 1;
 
     if (hits >= HITS_PER_CHARGE) {
       hits -= HITS_PER_CHARGE;
-      const newCharge = Math.min((charges.get(pid) || 0) + 1, MAX_CHARGES);
+      const current   = charges.get(pid) || 0;
+      const newCharge = Math.min(current + 1, MAX_CHARGES);
       charges.set(pid, newCharge);
-
-      // Chat feedback so you see it
-      player.runCommand(`say  Charged ${newCharge}`);
+      player.runCommand(`say Charged ${newCharge}`);
     }
 
     rawHits.set(pid, hits);
   }
+}
 
-  /**
-   * Consume charges on use, or penalty if zero.
-   */
+//////////////////////// Alt Slash (Axe Slash) //////////////////////
+export class Alt_swing {
   onUse(event) {
     const player = event.source;
     const pid    = player.id;
-    const c      = charges.get(pid) || 0;
 
-    // always play swing animation
+    // read combo charges
+    const c = charges.get(pid) || 0;
+
+    // read ability-level bonus
+    const altLevel = player.getProperty("zombie:alt_ability_level") || 0;
+    const extraDmg = altLevel * 0.5;
+
     player.playAnimation("animation.tpp_axe_swing");
 
     if (c <= 0) {
-      // No charges: penalty
-      player.applyDamage(PENALTY_SELF_DAMAGE);
-      applyAxeDamage(player, PENALTY_DAMAGE, PENALTY_KNOCKBACK, BASE_RANGE);
-      player.runCommand(`say  No charges! Took 3 hearts, unleashed level 5 attack!`);
+      applyAxeDamage(player, PENALTY_DAMAGE + extraDmg, PENALTY_KNOCKBACK, BASE_RANGE);
+      player.runCommand(
+        `say No charges! Delivered penalty +${extraDmg.toFixed(1)} bonus!`
+      );
     } else {
-      // Consume charges: empowered AOE
       const range     = BASE_RANGE + c * RANGE_PER_CHARGE;
-      const damage    = BASE_DAMAGE + c * DAMAGE_PER_CHARGE;
+      const totalDmg  = (BASE_DAMAGE + c * DAMAGE_PER_CHARGE) + extraDmg;
       const knockback = BASE_KNOCKBACK + c * KNOCKBACK_PER_CHARGE;
-      applyAxeDamage(player, damage, knockback, range);
 
-      // Feedback
-      player.dimension
-        .runCommand(`title @s actionbar "Unleashed ${c} charge${c!==1?'s':''}!"`)
+      applyAxeDamage(player, totalDmg, knockback, range);
+      player.dimension.runCommand(
+        `title @s actionbar "Unleashed ${c} charge${c !== 1 ? 's' : ''} +${extraDmg.toFixed(1)} bonus!"`
+      );
     }
 
-    // reset for next combo
+    // reset combo charges
     charges.set(pid, 0);
-    rawHits.set(pid, 0);
+  }
+}
+
+//////////////////////// Jump Attack ///////////////////////////////
+export class JumpAttack {
+  onUse(event) {
+    const player = event.source;
+    const lvl    = player.getProperty("zombie:alt_jump_ability_level") || 0;
+
+    if (lvl < 1) {
+      player.sendMessage("§cYou haven’t learned Jump Attack yet!");
+      return;
+    }
+
+    const extra  = lvl * 0.5;
+    const damage = Math.floor(20 + extra);
+
+    player.sendMessage(`§bJump Attack (Lv.${lvl}) deals ${damage} damage!`);
+
+    player.runCommand("tag @s add _rageTemp");
+    player.runCommand("playanimation @s animation.demon_sword.jump_attack");
+    player.runCommand(
+      `execute at @s facing ^ ^ ^1 run damage @e[tag=!_rageTemp,r=2] ${damage} entity_attack entity @s`
+    );
+    player.runCommand("tag @s remove _rageTemp");
+  }
+}
+
+//////////////////////// Controller ////////////////////////////////
+export class BerserkerAxeController {
+  onUse(event) {
+    const player = event.source;
+
+    // — Up-front XP requirement & consume —
+    const xpComp = player.getComponent("minecraft:experience");
+    if (!xpComp || xpComp.currentLevel < 1) {
+      player.sendMessage("§cNot enough XP to use any Berserker ability!");
+      return;
+    }
+    player.runCommand("xp -1L @s");
+
+    // Sneak → Rage
+    if (player.isSneaking) {
+      const lvl = player.getProperty("zombie:sneak_ability_level") || 0;
+      if (lvl < 1) {
+        player.sendMessage("§cYour Rage skill is too low! Reach Lv.1 to use Rage.");
+        return;
+      }
+      new Rage().onUse(event);
+      return;
+    }
+
+    // Jump → JumpAttack
+    if (player.isJumping) {
+      const lvl = player.getProperty("zombie:alt_jump_ability_level") || 0;
+      if (lvl < 1) {
+        player.sendMessage("§cYour Jump Attack skill is too low! Reach Lv.1 to use Jump Attack.");
+        return;
+      }
+      new JumpAttack().onUse(event);
+      return;
+    }
+
+    // Normal → Slash
+    const lvl = player.getProperty("zombie:alt_ability_level") || 0;
+    if (lvl < 1) {
+      player.sendMessage("§cYour Axe Slash skill is too low! Reach Lv.1 to use Slash.");
+      return;
+    }
+    new Alt_swing().onUse(event);
   }
 }
