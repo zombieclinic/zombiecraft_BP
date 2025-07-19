@@ -1,11 +1,13 @@
-//bridge-file-version: #89
+
 {
-	"format_version": "1.20.30",
+	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:zombie_oldguy_block",
-			"is_experimental": false,
-			"register_to_creative_menu": false,
+			"menu_category": {
+				"category": "none",
+				"is_hidden_in_commands": true
+			},
 			"traits": {
 				"minecraft:placement_direction": {
 					"enabled_states": [
@@ -485,7 +487,6 @@
 					"minecraft:geometry": "geometry.zombie_easteregg_block"
 				}
 			}
-		],
-		"events": {}
+		]
 	}
 }
