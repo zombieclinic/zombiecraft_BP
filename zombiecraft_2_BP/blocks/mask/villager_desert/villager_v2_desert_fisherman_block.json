@@ -1,6 +1,5 @@
-//bridge-file-version: #77
 {
-	"format_version": "1.20.30",
+	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:villager_v2_desert_fisherman_block",
@@ -39,7 +38,6 @@
 			"minecraft:geometry": "geometry.villager_block",
 			"minecraft:loot": "loot_tables/mask/villager_v2_desert_fisherman_mask.json"
 		},
-		"events": {},
 		"permutations": [
 			{
 				"condition": "query.block_state('minecraft:block_face') == 'north'",

@@ -1,6 +1,6 @@
-//bridge-file-version: #62
+
 {
-	"format_version": "1.20.30",
+	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:husk_block",
@@ -484,7 +484,6 @@
 					"minecraft:geometry": "geometry.husk_block"
 				}
 			}
-		],
-		"events": {}
+		]
 	}
 }

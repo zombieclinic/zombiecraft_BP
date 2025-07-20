@@ -1,10 +1,12 @@
-//bridge-file-version: #62
 {
-	"format_version": "1.20.30",
+	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:villager_desert_armorer_block",
-			"is_experimental": false,
+			"menu_category": {
+				"category": "none",
+				"is_hidden_in_commands": true
+			},
 			"traits": {
 				"minecraft:placement_direction": {
 					"enabled_states": [
@@ -39,7 +41,6 @@
 			"minecraft:geometry": "geometry.villager_block",
 			"minecraft:loot": "loot_tables/mask/villager_desert_armorer_mask.json"
 		},
-		"events": {},
 		"permutations": [
 			{
 				"condition": "query.block_state('minecraft:block_face') == 'north'",

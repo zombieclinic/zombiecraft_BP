@@ -31,6 +31,7 @@ import { ChaosXp} from "./custom_components/chaos_components/xp"
 import {TppAxeSwing, BerserkerAxeController} from "./custom_components/chaos_components/battleaxe"
 import {arrowEffect} from "./custom_components/chaos_components/chaos_arrow"
 import {DemonGrass,TestDemon} from "./custom_components/chaos_components/generation"
+import {AdminMenu} from "./adminmenu"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -74,7 +75,8 @@ const ITEM_COMPONENTS = [
   ["zombie:sword",               BerserkerAttackController],
   ["zombie:axecontroller",       BerserkerAxeController],
   ["zombie:paintbrush",          PaintBrush],
-  ["zombie:paintings",            Painting]
+  ["zombie:paintings",           Painting],
+  ["zombie:adminmenu",           AdminMenu]
 ];
 
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {

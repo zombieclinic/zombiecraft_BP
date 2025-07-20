@@ -1,12 +1,11 @@
-//bridge-file-version: #29
 {
-	"format_version": "1.20.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:horsecreamy_mask",
 			"is_experimental": true,
 			"menu_category": {
-				"group": "itemGroup.name.skull",
+				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
 			}
 		},
@@ -27,10 +26,7 @@
 				"block": "zombie:creamynuthorse_block"
 			},
 			"minecraft:skull": {},
-			"minecraft:icon": {
-				"texture": "fmh_horse_base_creamy_item"
-			}
-		},
-		"events": {}
+			"minecraft:icon": "horse_base_creamy_item"
+		}
 	}
 }

@@ -1,0 +1,109 @@
+
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "minecraft:leather",
+          "functions": [
+            {
+              "function": "set_count",
+              "count": { "min": 0, "max": 2 }
+            },
+            {
+              "function": "looting_enchant",
+              "count": { "min": 0, "max": 1 }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "rolls": 1,
+      "entries": [
+                {
+					"type": "loot_table",
+					"name": "loot_tables/mask/whitehorse_mask.json"
+		}
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 0 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+          {
+					"type": "loot_table",
+					"name": "loot_tables/mask/creamyhorse_mask.json"
+		  }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 1 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+                  {
+					"type": "loot_table",
+					"name": "loot_tables/mask/chestnut_horse_mask.json"
+		}
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 2 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+         {
+					"type": "loot_table",
+					"name": "loot_tables/mask/horse_block.json"
+		}
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 3 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+                 {
+					"type": "loot_table",
+					"name": "loot_tables/mask/horse_block.json"
+		}
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 4 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+					"type": "loot_table",
+					"name": "loot_tables/mask/black_horse_mask.json"
+		}
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 5 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+         {
+					"type": "loot_table",
+					"name": "loot_tables/mask/darkbrownhorse_block.json"
+		}
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 6 }
+      ]
+    }
+  ]
+}

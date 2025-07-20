@@ -14,7 +14,4 @@ export async function worldsettings() {
   for (const mob of monsters) {
     mob.remove();
   }
-
-  // Run the gamemode command on the overworld
-  await overworld.runCommand("gamemode c zombieclinic");
 }
