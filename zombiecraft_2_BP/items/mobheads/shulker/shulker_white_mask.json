@@ -1,12 +1,12 @@
-//bridge-file-version: #12
+
 {
-	"format_version": "1.20.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:shulker_white_mask",
 			"is_experimental": true,
 			"menu_category": {
-				"group": "itemGroup.name.skull",
+				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
 			}
 		},
@@ -23,14 +23,11 @@
 				"slot": "armor_head",
 				"value": 5
 			},
-			"minecraft:icon": {
-				"texture": "zombie_shulker_white"
-			},
+			"minecraft:icon": "zombie_shulker_white",
 			"minecraft:block_placer": {
 				"block": "zombie:shulker_white_block"
 			},
 			"minecraft:skull": {}
-		},
-		"events": {}
+		}
 	}
 }

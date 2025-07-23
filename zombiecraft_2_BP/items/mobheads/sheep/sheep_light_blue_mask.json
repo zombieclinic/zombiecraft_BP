@@ -1,12 +1,12 @@
-//bridge-file-version: #40
+
 {
-	"format_version": "1.20.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:sheep_light_blue_mask",
 			"is_experimental": true,
 			"menu_category": {
-				"group": "itemGroup.name.skull",
+				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
 			}
 		},
@@ -23,14 +23,11 @@
 				"slot": "armor_head",
 				"value": 5
 			},
-			"minecraft:icon": {
-				"texture": "fmh_sheep_light_blue_item"
-			},
+			"minecraft:icon": "sheep_light_blue_item",
 			"minecraft:block_placer": {
 				"block": "zombie:sheep_light_blue_block"
 			},
 			"minecraft:skull": {}
-		},
-		"events": {}
+		}
 	}
 }

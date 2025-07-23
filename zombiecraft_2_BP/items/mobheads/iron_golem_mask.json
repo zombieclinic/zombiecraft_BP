@@ -1,12 +1,12 @@
-//bridge-file-version: #23
+
 {
-	"format_version": "1.20.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:iron_golem_mask",
 			"is_experimental": true,
 			"menu_category": {
-				"group": "itemGroup.name.skull",
+				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
 			}
 		},
@@ -23,14 +23,11 @@
 				"slot": "armor_head",
 				"value": 5
 			},
-			"minecraft:icon": {
-				"texture": "fmh_iron_golem_item"
-			},
+			"minecraft:icon": "iron_golem_item",
 			"minecraft:block_placer": {
 				"block": "zombie:iron_golem_block"
 			},
 			"minecraft:skull": {}
-		},
-		"events": {}
+		}
 	}
 }

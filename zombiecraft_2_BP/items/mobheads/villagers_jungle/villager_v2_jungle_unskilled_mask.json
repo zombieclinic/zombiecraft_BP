@@ -1,4 +1,4 @@
-//bridge-file-version: #55
+
 {
 	"format_version": "1.20.40",
 	"minecraft:item": {
@@ -26,11 +26,8 @@
 			"minecraft:block_placer": {
 				"block": "zombie:villager_v2_jungle_unskilled_block"
 			},
-			"minecraft:icon": {
-				"texture": "fmh_villager_v2_jungle_unskilled_item"
-			},
+			"minecraft:icon": "villager_v2_jungle_unskilled_item",
 			"minecraft:skull": {}
-		},
-		"events": {}
+		}
 	}
 }

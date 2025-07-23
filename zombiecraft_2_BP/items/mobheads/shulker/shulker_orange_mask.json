@@ -1,12 +1,12 @@
-//bridge-file-version: #13
+
 {
-	"format_version": "1.20.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:shulker_orange_mask",
 			"is_experimental": true,
 			"menu_category": {
-				"group": "itemGroup.name.skull",
+				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
 			}
 		},
@@ -17,20 +17,18 @@
 			},
 			"minecraft:wearable": {
 				"slot": "slot.armor.head",
-				"dispensable": true
+				"dispensable": true,
+				"hides_player_location": true
 			},
 			"minecraft:enchantable": {
 				"slot": "armor_head",
 				"value": 5
 			},
-			"minecraft:icon": {
-				"texture": "zombie_shulker_orange"
-			},
+			"minecraft:icon": "zombie_shulker_orange",
 			"minecraft:block_placer": {
 				"block": "zombie:shulker_orange_block"
 			},
 			"minecraft:skull": {}
-		},
-		"events": {}
+		}
 	}
 }

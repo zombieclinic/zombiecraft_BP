@@ -1,12 +1,12 @@
-//bridge-file-version: #143
+
 {
-	"format_version": "1.20.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:villager_v2_swamp_shepherd_mask",
 			"is_experimental": true,
 			"menu_category": {
-				"group": "itemGroup.name.skull",
+				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
 			}
 		},
@@ -26,11 +26,8 @@
 			"minecraft:block_placer": {
 				"block": "zombie:villager_v2_swamp_shepherd_block"
 			},
-			"minecraft:icon": {
-				"texture": "fmh_villager_v2_swamp_shepherd_item"
-			},
+			"minecraft:icon": "villager_v2_swamp_shepherd_item",
 			"minecraft:skull": {}
-		},
-		"events": {}
+		}
 	}
 }

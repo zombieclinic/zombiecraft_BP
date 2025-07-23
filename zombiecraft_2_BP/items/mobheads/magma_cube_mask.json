@@ -1,12 +1,12 @@
-//bridge-file-version: #14
+
 {
-	"format_version": "1.20.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:magma_cube_mask",
 			"is_experimental": true,
 			"menu_category": {
-				"group": "itemGroup.name.skull",
+				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
 			}
 		},
@@ -23,14 +23,11 @@
 				"slot": "armor_head",
 				"value": 5
 			},
-			"minecraft:icon": {
-				"texture": "fmh_magma_cube_item"
-			},
+			"minecraft:icon": "magma_cube_item",
 			"minecraft:block_placer": {
 				"block": "zombie:magma_cube_block"
 			},
 			"minecraft:skull": {}
-		},
-		"events": {}
+		}
 	}
 }
