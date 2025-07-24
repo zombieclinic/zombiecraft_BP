@@ -3,7 +3,7 @@
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:parrot_green_mask",
-			"is_experimental": true,
+			
 			"menu_category": {
 				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
@@ -16,7 +16,7 @@
 			},
 			"minecraft:wearable": {
 				"slot": "slot.armor.head",
-				"dispensable": true
+				"hides_player_location": true
 			},
 			"minecraft:enchantable": {
 				"slot": "armor_head",

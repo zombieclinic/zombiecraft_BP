@@ -4,7 +4,7 @@
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:villager_v2_taiga_librarian_mask",
-			"is_experimental": true,
+			
 			"menu_category": {
 				"group": "minecraft:itemGroup.name.skull",
 				"category": "items"
@@ -17,7 +17,7 @@
 			},
 			"minecraft:wearable": {
 				"slot": "slot.armor.head",
-				"dispensable": true
+				"hides_player_location": true
 			},
 			"minecraft:enchantable": {
 				"slot": "armor_head",
@@ -26,7 +26,7 @@
 			"minecraft:block_placer": {
 				"block": "zombie:villager_v2_taiga_librarian_block"
 			},
-			"minecraft:icon": "fmh_villager_v2_taiga_librarian_item",
+			"minecraft:icon": "villager_v2_taiga_librarian_item",
 			"minecraft:skull": {}
 		}
 	}
