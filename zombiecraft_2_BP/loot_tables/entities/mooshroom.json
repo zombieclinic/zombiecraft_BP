@@ -1,16 +1,16 @@
-//bridge-file-version: #1
 {
-	"pools": [
-		{
-			"rolls": 1,
-			"entries": [
-				{
-					"type": "loot_table",
-					"name": "loot_tables/mask/brown_mooshroom.json"
-				}
-			],
-			"conditions": [
-				{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "loot_tables/mask/mooshroom_mask.json"
+        }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 0 },
+        {
 					"condition": "killed_by_player"
 				},
 				{
@@ -18,9 +18,29 @@
 					"chance": 0.1,
 					"looting_multiplier": 0.001
 				}
-			]
-		},
-		{
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "loot_tables/mask/brown_mooshroom.json"
+        }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 1 },
+         {
+					"condition": "killed_by_player"
+				},
+				{
+					"condition": "random_chance_with_looting",
+					"chance": 0.1,
+					"looting_multiplier": 0.001
+				}
+      ]
+    },
+    	{
 			"rolls": 1,
 			"entries": [
 				{
