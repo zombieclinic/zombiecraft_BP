@@ -1,8 +1,11 @@
 {
-	"format_version": "1.21.60",
+	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
-			"identifier": "zombie:warpaltar"
+			"identifier": "zombie:warpaltar",
+			"menu_category": {
+				"category": "construction"
+			}
 		},
 		"components": {
 			"minecraft:collision_box": true,
@@ -17,9 +20,6 @@
 			},
 			"minecraft:light_emission": 5,
 			"minecraft:selection_box": true,
-			"minecraft:custom_components": [
-				"zombie:warpalter"
-			],
 			"minecraft:destructible_by_mining": false,
 			"minecraft:liquid_detection": {
 				"detection_rules": [

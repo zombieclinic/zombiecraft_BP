@@ -22,8 +22,6 @@ import {RedwoodGrowthComponent} from "./custom_components/plants/custom_trees";
 import {Atlantis, OpenableComponent, FencePlaceComponent, ZombieDoor, ZombieSlab, PaintBrush, Painting} from "./blocks";
 import { CropGrowthComponent } from "./custom_components/plants/grow";
 import {  BlockShop } from "./playertoplayershop";
-import { WarpAtlas } from "./warpalter/warpalter";
-import { securityCheck } from "./warpalter/security";
 import {ChaosBookComponent} from "./magic/chaos";
 import { SwordHit, BerserkerAttackController} from "./custom_components/chaos_components/chaos_sword";
 import {CustomFishingRod} from "./custom_components/chaos_components/fishingpool"
@@ -43,7 +41,6 @@ const BLOCK_COMPONENTS = [
   ["zombie:atlantis",             Atlantis],
   ["zombie:crop_grow",            CropGrowthComponent],
   ["zombie:shopblock",            BlockShop],
-  ["zombie:warpalter",            WarpAtlas],
   ["zombie:corruptedDamage",      CorruptedDamage],
   ["zombie:demonGrass",           DemonGrass],
   ["zombie:strippedlog",          LogStripper],
@@ -102,7 +99,6 @@ system.afterEvents.scriptEventReceive.subscribe(({ id, sourceEntity }) => {
 
 const checkIntervalTicks = 100;
 system.runInterval(() => {
-    securityCheck();
     worldsettings();
 }, checkIntervalTicks);
 

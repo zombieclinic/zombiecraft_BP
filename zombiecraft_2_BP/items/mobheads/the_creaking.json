@@ -3,7 +3,7 @@
 	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
-			"identifier": "zombie:villager_v2_taiga_weaponsmith_mask",
+			"identifier": "zombie:creaking_mask",
 			
 			"menu_category": {
 				"group": "minecraft:itemGroup.name.skull",
@@ -13,7 +13,7 @@
 		"components": {
 			"minecraft:should_despawn": true,
 			"minecraft:display_name": {
-				"value": "Taiga Weaponsmith Mask"
+				"value": "Creaking Mask"
 			},
 			"minecraft:wearable": {
 				"slot": "slot.armor.head",
@@ -23,10 +23,10 @@
 				"slot": "armor_head",
 				"value": 5
 			},
+			"minecraft:icon": "zombie_creaking_icon",
 			"minecraft:block_placer": {
-				"block": "zombie:villager_v2_taiga_weaponsmith_block"
+				"block": "zombie:creaking_block"
 			},
-			"minecraft:icon": "villager_v2_taiga_weaponsmith_item",
 			"minecraft:skull": {}
 		}
 	}
