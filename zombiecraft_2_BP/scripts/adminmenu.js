@@ -14,6 +14,7 @@ function mainMenu(player) {
   const baseRadius    = world.getDynamicProperty("baseRadius")     ?? "none";
   const baseDistance  = world.getDynamicProperty("baseDistance")   ?? "none";
   const xyDistance    = world.getDynamicProperty("xyDistance")     ?? "none";
+  const maxBaseClaim = world.getDynamicProperty("maxBaseClaims")  ?? "none";
 
   const statusLines = [
     `Spawn:             ${spawnCoords}`,
@@ -21,6 +22,7 @@ function mainMenu(player) {
     `Base Radius:       ${baseRadius}`,
     `Base Distance:     ${baseDistance}`,
     `X/Z Distance:      ${xyDistance}`,
+    `Base counts       ${maxBaseClaim}`
   ];
 
   new ActionFormData()
@@ -33,6 +35,7 @@ function mainMenu(player) {
     .button("Set Base Radius")
     .button("Set Base Distance")
     .button("Set X/Z Distance")
+    .button("Set Base Count")
     .button("Economy")
     .button("Command Prompt")
     .button("Exit")
@@ -47,9 +50,10 @@ function mainMenu(player) {
         case 4: return setBaseRadius(player);
         case 5: return baseDistanceSpawn(player);
         case 6: return setXYDistanceSpawn(player);
-        case 7: return Economy(player);
-        case 8: return commandPrompt(player);
-        case 9: return;                     // Exit
+        case 7: return setBaseCount(player);
+        case 8: return Economy(player);
+        case 9: return commandPrompt(player);
+        case 10: return;                     // Exit
       }
     })
     .catch(console.error);
@@ -402,4 +406,33 @@ function setListOrder(player) {
       Economy(player);
     })
     .catch(console.error);
+}
+
+
+function setBaseCount(player) {
+  new ModalFormData()
+    .title("Max Base Claims")
+    .textField("How many bases may a player claim?", "e.g., 3")
+    .show(player)
+    .then(response => {
+      if (response.canceled) return mainMenu(player);
+
+      const input = response.formValues?.[0]?.trim();
+      const count = parseInt(input, 10);
+
+      if (isNaN(count) || count < 1) {
+        player.sendMessage("§cPlease enter a valid number (1 or higher).");
+        return mainMenu(player);
+      }
+
+      // Save to dynamic properties
+      world.setDynamicProperty("maxBaseClaims", count);
+      player.sendMessage(`§aPlayers may now claim up to ${count} bases.`);
+
+      mainMenu(player);
+    })
+    .catch(err => {
+      console.error("setBaseCount error:", err);
+      mainMenu(player);
+    });
 }

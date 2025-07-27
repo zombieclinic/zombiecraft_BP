@@ -125,7 +125,7 @@ function confirmBaseCoords(player) {
     .button2("No")
     .show(player)
     .then(confirm => {
-      if (confirm.selection !== 0) return;
+      if (confirm.selection !== 0) return mainMenu(player);
 
       const loc = player.location;
 
@@ -133,15 +133,15 @@ function confirmBaseCoords(player) {
       const spawnProp = world.getDynamicProperty("worldspawn");
       if (!spawnProp) {
         player.sendMessage("§cAdmins must set a world spawn first.");
-        return;
+        return mainMenu(player);
       }
-      const [spawnX, , spawnZ] = spawnProp.split(" ").map(Number);
+      const [spawnX,, spawnZ] = spawnProp.split(" ").map(Number);
 
       const xyDistance   = world.getDynamicProperty("xyDistance");
       const baseDistance = world.getDynamicProperty("baseDistance");
       if (![xyDistance, baseDistance].every(n => typeof n === "number" && n > 0)) {
         player.sendMessage("§cAdmins must set both XY‑Distance and Base‑Distance first.");
-        return;
+        return mainMenu(player);
       }
 
       const dx = Math.abs(loc.x - spawnX);
@@ -153,7 +153,7 @@ function confirmBaseCoords(player) {
           `§cBase must be > ${xyDistance} blocks from spawn at (${spawnX}, ${spawnZ}) ` +
           `on either X or Z (you’re at dx=${dx}, dz=${dz}).`
         );
-        return;
+        return mainMenu(player);
       }
 
       // ─────── Base‑distance check ───────
@@ -162,14 +162,14 @@ function confirmBaseCoords(player) {
           `§cBase must be > ${baseDistance} blocks from spawn at (${spawnX}, ${spawnZ}) ` +
           `on either X or Z (you’re at dx=${dx}, dz=${dz}).`
         );
-        return;
+        return mainMenu(player);
       }
 
       // ─────── Proximity to other bases ───────
       const baseRadius = world.getDynamicProperty("baseRadius");
       if (typeof baseRadius !== 'number' || baseRadius <= 0) {
         player.sendMessage("§cAdmins must set a valid base radius first.");
-        return;
+        return mainMenu(player);
       }
       const allBases = world
         .getDynamicPropertyIds()
@@ -179,21 +179,51 @@ function confirmBaseCoords(player) {
         if (prop === `base_${player.name}`) continue;
         const coords = world.getDynamicProperty(prop);
         if (typeof coords !== 'string') continue;
-        const [bx, , bz] = coords.split(" ").map(Number);
+        const [bx,, bz] = coords.split(" ").map(Number);
         const dist = Math.hypot(loc.x - bx, loc.z - bz);
         if (dist < baseRadius) {
           const owner = prop.replace("base_", "");
           player.sendMessage(
             `§cToo close to ${owner}'s base. Must be ≥ ${baseRadius} blocks apart (you’re at ${Math.floor(dist)}).`
           );
-          return;
+          return mainMenu(player);
         }
       }
 
-      // ─────── All clear, save it ───────
-      const saved = `${Math.floor(loc.x)} ${Math.floor(loc.y)} ${Math.floor(loc.z)}`;
-      world.setDynamicProperty(`base_${player.name}`, saved);
-      player.sendMessage("§aBase coordinates saved.");
+      // ─────── Ready to save ───────
+      const newCoords = `${Math.floor(loc.x)} ${Math.floor(loc.y)} ${Math.floor(loc.z)}`;
+      const baseKey   = `base_${player.name}`;
+      const oldCoords = world.getDynamicProperty(baseKey);
+
+      if (typeof oldCoords === "string") {
+        // They already have a base → ask to move it
+        new MessageFormData()
+          .title("Move Existing Base?")
+          .body(
+            `You already have a base at:\n${oldCoords}\n\n` +
+            `Move it here to:\n${newCoords}?`
+          )
+          .button1("Yes")
+          .button2("No")
+          .show(player)
+          .then(moveConfirm => {
+            if (moveConfirm.selection === 0) {
+              // Overwrite the old coords, mates list remains untouched
+              world.setDynamicProperty(baseKey, newCoords);
+              player.sendMessage(`§aBase moved to: ${newCoords}`);
+            }
+            mainMenu(player);
+          })
+          .catch(err => {
+            console.error("moveBase confirm error:", err);
+            mainMenu(player);
+          });
+      } else {
+        // No existing base → create new
+        world.setDynamicProperty(baseKey, newCoords);
+        player.sendMessage("§aBase coordinates saved.");
+        mainMenu(player);
+      }
     })
     .catch(err => {
       console.error("confirmBaseCoords error:", err);
@@ -201,6 +231,7 @@ function confirmBaseCoords(player) {
       mainMenu(player);
     });
 }
+
 
 
 
