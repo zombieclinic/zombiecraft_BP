@@ -1,5 +1,5 @@
 {
-	"format_version": "1.21.60",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:spawnbite",
@@ -27,9 +27,7 @@
 				"movement_modifier": 1,
 				"use_duration": 1
 			},
-			"minecraft:custom_components": [
-				"zombie:tporb"
-			],
+			"zombie:tporb": {},
 			"minecraft:display_name": {
 				"value": "SpawnBites"
 			}

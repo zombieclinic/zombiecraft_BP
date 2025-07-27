@@ -545,77 +545,44 @@ export class RawFood {
 
 
 export class TpOrb {
-    async onConsume(event) {
-        const { source } = event;
-        const player = source; // Fixed incorrect variable assignment
+  onConsume(event) {
+    const player = event.source;
 
-        const scoreboard = world.scoreboard.getObjective("setspawn");
-        if (!scoreboard) {
-            player.sendMessage("§cNo global spawn point found in the scoreboard.");
-            return;
-        }
-
-        let spawnEntry = null;
-        scoreboard.getParticipants().forEach((participant) => {
-            if (participant.displayName.startsWith("global_spawn")) {
-                spawnEntry = participant.displayName;
-            }
-        });
-
-        if (!spawnEntry) {
-            player.sendMessage(
-                "§cNo valid global spawn point found! Use the Set Spawn function to define one."
-            );
-            return;
-        }
-
-        const match = spawnEntry.match(/^global_spawn_(\w+)_(-?\d+)_(-?\d+)_(-?\d+)$/);
-        if (!match) {
-            player.sendMessage(
-                "§cGlobal spawn point format is invalid. Please reset the spawn."
-            );
-            return;
-        }
-
-        const [, dimension, x, y, z] = match;
-
-        // Play particle effect at current location
-        player.runCommand(
-            `execute as @s at @s run particle zombie:tporb ~ ~-1 ~`
-        );
-        player.runCommand(
-            `execute as @s at @s run particle zombie:tporbmagic ~ ~-0.9 ~`
-        );
-
-        // Play sound effect
-        player.runCommand(
-            `execute as @s at @s run playsound magictp @s ~ ~ ~ 1 1 1`
-        );
-
-        // Wait 5 seconds using system.runTimeout (100 ticks = 5 seconds)
-        system.runTimeout(async () => {
-            // Teleport the player
-            await player.runCommand(
-                `execute as @s in ${dimension} run tp @s ${x} ${y} ${z}`
-            );
-            player.runCommand(
-                `execute as @s at @s run playsound magictpend @s ~ ~ ~ 1 1 1`
-            );
-
-            // Play particle effect at new location
-            player.runCommand(
-                `execute as @s at @s run particle zombie:tporb ~ ~-2 ~`
-            );
-            player.runCommand(
-                `execute as @s at @s run particle zombie:tporbmagic ~ ~-0.9 ~`
-            );
-
-            // Send teleportation message
-            player.sendMessage(
-                `§aTeleported to the global spawn point: X=${x}, Y=${y}, Z=${z} in ${dimension}.`
-            );
-        }, 100); // 100 ticks = 5 seconds
+    // 1) Read the spawn coords from dynamic properties
+    const spawnProp = world.getDynamicProperty("worldspawn");
+    if (!spawnProp || typeof spawnProp !== "string") {
+      player.sendMessage("§cNo global spawn point set! Use the Admin Menu to define one.");
+      return;
     }
+
+    const parts = spawnProp.split(" ").map(n => parseInt(n, 10));
+    if (parts.length !== 3 || parts.some(v => isNaN(v))) {
+      player.sendMessage("§cInvalid spawn coordinates format. Please reset the spawn.");
+      return;
+    }
+    const [x, y, z] = parts;
+
+    // 2) Play initial particles & sound
+    player.runCommand(`execute as @s at @s run particle zombie:tporb ~ ~-1 ~`);
+    player.runCommand(`execute as @s at @s run particle zombie:tporbmagic ~ ~-0.9 ~`);
+    player.runCommand(`execute as @s at @s run playsound magictp @s ~ ~ ~ 1 1 1`);
+
+    // 3) Wait 5 seconds (100 ticks)
+    system.runTimeout(() => {
+      // Teleport them in the overworld to the saved spawn
+      player.runCommand(`execute as @s in overworld run tp @s ${x} ${y} ${z}`);
+
+      // Landing sound & particles
+      player.runCommand(`execute as @s at @s run playsound magictpend @s ~ ~ ~ 1 1 1`);
+      player.runCommand(`execute as @s at @s run particle zombie:tporb ~ ~-2 ~`);
+      player.runCommand(`execute as @s at @s run particle zombie:tporbmagic ~ ~-0.9 ~`);
+
+      // Confirmation message
+      player.sendMessage(
+        `§aTeleported to global spawn: X=${x}, Y=${y}, Z=${z}.`
+      );
+    }, 100);
+  }
 }
 
 export class Crablegs {
