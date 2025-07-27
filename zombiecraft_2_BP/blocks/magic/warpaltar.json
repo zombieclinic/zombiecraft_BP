@@ -8,6 +8,7 @@
 			}
 		},
 		"components": {
+			"zombie:warpstone": {},
 			"minecraft:collision_box": true,
 			"minecraft:geometry": "geometry.warpaltar",
 			"minecraft:material_instances": {

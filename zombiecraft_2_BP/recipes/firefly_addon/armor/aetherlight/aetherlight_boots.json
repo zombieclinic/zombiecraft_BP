@@ -7,6 +7,11 @@
 		"tags": [
 			"smithing_table"
 		],
+		"unlock": [
+			{
+				"item": "minecraft:netherite_ingot"
+			}
+		],
 		"template": "zombie:firefly_luciferin",
 		"base": "netherite_chestplate",
 		"addition": "minecraft:netherite_ingot",

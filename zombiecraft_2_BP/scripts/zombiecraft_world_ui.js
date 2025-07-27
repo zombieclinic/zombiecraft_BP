@@ -30,6 +30,7 @@ import {TppAxeSwing, BerserkerAxeController} from "./custom_components/chaos_com
 import {arrowEffect} from "./custom_components/chaos_components/chaos_arrow"
 import {DemonGrass,TestDemon} from "./custom_components/chaos_components/generation"
 import {AdminMenu} from "./adminmenu"
+import {WarpMenu} from "./warpalter/warpalter_main"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -48,7 +49,8 @@ const BLOCK_COMPONENTS = [
   ["zombie:fence_place",          FencePlaceComponent],
   ["zombie:door",                 ZombieDoor],
   ["zombie:slab",                 ZombieSlab],
-  ["zombie:ores",                 CustomOres]
+  ["zombie:ores",                 CustomOres],
+  ["zombie:warpstone",            WarpMenu]
 ];
 
 const ITEM_COMPONENTS = [

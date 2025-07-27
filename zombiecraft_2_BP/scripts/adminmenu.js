@@ -9,43 +9,51 @@ export class AdminMenu {
   }
 }
 
-  function mainMenu(player) {
-    const form = new ActionFormData()
-        .title("Admin Menu")
-        .button("Set Spawn")
-        .button("Make Admin")
-        .button("Manage Admins")
-        .button("Set Spawn Protection")
-        .button("Command Prompt")
-        .button("Exit");
+function mainMenu(player) {
+  // pull your stored settings (provide sensible defaults if unset)
+  const spawnCoords     = world.getDynamicProperty("worldspawn")     ?? "not set";
+  const spawnProtect    = world.getDynamicProperty("spawnprotection") ?? "none";
+  const baseRadius      = world.getDynamicProperty("baseRadius")      ?? "none";
+  const baseDistance    = world.getDynamicProperty("baseDistance")    ?? "none";
+  const xyDistance      = world.getDynamicProperty("xyDistance")      ?? "none";
 
-    form.show(player).then(result => {
-        if (result.canceled) return;
-
-        switch (result.selection) {
-            case 0:
-                setSpawnMenu(player);
-                break;
-            case 1:
-                makeAdminMenu(player);
-                break;
-            case 2:
-                manageAdminsMenu(player);
-                break;
-            case 3:
-                setSpawnProtection(player);
-                break;
-            case 4:
-              commandPrompt(player);
-                break;
-            case 5:
-                return
-            default:
-                return;
-        }
-    }).catch(err => {
-        console.error("MainMenu form error:", err);
-    });
+  // build a little status block
+  const statusLines = [
+    `Spawn: ${spawnCoords}`,
+    `Protection: ${spawnProtect}`,
+    `Base Radius: ${baseRadius}`,
+    `Base Distance: ${baseDistance}`,
+    `X, Y, Distance: ${xyDistance}`
+  ];
+  
+  new ActionFormData()
+    .title("Admin Menu")
+    .body(statusLines.join("\n"))    // show all settings here
+    .button("Set Spawn")
+    .button("Make Admin")
+    .button("Manage Admins")
+    .button("Set Spawn Protection")
+    .button("Set Base Radius")
+    .button("Set Base Distance")
+    .button("set x, z, distance")
+    .button("Command Prompt")
+    .button("Exit")
+    .show(player)
+    .then(result => {
+      if (result.canceled) return;
+      switch (result.selection) {
+        case 0: return setSpawnMenu(player); 
+        case 1: return makeAdminMenu(player);
+        case 2: return manageAdminsMenu(player);
+        case 3: return setSpawnProtection(player);
+        case 4: return setBaseRadius(player);
+        case 5: return baseDistanceSpawn(player);
+        case 6: return setXYDistanceSpawn(player);
+        case 7: return commandPrompt(player);
+        case 8: return;
+      }
+    })
+    .catch(err => console.error("MainMenu form error:", err));
 }
 
 
@@ -191,3 +199,75 @@ function commandPrompt(player) {
       mainMenu(player);
     });
 }
+
+function setBaseRadius(player) {
+  new ModalFormData()
+    .title("Set Base Radius")
+    .textField("Enter base radius (blocks):", "e.g., 32")
+    .show(player)
+    .then(response => {
+      if (response.canceled) return mainMenu(player);
+
+      const radiusInput = response.formValues?.[0]?.trim();
+      const radius = parseInt(radiusInput);
+
+      if (isNaN(radius) || radius <= 0) {
+        player.sendMessage("§cInvalid radius value.");
+        return mainMenu(player);
+      }
+
+      world.setDynamicProperty("baseRadius", radius);
+      player.sendMessage(`§aBase radius set to: ${radius} blocks.`);
+      mainMenu(player);
+    });
+}
+
+
+function baseDistanceSpawn(player) {
+  new ModalFormData()
+    .title("Set Base Distance from spawn")
+    .textField("Enter base distance (blocks):", "e.g., 32")
+    .show(player)
+    .then(response => {
+      if (response.canceled) return mainMenu(player);
+
+      const distanceInput = response.formValues?.[0]?.trim();
+      const distance = parseInt(distanceInput, 10);
+
+      if (isNaN(distance) || distance <= 0) {
+        player.sendMessage("§cInvalid distance value.");
+        return mainMenu(player);
+      }
+
+      world.setDynamicProperty("baseDistance", distance);
+      player.sendMessage(`§aBase distance set to: ${distance} blocks.`);
+      return mainMenu(player);
+    });
+}
+
+function setXYDistanceSpawn(player) {
+  new ModalFormData()
+    .title("Set Base Distance")
+    .textField("Enter distance from spawn (blocks):", "e.g., 250")
+    .show(player)
+    .then(response => {
+      if (response.canceled) return mainMenu(player);
+
+      const input = response.formValues?.[0]?.trim();
+      const distance = parseInt(input, 10);
+
+      if (isNaN(distance) || distance <= 0) {
+        player.sendMessage("§cInvalid distance value.");
+        return mainMenu(player);
+      }
+
+      world.setDynamicProperty("xyDistance", distance);
+      player.sendMessage(`§aDistance set to: ${distance} blocks.`);
+      return mainMenu(player);
+    })
+    .catch(err => {
+      console.error("xyDistanceSpawn form error:", err);
+      mainMenu(player);
+    });
+}
+

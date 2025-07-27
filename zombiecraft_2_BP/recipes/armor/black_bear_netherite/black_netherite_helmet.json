@@ -7,6 +7,11 @@
 		"tags": [
 			"smithing_table"
 		],
+		"unlock": [
+			{
+				"item": "minecraft:netherite_ingot"
+			}
+		],
 		"template": "minecraft:netherite_upgrade_smithing_template",
 		"base": "zombie:black_bear_helmet",
 		"addition": "minecraft:netherite_ingot",
