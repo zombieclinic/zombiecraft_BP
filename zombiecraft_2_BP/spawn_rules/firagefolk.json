@@ -61,7 +61,7 @@
                 },
                 "minecraft:brightness_filter": {
                     "min": 0,
-                    "max": 12,
+                    "max": 15,
                     "adjust_for_weather": true
                 }
             }

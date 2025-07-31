@@ -38,6 +38,7 @@ function mainMenu(player) {
     .button("Set Base Count")
     .button("Economy")
     .button("Command Prompt")
+    .button("Dynamic Database")
     .button("Exit")
     .show(player)
     .then(res => {
@@ -53,7 +54,8 @@ function mainMenu(player) {
         case 7: return setBaseCount(player);
         case 8: return Economy(player);
         case 9: return commandPrompt(player);
-        case 10: return;                     // Exit
+        case 10: return openDynamicDatabase(player); // NEW
+        case 11: return; // Exit
       }
     })
     .catch(console.error);
@@ -434,5 +436,107 @@ function setBaseCount(player) {
     .catch(err => {
       console.error("setBaseCount error:", err);
       mainMenu(player);
+    });
+}
+
+function openDynamicDatabase(player) {
+  const allProps = world.getDynamicPropertyIds();
+  if (allProps.length === 0) {
+    return new MessageFormData()
+      .title("Dynamic Database")
+      .body("§7No dynamic properties found.")
+      .button1("Back")
+      .show(player)
+      .then(() => mainMenu(player));
+  }
+
+  const form = new ActionFormData().title("Dynamic Database");
+  allProps.forEach(id => form.button(id));
+  form.button("Exit");
+
+  form.show(player).then(res => {
+    if (res.canceled || res.selection === allProps.length) return mainMenu(player);
+    const selectedKey = allProps[res.selection];
+    handleDynamicPropertyAction(player, selectedKey);
+  });
+}
+
+function handleDynamicPropertyAction(player, key) {
+  new ActionFormData()
+    .title(`Property: ${key}`)
+    .body("Choose what to do:")
+    .button("Modify")
+    .button("Delete")
+    .button("Return")
+    .show(player)
+    .then(res => {
+      if (res.canceled || res.selection === 2) return openDynamicDatabase(player);
+      if (res.selection === 0) return modifyDynamicProperty(player, key);
+      if (res.selection === 1) return confirmDeleteProperty(player, key);
+    });
+}
+
+
+function modifyDynamicProperty(player, key) {
+  const currentVal = world.getDynamicProperty(key);
+  const currentStr = currentVal !== undefined ? String(currentVal) : "";
+
+  new ModalFormData()
+    .title(`Modify Property: ${key}`)
+    .textField("Current value shown below.\nEdit to save a new one:", currentStr)
+    .show(player)
+    .then(res => {
+      if (res.canceled) return handleDynamicPropertyAction(player, key);
+
+      const input = res.formValues[0]?.trim();
+      if (input === "") {
+        player.sendMessage("§cCannot save an empty value.");
+        return handleDynamicPropertyAction(player, key);
+      }
+
+      let finalValue;
+
+      // Try to preserve original type
+      if (typeof currentVal === "number") {
+        const parsed = parseFloat(input);
+        if (isNaN(parsed)) {
+          player.sendMessage("§cInvalid number. Not saved.");
+          return handleDynamicPropertyAction(player, key);
+        }
+        finalValue = parsed;
+      } else if (typeof currentVal === "boolean") {
+        const lower = input.toLowerCase();
+        if (lower === "true" || lower === "1") finalValue = true;
+        else if (lower === "false" || lower === "0") finalValue = false;
+        else {
+          player.sendMessage("§cInvalid boolean. Use true/false.");
+          return handleDynamicPropertyAction(player, key);
+        }
+      } else {
+        // Default to string
+        finalValue = input;
+      }
+
+      world.setDynamicProperty(key, finalValue);
+      player.sendMessage(`§aProperty '${key}' updated.`);
+      handleDynamicPropertyAction(player, key);
+    });
+}
+
+
+
+function confirmDeleteProperty(player, key) {
+  new MessageFormData()
+    .title(`Delete Property: ${key}`)
+    .body(`§cAre you sure you want to delete '${key}'?\nThis cannot be undone.`)
+    .button1("Yes, delete")
+    .button2("Cancel")
+    .show(player)
+    .then(confirm => {
+      if (confirm.selection === 0) {
+        world.setDynamicProperty(key, undefined);
+        player.sendMessage(`§aDeleted property: ${key}`);
+      }
+      openDynamicDatabase(player);
     });
 }

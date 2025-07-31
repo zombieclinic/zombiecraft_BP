@@ -11,7 +11,7 @@
         "minecraft:spawns_underground": {},
         "minecraft:brightness_filter": {
           "min": 0,
-          "max": 2,
+          "max": 1,
           "adjust_for_weather": true
         },
         "minecraft:difficulty_filter": {
@@ -22,8 +22,8 @@
           "default": 50
         },
         "minecraft:herd": {
-          "min_size": 2,
-          "max_size": 4
+          "min_size": 1,
+          "max_size": 1
         },
         "minecraft:biome_filter": {
           "test": "has_biome_tag", "operator": "==", "value": "monster"

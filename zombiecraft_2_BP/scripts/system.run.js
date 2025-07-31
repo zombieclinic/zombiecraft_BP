@@ -1,6 +1,5 @@
-import { world, system } from "@minecraft/server";
 
-
+import { world } from "@minecraft/server";
 
 
 export function worldsettings() {
@@ -9,118 +8,98 @@ export function worldsettings() {
   // ─── 1) Spawn‑area cleanup ───
   const spawnRadius = world.getDynamicProperty("spawnprotection");
   const spawnProp   = world.getDynamicProperty("worldspawn");
-  if (
-    typeof spawnRadius !== "number" ||
-    spawnRadius <= 0 ||
-    typeof spawnProp !== "string"
-  ) {
-    console.warn("Spawn protection radius or spawn coords not set properly.");
-  } else {
+  if (typeof spawnRadius === "number" && spawnRadius > 0 && typeof spawnProp === "string") {
     const [sx, sy, sz] = spawnProp.split(" ").map(Number);
-    if (![sx, sy, sz].every(n => !isNaN(n))) {
-      console.warn("Invalid spawn coordinate format.");
-    } else {
-      const monsters = overworld.getEntities({
-        families: ["monster"],
-        location: { x: sx, y: sy, z: sz },
-        maxDistance: spawnRadius
-      });
-      for (const mob of monsters) mob.remove();
-    }
+    const monsters = overworld.getEntities({
+      families: ["monster"],
+      location: { x: sx, y: sy, z: sz },
+      maxDistance: spawnRadius
+    });
+    for (const m of monsters) m.remove();
   }
 
-  // ─── 2) Base‑security enforcement ───
+  // ─── 2) Base‑security across dimensions ───
   const baseRadius = world.getDynamicProperty("baseRadius");
-  if (typeof baseRadius !== "number" || baseRadius <= 0) {
-    console.warn("Base radius not set properly.");
-    return;
-  }
+  if (typeof baseRadius === "number" && baseRadius > 0) {
+    const baseKeys = world
+      .getDynamicPropertyIds()
+      .filter(id => id.startsWith("base_") && !id.includes("_mates"));
 
-  const baseProps = world
-    .getDynamicPropertyIds()
-    .filter(id => id.startsWith("base_") && !id.includes("_mates"));
+    for (const key of baseKeys) {
+      const raw = world.getDynamicProperty(key);
+      if (typeof raw !== "string" || !raw.includes("|")) continue;
 
-  for (const prop of baseProps) {
-    const owner = prop.replace("base_", "");
-    const raw   = world.getDynamicProperty(prop);
-    if (typeof raw !== "string") continue;
 
-    const [bx, by, bz] = raw.split(" ").map(Number);
-    if (![bx, by, bz].every(n => !isNaN(n))) continue;
+      const [dimName, coordStr] = raw.split("|");
+      const [bx, by, bz] = coordStr.split(" ").map(Number);
+      if ([bx, by, bz].some(n => isNaN(n))) continue;
 
-    const matesRaw        = world.getDynamicProperty(`${prop}_mates`) || "";
-    const mates           = matesRaw.split("|").map(s => s.trim().toLowerCase());
-    const everyoneAllowed = mates.includes("everyone");
+      const dim = world.getDimension(dimName);
+      if (!dim) continue;  // invalid dimension
 
-    for (const p of world.getPlayers()) {
-      if (p.name === owner)                    continue;
-      if (everyoneAllowed)                     continue;
-      if (mates.includes(p.name.toLowerCase())) continue;
+      const matesRaw = world.getDynamicProperty(`${key}_mates`) || "";
+      const mates    = matesRaw.split("|").map(s => s.toLowerCase().trim());
+      const everyone = mates.includes("everyone");
 
-      const dx   = p.location.x - bx;
-      const dz   = p.location.z - bz;
-      const dist = Math.hypot(dx, dz);
+      for (const p of dim.getPlayers()) {
+        const isAdmin = world.getDynamicProperty(`admin_${p.name}`) === true;
+        const isOwner = p.name === key.replace("base_", "");
+        const isMate  = mates.includes(p.name.toLowerCase());
+        if (isAdmin || isOwner || everyone || isMate) continue;
 
-      if (dist < baseRadius) {
-        let ux, uz;
-        if (dist < 1) { ux = 1; uz = 0; }
-        else         { ux = dx / dist; uz = dz / dist; }
+        const dx   = p.location.x - bx;
+        const dz   = p.location.z - bz;
+        const dist = Math.hypot(dx, dz);
+        if (dist < baseRadius) {
+          // push them just outside the boundary
+          const ux    = dist < 1 ? 1 : dx / dist;
+          const uz    = dist < 1 ? 0 : dz / dist;
+          const safeD = baseRadius + 50;
+          const tx    = bx + ux * safeD;
+          const tz    = bz + uz * safeD;
 
-        const safeDist = baseRadius + 50;
-        const targetX  = bx + ux * safeDist;
-        const targetZ  = bz + uz * safeDist;
-        const targetY  = by + 200;
+          // clamp Y so we don't teleport above build height
+          const safeY = Math.min(by + 200, 200);
 
-        p.teleport({ x: targetX, y: targetY, z: targetZ }, overworld);
-        p.addEffect("minecraft:slow_falling", 600, {
-          amplifier: 0,
-          showParticles: true
-        });
-        p.sendMessage(
-          `§cYou were too close to ${owner}'s base at (${bx}, ${by}, ${bz}).\n` +
-          `You’ve been moved to (${Math.floor(targetX)}, ${targetY}, ${Math.floor(targetZ)}),\n` +
-          `about 50 blocks outside the ${baseRadius}-block radius.`
-        );
+          // use the TeleportOptions signature
+          p.teleport({
+            x: tx,
+            y: safeY,
+            z: tz,
+            dimension: dim
+          });
+
+          p.addEffect("minecraft:slow_falling", 600, {
+            amplifier: 0,
+            showParticles: true
+          });
+          p.sendMessage(
+            `§cToo close to base at ${dimName} (${bx},${by},${bz}).\n` +
+            `Moved to (${Math.floor(tx)},${safeY},${Math.floor(tz)}).`
+          );
+        }
       }
     }
   }
 
-  // ─── 3) Economy scoreboard refresh & start‑bonus (if economy settings exist) ───
+  // ─── 3) Economy scoreboard refresh & start‑bonus ───
   const econKeys = world
     .getDynamicPropertyIds()
     .filter(id => id.startsWith("economy_"));
   if (econKeys.length > 0) {
-    // Remove old Display
     overworld.runCommand(`scoreboard objectives remove Display`);
-
-    // Re-create Display with saved currency name
     const currencyName = world.getDynamicProperty("economy_currencyName") ?? "Coins";
-    overworld.runCommand(
-      `scoreboard objectives add Display dummy "${currencyName}"`
-    );
-
-    // Set display slot & order
+    overworld.runCommand(`scoreboard objectives add Display dummy "${currencyName}"`);
     const displayType = world.getDynamicProperty("economy_displayType") ?? "belowname";
     const listOrder   = world.getDynamicProperty("economy_listOrder")   ?? "ascending";
-    let setDisplayCmd = `scoreboard objectives setdisplay ${displayType} Display`;
-    if (displayType === "list") setDisplayCmd += ` ${listOrder}`;
-    overworld.runCommand(setDisplayCmd);
-
-    // Copy Display into Money for all online players
-    overworld.runCommand(
-      `execute as @a run scoreboard players operation @s Display = @s Money`
-    );
-
-    // Give start bonus once
-    const startBonus = world.getDynamicProperty("economy_startBonus") ?? 0;
-    if (startBonus > 0) {
-      // Only players without the 'start' tag
-      overworld.runCommand(
-        `scoreboard players add @a[tag=!start] Money ${startBonus}`
-      );
-      overworld.runCommand(
-        `tag @a[tag=!start] add start`
-      );
+    let cmd = `scoreboard objectives setdisplay ${displayType} Display`;
+    if (displayType === "list") cmd += ` ${listOrder}`;
+    overworld.runCommand(cmd);
+    overworld.runCommand(`execute as @a run scoreboard players operation @s Display = @s Money`);
+    const bonus = world.getDynamicProperty("economy_startBonus") ?? 0;
+    if (bonus > 0) {
+      overworld.runCommand(`scoreboard players add @a[tag=!start] Money ${bonus}`);
+      overworld.runCommand(`tag @a[tag=!start] add start`);
     }
   }
 }

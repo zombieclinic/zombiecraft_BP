@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { system } from "@minecraft/server";
 import {worldsettings} from "./system.run"
 import {BrownbearChanceEffect,
         OnHitDamage,
@@ -31,6 +31,9 @@ import {arrowEffect} from "./custom_components/chaos_components/chaos_arrow"
 import {DemonGrass,TestDemon} from "./custom_components/chaos_components/generation"
 import {AdminMenu} from "./adminmenu"
 import {WarpMenu} from "./warpalter/warpalter_main"
+import {TeleportBlock} from "./magic/teleport_block_script.js"
+import {DayDream } from "./custom_components/food.js"
+import {Mailbox} from "./magic/mailbox.js"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -50,7 +53,9 @@ const BLOCK_COMPONENTS = [
   ["zombie:door",                 ZombieDoor],
   ["zombie:slab",                 ZombieSlab],
   ["zombie:ores",                 CustomOres],
-  ["zombie:warpstone",            WarpMenu]
+  ["zombie:warpstone",            WarpMenu],
+  ["zombie:teleportblock",        TeleportBlock],
+  ["zombie:mailbox",              Mailbox]
 ];
 
 const ITEM_COMPONENTS = [
@@ -63,7 +68,6 @@ const ITEM_COMPONENTS = [
   ["zombie:candycane",           Candycane],
   ["zombie:tporb",               TpOrb],
   ["zombie:tppAxeSwing",         TppAxeSwing],
-  ["zombie:worldmenu",           TestDemon],
   ["zombie:fishing_rod",         CustomFishingRod],
   ["zombie:crablegs",            Crablegs],
   ["zombie:BowHold",             BowHold],
@@ -75,7 +79,8 @@ const ITEM_COMPONENTS = [
   ["zombie:axecontroller",       BerserkerAxeController],
   ["zombie:paintbrush",          PaintBrush],
   ["zombie:paintings",           Painting],
-  ["zombie:adminmenu",           AdminMenu]
+  ["zombie:adminmenu",           AdminMenu],
+  ["zombie:daydream",            DayDream]
 ];
 
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {

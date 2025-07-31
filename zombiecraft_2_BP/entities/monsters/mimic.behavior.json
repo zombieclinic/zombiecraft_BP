@@ -261,8 +261,7 @@
 				]
 			},
 			"minecraft:despawn": {
-				"despawn_from_distance": {},
-				"despawn_from_simulation_edge": true
+				"despawn_from_distance": {}
 			},
 			"minecraft:damage_sensor": {
 				"triggers": [

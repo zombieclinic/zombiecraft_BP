@@ -2,18 +2,17 @@
 	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
-			"identifier": "zombie:warpaltar",
+			"identifier": "zombie:mailbox",
 			"menu_category": {
 				"category": "construction"
 			}
 		},
 		"components": {
-			"zombie:warpstone": {},
 			"minecraft:collision_box": true,
-			"minecraft:geometry": "geometry.warpaltar",
+			"minecraft:geometry": "geometry.mailbox",
 			"minecraft:material_instances": {
 				"*": {
-					"texture": "zombie_warpaltar",
+					"texture": "zombie_mailbox",
 					"ambient_occlusion": 0.5,
 					"face_dimming": true,
 					"render_method": "opaque"
@@ -32,11 +31,12 @@
 					}
 				]
 			},
-			"minecraft:display_name": "Warp Altar",
+			"minecraft:display_name": "Mailbox",
 			"minecraft:redstone_conductivity": {
 				"allows_wire_to_step_down": true,
 				"redstone_conductor": true
-			}
+			},
+			"zombie:mailbox": {}
 		}
 	}
 }

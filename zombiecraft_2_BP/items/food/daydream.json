@@ -1,0 +1,36 @@
+{
+	"format_version": "1.21.90",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:daydreambite",
+			"menu_category": {
+				"category": "equipment",
+				"group": "minecraft:itemGroup.name.miscFood"
+			}
+		},
+		"components": {
+			"minecraft:allow_off_hand": false,
+			"minecraft:food": {
+				"can_always_eat": true,
+				"nutrition": 0,
+				"saturation_modifier": 0
+			},
+			"minecraft:rarity": "common",
+			"minecraft:tags": {
+				"tags": [
+					"minecraft:is_cooked"
+				]
+			},
+			"minecraft:use_animation": "eat",
+			"minecraft:icon": "zombie_daydreambites",
+			"minecraft:use_modifiers": {
+				"movement_modifier": 1,
+				"use_duration": 1
+			},
+			"minecraft:display_name": {
+				"value": "DayDream Bites"
+			},
+            "zombie:daydream": {}
+		}
+	}
+}
