@@ -9,9 +9,21 @@ function toRoman(num) {
   return map[num - 1] || num.toString();
 }
 
-// ─── Load & save shops ────────────────────────────────────────────
+// ─── Load & save shops ───────────────────────────────────────────
 function getShops() {
-  return JSON.parse(world.getDynamicProperty(SHOP_PROP) || "{}");
+  const raw = world.getDynamicProperty(SHOP_PROP) || "{}";
+  const shops = JSON.parse(raw);
+  // backfill missing stats
+  for (const key in shops) {
+    const shop = shops[key];
+    shop.profit = shop.profit || 0;
+    shop.totalItemsSold = shop.totalItemsSold || 0;
+    shop.totalRevenue   = shop.totalRevenue   || 0;
+    shop.items.forEach(it => {
+      it.sold = it.sold || 0;
+    });
+  }
+  return shops;
 }
 function saveShops(shops) {
   world.setDynamicProperty(SHOP_PROP, JSON.stringify(shops));
@@ -25,10 +37,8 @@ function getKey(block) {
 
 // ─── Give block item back and remove block ────────────────────────
 function reclaimBlock(block, player) {
-  // give the block as an item back to the player
   const blockItem = new ItemStack(block.typeId, 1);
   player.getComponent("inventory").container.addItem(blockItem);
-  // remove the block from the world
   const { x, y, z } = block.location;
   block.dimension.runCommand(`setblock ${x} ${y} ${z} air`);
 }
@@ -56,8 +66,15 @@ async function shopMenu(player, block) {
       .show(player);
 
     if (res.selection === 0) {
-      // create it, initialize profit
-      shops[key] = { owner: player.name, name: null, items: [], profit: 0 };
+      // initialize new shop with stats
+      shops[key] = {
+        owner:         player.name,
+        name:          null,
+        items:         [],
+        profit:        0,
+        totalItemsSold: 0,
+        totalRevenue:   0
+      };
       saveShops(shops);
       await new MessageFormData()
         .title("Created")
@@ -65,9 +82,7 @@ async function shopMenu(player, block) {
         .button1("OK")
         .show(player);
       return storeMenu(player, block);
-
     } else {
-      // cancel → reclaim the block
       reclaimBlock(block, player);
       return;
     }
@@ -85,16 +100,38 @@ async function shopMenu(player, block) {
 // ─── Owner menu ──────────────────────────────────────────────────
 async function storeMenu(player, block) {
   const shop = getShops()[getKey(block)];
-  const form = new ActionFormData().title(shop.name || "Store");
-  ["Name Store","Add Inventory","View Inventory","Close Shop","Exit"]
-    .forEach(lbl => form.button(lbl));
+
+  const form = new ActionFormData()
+    .title(shop.name || "Store")
+    .body(
+      `Balance:    $${shop.profit}\n` +
+      `Sold Items: ${shop.totalItemsSold}\n` +
+      `Revenue:    $${shop.totalRevenue}`
+    );
+
+  [
+    "Name Store",
+    "Add Inventory",
+    "View Inventory",
+    "Close Shop",
+    "Claim Balance",
+    "Exit"
+  ].forEach(lbl => form.button(lbl));
+
   const res = await form.show(player);
   if (res.canceled) return;
-  if (res.selection === 0) return nameStore(player, block);
-  if (res.selection === 1) return addInventory(player, block);
-  if (res.selection === 2) return viewInventory(player, block);
-  if (res.selection === 3) return closeShop(player, block);
+
+  switch (res.selection) {
+    case 0: return nameStore(player, block);
+    case 1: return addInventory(player, block);
+    case 2: return viewInventory(player, block);
+    case 3: return closeShop(player, block);
+    case 4: return claimBalance(player, block);
+    case 6: return;
+  }
 }
+
+
 
 // ─── Set store name ───────────────────────────────────────────────
 async function nameStore(player, block) {
@@ -180,7 +217,8 @@ async function addInventory(player, block) {
     enchanted:    !!enchCopy.length,
     name:         chosen.nameTag,
     lore:         chosen.getLore(),
-    enchantments: enchCopy
+    enchantments: enchCopy,
+    sold:         0            // initialize per-item sales
   });
 
   const remain = chosen.amount - qty;
@@ -226,8 +264,8 @@ async function viewInventory(player, block) {
   if (res.selection === items.length + 1) return;
 
   // detail submenu
-  const it      = items[res.selection];
-  let bodyStr   = "";
+  const it = items[res.selection];
+  let bodyStr = "";
   if (it.enchantments?.length) {
     bodyStr += "Enchantments:\n" + it.enchantments.map(e => {
       const raw = e.id.split(":").pop().replace(/_/g, " ");
@@ -237,13 +275,16 @@ async function viewInventory(player, block) {
   if (it.lore?.length) {
     bodyStr += (bodyStr ? "\n\n" : "") + "Lore:\n" + it.lore.join("\n");
   }
+  bodyStr += `\n\nSold: ${it.sold}`;
 
   const sub = new ActionFormData()
     .title(it.name||it.typeId.split(":").pop())
     .body(bodyStr || "No extra data");
   ["Edit Price","Remove Qty","Back","Exit"].forEach(lbl => sub.button(lbl));
   const subRes = await sub.show(player);
-  if (subRes.canceled||subRes.selection===3) return;
+  if (subRes.canceled||subRes.selection===2) return;
+  if (subRes.selection===3) return;
+
   if (subRes.selection===0) {
     // edit price...
     const pr = await new ModalFormData()
@@ -316,8 +357,6 @@ async function closeShop(player, block) {
 
     delete shops[key];
     saveShops(shops);
-
-    // reclaim the block to the player
     reclaimBlock(block, player);
 
     await new MessageFormData()
@@ -330,6 +369,55 @@ async function closeShop(player, block) {
   }
 }
 
+// ─── Claim Balance (owner) ────────────────────────────────────────
+async function claimBalance(player, block) {
+  const shops = getShops();
+  const key   = getKey(block);
+  const shop  = shops[key];
+  const amount = shop.profit || 0;
+
+  if (amount <= 0) {
+    await new MessageFormData()
+      .title("Nothing to Claim")
+      .body("Your shop balance is $0.")
+      .button1("OK")
+      .show(player);
+    return storeMenu(player, block);
+  }
+
+  // give scoreboard money
+  block.dimension.runCommand(
+    `scoreboard players add "${player.name}" Money ${amount}`
+  );
+  shop.profit = 0;
+  saveShops(shops);
+
+  await new MessageFormData()
+    .title("Claimed")
+    .body(`You claimed $${amount}.`)
+    .button1("OK")
+    .show(player);
+
+  return storeMenu(player, block);
+}
+
+// ─── View Stats (owner) ───────────────────────────────────────────
+async function viewStats(player, block) {
+  const shop = getShops()[getKey(block)];
+  const body = `Total Items Sold: ${shop.totalItemsSold}` +
+               `\nTotal Revenue: $${shop.totalRevenue}`;
+
+  const res = await new ActionFormData()
+    .title("Stats")
+    .body(body)
+    .button("Back")
+    .button("Exit")
+    .show(player);
+
+  if (res.canceled || res.selection === 1) return;
+  return storeMenu(player, block);
+}
+
 // ─── Customer menu ───────────────────────────────────────────────
 async function customerMenu(player, block) {
   const key   = getKey(block);
@@ -337,7 +425,6 @@ async function customerMenu(player, block) {
   const shop  = shops[key];
   const items = shop.items || [];
 
-  // list items + Exit
   const form = new ActionFormData().title(shop.name || "Store");
   items.forEach(it => {
     const name   = it.name || it.typeId.split(":").pop();
@@ -425,12 +512,16 @@ async function customerDetail(player, block, idx) {
   }
 
   // execute purchase
-  // subtract money
   block.dimension.runCommand(
     `scoreboard players remove "${player.name}" Money ${total}`
   );
-  // add profit
-  shops[key].profit = (shops[key].profit || 0) + total;
+
+  // update shop stats
+  shops[key].profit         = (shops[key].profit         || 0) + total;
+  shops[key].totalRevenue   = (shops[key].totalRevenue   || 0) + total;
+  shops[key].totalItemsSold = (shops[key].totalItemsSold || 0) + qty;
+  it.sold                   = (it.sold                   || 0) + qty;
+
   // give items
   const ret = new ItemStack(it.typeId, qty);
   if (it.name) ret.nameTag = it.name;

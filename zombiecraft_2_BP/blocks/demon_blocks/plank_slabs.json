@@ -16,6 +16,7 @@
 			}
 		},
 		"components": {
+			"minecraft:display_name": "Demon Plank Slab",
 			"minecraft:flammable": {
 				"destroy_chance_modifier": 45,
 				"catch_chance_modifier": 80
