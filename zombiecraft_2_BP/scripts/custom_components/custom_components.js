@@ -100,29 +100,30 @@ export class OnHitDamage {
         adjustItemDamage(attackingEntity, itemInHand, Math.floor(Math.random() * 5) + 1);
     }
     
-    onUse(event) {
-        const player    = event.source;
-        const itemStack = event.itemStack;
-        if (!(player instanceof Player)) return;
-        if (!player.matches({ gameMode: GameMode.survival })) return;
-        if (!itemStack.hasComponent("minecraft:durability")) return;
-    
-        // Unbreaking check
-        let unbreakingLevel = 0;
-        const enchComp = itemStack.getComponent(ItemComponentTypes.Enchantable);
-        if (enchComp) {
-          const ench = enchComp
-            .getEnchantments()
-            .find(e => e.type.id === "unbreaking");
-          if (ench) unbreakingLevel = ench.level;
-        }
-    
-        const damageChance = 1 / (unbreakingLevel + 1);
-        if (Math.random() <= damageChance) {
-          const damageToAdd = Math.floor(Math.random() * 5) + 1;
-          adjustItemDamage(player, itemStack, damageToAdd);
-        }
-      }
+     onCompleteUse(event) {
+    const player    = event.source;
+    const itemStack = event.itemStack;
+    if (!(player instanceof Player)) return;
+    if (!player.matches({ gameMode: GameMode.survival })) return;
+    if (!itemStack.hasComponent("minecraft:durability")) return;
+
+    // Unbreaking check
+    let unbreakingLevel = 0;
+    const enchComp = itemStack.getComponent(ItemComponentTypes.Enchantable);
+    if (enchComp) {
+      const ench = enchComp
+        .getEnchantments()
+        .find(e => e.type.id === "unbreaking");
+      if (ench) unbreakingLevel = ench.level;
+    }
+
+    const damageChance = 1 / (unbreakingLevel + 1);
+    if (Math.random() <= damageChance) {
+      const damageToAdd = Math.floor(Math.random() * 5) + 1;
+      adjustItemDamage(player, itemStack, damageToAdd);
+    }
+  }
+
 
     onMineBlock(event) {
         const { source: player, itemStack, block } = event;

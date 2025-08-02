@@ -1,11 +1,11 @@
 {
-	"format_version": "1.21.40",
+	"format_version": "1.21.90",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:black_bear_claws",
 			"menu_category": {
 				"category": "equipment",
-				"group": "itemGroup.name.sword"
+				"group": "minecraft:itemGroup.name.sword"
 			}
 		},
 		"components": {
@@ -70,27 +70,26 @@
 				"ammunition": [
 					{
 						"item": "zombie:bear_claw_item",
-						"use_offhand": true,
+						"use_offhand": false,
 						"search_inventory": true,
 						"use_in_creative": true
 					}
 				],
 				"scale_power_by_draw_duration": false,
-				"max_draw_duration": 1
+				"max_draw_duration": 10
 			},
 			"minecraft:use_modifiers": {
 				"use_duration": 10,
 				"movement_modifier": 1
 			},
-			"minecraft:custom_components": [
-				"zombie:bearcheck",
-				"zombie:onhitdamage"
-			],
+			
 			"minecraft:tags": {
 				"tags": [
 					"minecraft:is_sword"
 				]
-			}
+			},
+			"zombie:bearcheck": {},
+			"zombie:onhitdamage": {}
 		}
 	}
 }
