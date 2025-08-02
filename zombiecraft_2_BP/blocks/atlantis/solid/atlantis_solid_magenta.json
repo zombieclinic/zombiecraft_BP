@@ -1,5 +1,5 @@
 {
-	"format_version": "1.21.50",
+	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:atlantis_solid_magenta",
@@ -17,9 +17,7 @@
 			"minecraft:map_color": "#A211C2",
 			"minecraft:light_dampening": 1,
 			"minecraft:display_name": "Atlantis solid magenta",
-			"minecraft:custom_components": [
-				"zombie:atlantis"
-			]
+			"zombie:atlantis": {}
 		}
 	}
 }

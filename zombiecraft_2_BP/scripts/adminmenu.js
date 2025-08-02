@@ -14,7 +14,7 @@ function mainMenu(player) {
   const baseRadius    = world.getDynamicProperty("baseRadius")     ?? "none";
   const baseDistance  = world.getDynamicProperty("baseDistance")   ?? "none";
   const xyDistance    = world.getDynamicProperty("xyDistance")     ?? "none";
-  const maxBaseClaim = world.getDynamicProperty("maxBaseClaims")  ?? "none";
+  const systemTick = world.getDynamicProperty("systemTickInterval")  ?? "none";
 
   const statusLines = [
     `Spawn:             ${spawnCoords}`,
@@ -22,7 +22,7 @@ function mainMenu(player) {
     `Base Radius:       ${baseRadius}`,
     `Base Distance:     ${baseDistance}`,
     `X/Z Distance:      ${xyDistance}`,
-    `Base counts       ${maxBaseClaim}`
+    `System Tick       ${systemTick}`
   ];
 
   new ActionFormData()
@@ -35,7 +35,7 @@ function mainMenu(player) {
     .button("Set Base Radius")
     .button("Set Base Distance")
     .button("Set X/Z Distance")
-    .button("Set Base Count")
+    .button("Set System Tick")
     .button("Economy")
     .button("Command Prompt")
     .button("Dynamic Database")
@@ -51,7 +51,7 @@ function mainMenu(player) {
         case 4: return setBaseRadius(player);
         case 5: return baseDistanceSpawn(player);
         case 6: return setXYDistanceSpawn(player);
-        case 7: return setBaseCount(player);
+        case 7: return setSystemTick(player);
         case 8: return Economy(player);
         case 9: return commandPrompt(player);
         case 10: return openDynamicDatabase(player); // NEW
@@ -411,132 +411,121 @@ function setListOrder(player) {
 }
 
 
-function setBaseCount(player) {
+function setSystemTick(player) {
   new ModalFormData()
-    .title("Max Base Claims")
-    .textField("How many bases may a player claim?", "e.g., 3")
+    .title("Set System Tick Interval")
+    .textField("Number of ticks between commands:", "e.g., 3")
     .show(player)
     .then(response => {
       if (response.canceled) return mainMenu(player);
 
       const input = response.formValues?.[0]?.trim();
-      const count = parseInt(input, 10);
-
-      if (isNaN(count) || count < 1) {
+      const ticks = parseInt(input, 10);
+      if (isNaN(ticks) || ticks < 1) {
         player.sendMessage("§cPlease enter a valid number (1 or higher).");
         return mainMenu(player);
       }
 
       // Save to dynamic properties
-      world.setDynamicProperty("maxBaseClaims", count);
-      player.sendMessage(`§aPlayers may now claim up to ${count} bases.`);
+      world.setDynamicProperty("systemTickInterval", ticks);
+      player.sendMessage(`§aSystem commands will now run every ${ticks} ticks.`);
 
       mainMenu(player);
     })
     .catch(err => {
-      console.error("setBaseCount error:", err);
+      console.error("setSystemTick error:", err);
       mainMenu(player);
     });
 }
 
 function openDynamicDatabase(player) {
-  const allProps = world.getDynamicPropertyIds();
-  if (allProps.length === 0) {
+  new ActionFormData()
+    .title("Dynamic Database")
+    .body("Choose an action:")
+    .button("Remove All Dynamic Data")
+    .button("View Dynamic Data")
+    .button("Back")
+    .show(player)
+    .then(res => {
+      if (res.canceled || res.selection === 2) return mainMenu(player);
+      if (res.selection === 0)      return confirmRemoveAllData(player);
+      if (res.selection === 1)      return viewDynamicDataMenu(player);
+    })
+    .catch(console.error);
+}
+
+// ─── “Remove All Dynamic Data” flow ─────────────────────────────────────────────────────────────
+function confirmRemoveAllData(player) {
+  new MessageFormData()
+    .title("Remove All Data")
+    .body("§cThis will delete **every** dynamic property ever saved!\n\nAre you sure?")
+    .button1("Yes, delete all")
+    .button2("No, cancel")
+    .show(player)
+    .then(res => {
+      if (res.selection === 0) {
+        world.getDynamicPropertyIds().forEach(key => {
+          world.setDynamicProperty(key, undefined);
+        });
+        player.sendMessage("§aAll dynamic data removed.");
+      }
+      openDynamicDatabase(player);
+    })
+    .catch(console.error);
+}
+
+function viewDynamicDataMenu(player) {
+  const allKeys = world.getDynamicPropertyIds();
+  if (allKeys.length === 0) {
     return new MessageFormData()
-      .title("Dynamic Database")
+      .title("Dynamic Data")
       .body("§7No dynamic properties found.")
       .button1("Back")
       .show(player)
-      .then(() => mainMenu(player));
+      .then(() => openDynamicDatabase(player));
   }
 
-  const form = new ActionFormData().title("Dynamic Database");
-  allProps.forEach(id => form.button(id));
-  form.button("Exit");
+  // 1) Build a modal with one toggle per key
+  const modal = new ModalFormData()
+    .title("Delete Dynamic Data")
+    .label("Check each entry you wish to remove:");
 
-  form.show(player).then(res => {
-    if (res.canceled || res.selection === allProps.length) return mainMenu(player);
-    const selectedKey = allProps[res.selection];
-    handleDynamicPropertyAction(player, selectedKey);
+  allKeys.forEach(key => {
+    // no second arg → default is unchecked
+    modal.toggle(key);
   });
-}
 
-function handleDynamicPropertyAction(player, key) {
-  new ActionFormData()
-    .title(`Property: ${key}`)
-    .body("Choose what to do:")
-    .button("Modify")
-    .button("Delete")
-    .button("Return")
+  // 2) Show it
+  modal
     .show(player)
     .then(res => {
-      if (res.canceled || res.selection === 2) return openDynamicDatabase(player);
-      if (res.selection === 0) return modifyDynamicProperty(player, key);
-      if (res.selection === 1) return confirmDeleteProperty(player, key);
-    });
-}
+      if (res.canceled) return openDynamicDatabase(player);
 
+      // 3) Snapshot all values first
+      const snapshot = allKeys.map(key => ({
+        key,
+        value: world.getDynamicProperty(key),
+      }));
 
-function modifyDynamicProperty(player, key) {
-  const currentVal = world.getDynamicProperty(key);
-  const currentStr = currentVal !== undefined ? String(currentVal) : "";
+      // 4) Clear every dynamic prop
+      world.clearDynamicProperties();
 
-  new ModalFormData()
-    .title(`Modify Property: ${key}`)
-    .textField("Current value shown below.\nEdit to save a new one:", currentStr)
-    .show(player)
-    .then(res => {
-      if (res.canceled) return handleDynamicPropertyAction(player, key);
-
-      const input = res.formValues[0]?.trim();
-      if (input === "") {
-        player.sendMessage("§cCannot save an empty value.");
-        return handleDynamicPropertyAction(player, key);
-      }
-
-      let finalValue;
-
-      // Try to preserve original type
-      if (typeof currentVal === "number") {
-        const parsed = parseFloat(input);
-        if (isNaN(parsed)) {
-          player.sendMessage("§cInvalid number. Not saved.");
-          return handleDynamicPropertyAction(player, key);
+      // 5) Re–write only the ones *not* checked
+      let kept = 0;
+      snapshot.forEach(({ key, value }, idx) => {
+        if (!res.formValues[idx]) {
+          world.setDynamicProperty(key, value);
+          kept++;
         }
-        finalValue = parsed;
-      } else if (typeof currentVal === "boolean") {
-        const lower = input.toLowerCase();
-        if (lower === "true" || lower === "1") finalValue = true;
-        else if (lower === "false" || lower === "0") finalValue = false;
-        else {
-          player.sendMessage("§cInvalid boolean. Use true/false.");
-          return handleDynamicPropertyAction(player, key);
-        }
-      } else {
-        // Default to string
-        finalValue = input;
-      }
+      });
 
-      world.setDynamicProperty(key, finalValue);
-      player.sendMessage(`§aProperty '${key}' updated.`);
-      handleDynamicPropertyAction(player, key);
-    });
-}
-
-
-
-function confirmDeleteProperty(player, key) {
-  new MessageFormData()
-    .title(`Delete Property: ${key}`)
-    .body(`§cAre you sure you want to delete '${key}'?\nThis cannot be undone.`)
-    .button1("Yes, delete")
-    .button2("Cancel")
-    .show(player)
-    .then(confirm => {
-      if (confirm.selection === 0) {
-        world.setDynamicProperty(key, undefined);
-        player.sendMessage(`§aDeleted property: ${key}`);
-      }
+      // 6) Report back and refresh
+      const removed = allKeys.length - kept;
+      player.sendMessage(`§aRemoved ${removed} propert${removed === 1 ? "y" : "ies"}, kept ${kept}.`);
+      openDynamicDatabase(player);
+    })
+    .catch(err => {
+      console.error(`viewDynamicDataMenu error: ${err.message || err}`);
       openDynamicDatabase(player);
     });
 }

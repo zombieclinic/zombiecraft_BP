@@ -40,10 +40,10 @@ export class Atlantis {
             // Check if the block type exists in the mapping
             if (blockType in blockMappings) {
                 const newBlockType = blockMappings[blockType];
-                dimension.runCommandAsync(
+                dimension.runCommand(
                     `setblock ${block.location.x} ${block.location.y} ${block.location.z} air`
                 );
-                dimension.runCommandAsync(
+                dimension.runCommand(
                     `setblock ${block.location.x} ${block.location.y} ${block.location.z} ${newBlockType}`
                 );
             }

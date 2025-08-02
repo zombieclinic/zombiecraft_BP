@@ -1,5 +1,5 @@
 {
-	"format_version": "1.21.70",
+	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:atlantis_transparent_white",
@@ -28,9 +28,7 @@
 			"minecraft:geometry": "minecraft:geometry.full_block",
 			"minecraft:display_name": "Atlantis Transparent White",
 			"tag:glass": {},
-			"minecraft:custom_components": [
-				"zombie:atlantis"
-			],
+			"zombie:atlantis": {},
 			"minecraft:collision_box": false
 		}
 	}

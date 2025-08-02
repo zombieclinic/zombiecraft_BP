@@ -1,4 +1,4 @@
-import { system } from "@minecraft/server";
+import { world, system } from "@minecraft/server";
 import {worldsettings} from "./system.run"
 import {BrownbearChanceEffect,
         OnHitDamage,
@@ -104,13 +104,36 @@ system.afterEvents.scriptEventReceive.subscribe(({ id, sourceEntity }) => {
   if (handler) handler(sourceEntity);
 });
 
-const checkIntervalTicks = 100;
+// — Dynamic‐interval runner for worldsettings() —
+
+// Running counter for ticks
+let _tickCounter = 0;
+// Only warn once if interval = 0
+let _warnedNoInterval = false;
+
 system.runInterval(() => {
-    worldsettings();
-}, checkIntervalTicks);
+  // Pull the current interval from dynamic properties
+  const interval = world.getDynamicProperty("systemTickInterval") ?? 0;
 
+  if (interval > 0) {
+    // Reset the “no‐interval” warning
+    _warnedNoInterval = false;
 
-
-
-
-
+    // Increment and test
+    _tickCounter++;
+    if (_tickCounter >= interval) {
+      _tickCounter = 0;
+      worldsettings();
+    }
+  } else {
+    // If it’s zero (or unset), warn once
+    if (!_warnedNoInterval) {
+      console.warn(
+        "⚠️ systemTickInterval is 0 — " +
+        "worldsettings() will not run. " +
+        "Use Admin Menu → Set System Tick to configure."
+      );
+      _warnedNoInterval = true;
+    }
+  }
+}, 1);

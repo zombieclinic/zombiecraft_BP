@@ -30,6 +30,10 @@
 			"minecraft:display_name": {
 				"value": "DayDream Bites"
 			},
+			"minecraft:cooldown": {
+				"category": "magic_cookies",
+				"duration": 1
+			},
             "zombie:daydream": {}
 		}
 	}

@@ -195,7 +195,7 @@ async function addInventory(player, block) {
 
   const qtyRes = await new ModalFormData()
     .title("Quantity")
-    .textField(`Have ${chosen.amount}. How many?`, "1")
+    .textField(`Have ${chosen.amount}. How many?`, "0")
     .show(player);
   if (qtyRes.canceled) return storeMenu(player, block);
   const qty = Math.min(chosen.amount, parseInt(qtyRes.formValues[0]) || 0);
@@ -203,7 +203,7 @@ async function addInventory(player, block) {
 
   const priceRes = await new ModalFormData()
     .title("Price")
-    .textField("Price each?","1")
+    .textField("Price each?","0")
     .show(player);
   if (priceRes.canceled) return storeMenu(player, block);
   const price = parseFloat(priceRes.formValues[0]) || 0;
@@ -301,7 +301,7 @@ async function viewInventory(player, block) {
     // remove qty...
     const rq = await new ModalFormData()
       .title("Remove Qty")
-      .textField(`Have ${it.count}. Remove?`, "1")
+      .textField(`Have ${it.count}. Remove?`, "0")
       .show(player);
     if (!rq.canceled) {
       const rem = Math.min(it.count, parseInt(rq.formValues[0]) || 0);
@@ -467,7 +467,7 @@ async function customerDetail(player, block, idx) {
   // Buy → ask quantity
   const qtyRes = await new ModalFormData()
     .title("Purchase Quantity")
-    .textField(`Have ${it.count}. How many to buy?`, "1")
+    .textField(`Have ${it.count}. How many to buy?`, "0")
     .show(player);
   if (qtyRes.canceled) return customerDetail(player, block, idx);
   const qty = Math.min(it.count, parseInt(qtyRes.formValues[0]) || 0);
