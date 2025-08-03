@@ -16,7 +16,7 @@
 			},
 			"minecraft:map_color": "#FF0427",
 			"minecraft:light_dampening": 1,
-			"minecraft:display_name": "Atlantis solid Red",
+			"minecraft:display_name": "Atlantis Solid Red",
 			"zombie:atlantis": {}
 		}
 	}
