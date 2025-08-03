@@ -38,7 +38,7 @@
 			"minecraft:destructible_by_mining": {
 				"seconds_to_destroy": 1
 			},
-			"minecraft:display_name": "light Blue Blink Light",
+			"minecraft:display_name": "Light Blue Blink Light",
 			"minecraft:destructible_by_explosion": {
 				"explosion_resistance": 13
 			},
