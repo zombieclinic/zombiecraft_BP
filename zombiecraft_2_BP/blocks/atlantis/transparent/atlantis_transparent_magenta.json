@@ -26,7 +26,7 @@
 				}
 			},
 			"minecraft:geometry": "minecraft:geometry.full_block",
-			"minecraft:display_name": "Atlantis Transparent magenta",
+			"minecraft:display_name": "Atlantis Transparent Magenta",
 			"tag:glass": {},
 			"zombie:atlantis": {},
 			"minecraft:collision_box": false
