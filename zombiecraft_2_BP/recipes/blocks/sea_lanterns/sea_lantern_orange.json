@@ -1,0 +1,28 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "zombie:sea_lantern_orange_recipe"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:sea_lantern"
+      }
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:sea_lantern"
+      },
+      {
+        "item": "minecraft:orange_dye"
+      }
+    ],
+    "result": {
+      "item": "zombie:sea_lantern_orange",
+      "count": 1
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_sonic_construction_top_shaped"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "Y",
+      "C"
+    ],
+    "key": {
+      "Y": {
+        "item": "minecraft:yellow_dye"
+      },
+      "C": {
+        "item": "zombie:sonic_construction"
+      }
+    },
+    "result": {
+      "item": "zombie:sonic_Construction_top",
+      "count": 1
+    }
+  }
+}

@@ -340,8 +340,7 @@
 			},
 			"minecraft:can_climb": {},
 			"minecraft:despawn": {
-				"despawn_from_distance": {},
-				"despawn_from_simulation_edge": true
+				"despawn_from_distance": {}
 			},
 			"minecraft:behavior.avoid_mob_type": {
 				"priority": 2,

@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "zombie:shroomlight_lime",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:display_name": "Shroomlight Lime",
+      "minecraft:light_emission": 15,
+      "minecraft:map_color": "#80C71F",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "shroomlight_lime",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.3
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 1
+      },
+      "minecraft:redstone_conductivity": {
+        "allows_wire_to_step_down": true,
+        "redstone_conductor": false
+      }
+    }
+  }
+}

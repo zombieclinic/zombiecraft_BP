@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_sonic_grass_shaped"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "L",
+      "G"
+    ],
+    "key": {
+      "L": {
+        "item": "minecraft:lime_dye"
+      },
+      "G": {
+        "item": "minecraft:grass_block"
+      }
+    },
+    "result": {
+      "item": "zombie:sonic_grass",
+      "count": 1
+    }
+  }
+}

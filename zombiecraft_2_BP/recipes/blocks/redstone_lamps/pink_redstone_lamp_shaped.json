@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_pink_redstone_lamp_shaped"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "D",
+      "L"
+    ],
+    "key": {
+      "D": {
+        "item": "minecraft:pink_dye"
+      },
+      "L": {
+        "item": "minecraft:redstone_lamp"
+      }
+    },
+    "result": {
+      "item": "zombie:redstone_pink_lamp",
+      "count": 1
+    }
+  }
+}

@@ -3,7 +3,7 @@
 	"format_version": "1.21.90",
 	"minecraft:block": {
 		"description": {
-			"identifier": "zombie:sonic22",
+			"identifier": "zombie:sonic_Construction_top",
 			"menu_category": {
 				"category": "construction"
 			}
@@ -16,7 +16,7 @@
 			"minecraft:destructible_by_explosion": {
 				"explosion_resistance": 50
 			},
-			"minecraft:display_name": "Sonic Construction2"
+			"minecraft:display_name": "Sonic Construction top"
 		}
 	}
 }

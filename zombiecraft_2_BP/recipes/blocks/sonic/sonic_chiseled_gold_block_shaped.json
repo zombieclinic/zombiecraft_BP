@@ -1,0 +1,29 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_sonic_chiseled_gold_block"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "BB",
+      "BB"
+    ],
+    "key": {
+      "B": {
+        "item": "zombie:sonic_gold_block"
+      }
+    },
+    "result": {
+      "item": "zombie:sonic_chiseled_gold_block",
+      "count": 1
+    }
+  }
+}

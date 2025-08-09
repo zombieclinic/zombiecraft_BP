@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_sonic_gold_block"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "GGG",
+      "GSG",
+      "GGG"
+    ],
+    "key": {
+      "G": {
+        "item": "minecraft:gold_ingot"
+      },
+      "S": {
+        "item": "minecraft:stone"
+      }
+    },
+    "result": {
+      "item": "zombie:sonic_gold_block",
+      "count": 1
+    }
+  }
+}

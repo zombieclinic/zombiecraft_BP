@@ -154,8 +154,7 @@
 				"avoid_damage_blocks": true
 			},
 			"minecraft:despawn": {
-				"despawn_from_distance": {},
-				"despawn_from_simulation_edge": true
+				"despawn_from_distance": {}
 			},
 			"minecraft:nameable": {
 				"allow_name_tag_renaming": true

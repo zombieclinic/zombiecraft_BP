@@ -1,0 +1,30 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "zombie:obsidian_light_gray",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:display_name": "Obsidian LightGray",
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 50
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 1200
+      },
+      "minecraft:map_color": "#9D9D97",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "obsidian_light_gray",
+          "ambient_occlusion": true,
+          "face_dimming": true,
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

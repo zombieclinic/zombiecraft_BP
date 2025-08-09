@@ -86,8 +86,7 @@
 			"minecraft:physics": {},
 			"minecraft:pushable": {},
 			"minecraft:despawn": {
-				"despawn_from_distance": {},
-				"despawn_from_simulation_edge": true
+				"despawn_from_distance": {}
 			},
 			"minecraft:behavior.panic": {
 				"priority": 1,

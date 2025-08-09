@@ -1,0 +1,32 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_sonic_grass_dirt"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "G",
+      "D"
+    ],
+    "key": {
+      "G": {
+        "item": "minecraft:grass_block"
+      },
+      "D": {
+        "item": "minecraft:dirt"
+      }
+    },
+    "result": {
+      "item": "zombie:sonic_grass_dirt",
+      "count": 1
+    }
+  }
+}

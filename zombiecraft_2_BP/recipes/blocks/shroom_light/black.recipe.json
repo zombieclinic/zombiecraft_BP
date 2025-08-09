@@ -1,0 +1,36 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_shroomlight_black"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "OOO",
+      "ODO",
+      "OOC"
+    ],
+    "key": {
+      "O": {
+        "item": "minecraft:shroomlight"
+      },
+      "D": {
+        "item": "minecraft:black_dye"
+      },
+      "C": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "result": {
+      "item": "zombie:shroomlight_black",
+      "count": 8
+    },
+    "unlock": [
+      {
+        "item": "minecraft:black_dye"
+      }
+    ]
+  }
+}

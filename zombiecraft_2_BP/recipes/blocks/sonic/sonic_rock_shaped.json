@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_sonic_rock_shaped"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "CCC",
+      "CSC",
+      "CCC"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:cobblestone"
+      },
+      "S": {
+        "item": "minecraft:stone"
+      }
+    },
+    "result": {
+      "item": "zombie:sonic_rock",
+      "count": 1
+    }
+  }
+}

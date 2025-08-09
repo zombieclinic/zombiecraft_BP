@@ -1,0 +1,29 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_gold_piller"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      " B ",
+      " B "
+    ],
+    "key": {
+      "B": {
+        "item": "zombie:sonic_gold_block"
+      }
+    },
+    "result": {
+      "item": "zombie:gold_piller",
+      "count": 1
+    }
+  }
+}

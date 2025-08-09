@@ -1,0 +1,29 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "zombie:recipe_sonic_chiseled_metal"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:cobblestone"
+      }
+    ],
+    "pattern": [
+      "MM",
+      "MM"
+    ],
+    "key": {
+      "M": {
+        "item": "zombie:sonic_light_metal"
+      }
+    },
+    "result": {
+      "item": "zombie:sonic_chiseled_metal",
+      "count": 1
+    }
+  }
+}

@@ -224,8 +224,7 @@
 				"sway_amplitude": 0
 			},
 			"minecraft:despawn": {
-				"despawn_from_distance": {},
-				"despawn_from_simulation_edge": true
+				"despawn_from_distance": {}
 			},
 			"minecraft:behavior.swim_idle": {
 				"priority": 5,

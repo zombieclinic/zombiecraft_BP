@@ -1,0 +1,28 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "zombie:obsidian_black_recipe"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": [
+      {
+        "item": "minecraft:obsidian"
+      }
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:obsidian"
+      },
+      {
+        "item": "minecraft:black_dye"
+      }
+    ],
+    "result": {
+      "item": "zombie:obsidian_black",
+      "count": 1
+    }
+  }
+}
