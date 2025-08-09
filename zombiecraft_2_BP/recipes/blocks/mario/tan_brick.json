@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_tan_brick_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:orange_dye" }],
+    "pattern": ["BBB","BDB","BBB"],
+    "key": {
+      "B": { "item": "minecraft:brick_block" },
+      "D": { "item": "minecraft:orange_dye" }
+    },
+    "result": { "item": "zombie:mario_tan_brick"}
+  }
+}

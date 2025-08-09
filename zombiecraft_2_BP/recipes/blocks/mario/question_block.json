@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_question_block_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:gold_ingot" }],
+    "pattern": ["GGG","GRG","GGG"],
+    "key": {
+      "G": { "item": "minecraft:gold_ingot" },
+      "R": { "item": "minecraft:redstone" }
+    },
+    "result": { "item": "zombie:mario_question_block"}
+  }
+}

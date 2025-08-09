@@ -34,6 +34,7 @@ import {WarpMenu} from "./warpalter/warpalter_main"
 import {TeleportBlock} from "./magic/teleport_block_script.js"
 import {DayDream } from "./custom_components/food.js"
 import {Mailbox} from "./magic/mailbox.js"
+import {RedstoneComponent} from "./custom_components/redstone.js"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -55,7 +56,8 @@ const BLOCK_COMPONENTS = [
   ["zombie:ores",                 CustomOres],
   ["zombie:warpstone",            WarpMenu],
   ["zombie:teleportblock",        TeleportBlock],
-  ["zombie:mailbox",              Mailbox]
+  ["zombie:mailbox",              Mailbox],
+  ["zombie:redstone",             RedstoneComponent]
 ];
 
 const ITEM_COMPONENTS = [

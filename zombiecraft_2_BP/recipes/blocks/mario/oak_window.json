@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_oak_window_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:glass_pane" }],
+    "pattern": ["PPP","PGP","PPP"],
+    "key": {
+      "P": { "item": "minecraft:oak_planks" },
+      "G": { "item": "minecraft:glass_pane" }
+    },
+    "result": { "item": "zombie:mario_oak_window"}
+  }
+}

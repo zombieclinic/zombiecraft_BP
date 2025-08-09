@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:musicnote_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:noteblock" }],
+    "pattern": ["WWW","WnW","WWW"],
+    "key": {
+      "W": { "item": "minecraft:white_wool" },
+      "n": { "item": "minecraft:noteblock" }
+    },
+    "result": { "item": "zombie:music_note"}
+  }
+}

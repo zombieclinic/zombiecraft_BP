@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_blue_rock_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [
+      { "item": "minecraft:lapis_lazuli" }
+    ],
+    "pattern": [
+      "CCC",
+      "CLC",
+      "CCC"
+    ],
+    "key": {
+      "C": { "item": "minecraft:cobblestone" },
+      "L": { "item": "minecraft:lapis_lazuli" }
+    },
+    "result": { "item": "zombie:mario_blue_rock"}
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_white_block_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:quartz_block" }],
+    "pattern": ["QQQ","QDQ","QQQ"],
+    "key": {
+      "Q": { "item": "minecraft:quartz_block" },
+      "D": { "item": "minecraft:white_dye" }
+    },
+    "result": { "item": "zombie:mario_white_block"}
+  }
+}

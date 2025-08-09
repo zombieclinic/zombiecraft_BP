@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_oak_wood_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:oak_planks" }],
+    "pattern": ["PPP","PDP","PPP"],
+    "key": {
+      "P": { "item": "minecraft:oak_planks" },
+      "D": { "item": "minecraft:brown_dye" }
+    },
+    "result": { "item": "zombie:mario_oak_wood"}
+  }
+}

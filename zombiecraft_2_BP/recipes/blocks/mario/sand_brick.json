@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:sand_brick_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [
+      { "item": "minecraft:stone_bricks" }
+    ],
+    "pattern": [
+      "SSS",
+      "SBS",
+      "SSS"
+    ],
+    "key": {
+      "S": { "item": "minecraft:stone_bricks" },
+      "B": { "item": "minecraft:sand" }
+    },
+    "result": { "item": "zombie:mario_sand_brick"}
+  }
+}

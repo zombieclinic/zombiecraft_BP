@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mariopipe2_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:green_dye" }],
+    "pattern": ["GIG","I I","GIG"],
+    "key": {
+      "G": { "item": "minecraft:green_dye" },
+      "I": { "item": "minecraft:iron_ingot" }
+    },
+    "result": { "item": "zombie:mariopipe2"}
+  }
+}

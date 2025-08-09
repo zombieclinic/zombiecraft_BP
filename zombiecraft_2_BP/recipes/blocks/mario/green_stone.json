@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_green_stone_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:green_dye" }],
+    "pattern": ["SSS","SDS","SSS"],
+    "key": {
+      "S": { "item": "minecraft:stone" },
+      "D": { "item": "minecraft:green_dye" }
+    },
+    "result": { "item": "zombie:mario_green_stone"}
+  }
+}

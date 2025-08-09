@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_pow_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:lapis_lazuli" }],
+    "pattern": ["LLL","LRL","LLL"],
+    "key": {
+      "L": { "item": "minecraft:lapis_lazuli" },
+      "R": { "item": "minecraft:redstone_block" }
+    },
+    "result": { "item": "zombie:mario_pow"}
+  }
+}

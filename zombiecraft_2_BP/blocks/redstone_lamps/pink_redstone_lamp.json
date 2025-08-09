@@ -1,0 +1,66 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:block": {
+    "description": {
+      "identifier": "zombie:redstone_pink_lamp",
+      "menu_category": {
+        "category": "construction"
+      },
+      "states": {
+				"zombie:powered": [0, 1]
+			}
+    },
+    "permutations": [
+      {
+				"condition": "q.block_state('zombie:powered') == 0 ",
+				"components": {
+          "minecraft:geometry": "minecraft:geometry.full_block",
+          "minecraft:light_emission": 0,
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "redstone_pink_lamp",
+              "render_method": "opaque"
+            }
+          }
+				}
+			},
+			{
+				"condition": "q.block_state('zombie:powered') == 1 ",
+				"components": {
+          "minecraft:geometry": "minecraft:geometry.full_block",
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "redstone_pink_lamp_on",
+              "render_method": "opaque"
+            }
+          }
+				}
+			}
+    ],
+    "components": {
+      "minecraft:display_name": "Pink Redstone Lamp",
+      "minecraft:redstone_conductivity": {"redstone_conductor": true},
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.3
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 0.3
+      },
+      "minecraft:friction": 0.4,
+      "minecraft:map_color": "#FFFFFF",
+      "minecraft:light_dampening": 0,
+      "minecraft:light_emission": 0,
+      "minecraft:collision_box": true,
+      "minecraft:selection_box": true,
+      "zombie:redstone": {},
+      "minecraft:tick": {
+        "interval_range": [
+          20,
+          20
+        ],
+        "looping": true
+      }
+    }
+  }
+}

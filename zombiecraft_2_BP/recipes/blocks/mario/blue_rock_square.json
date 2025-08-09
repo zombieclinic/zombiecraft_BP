@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_blue_square_rock_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [
+      { "item": "minecraft:lapis_lazuli" }
+    ],
+    "pattern": [
+      "SSS",
+      "SLS",
+      "SSS"
+    ],
+    "key": {
+      "S": { "item": "minecraft:stone_bricks" },
+      "L": { "item": "minecraft:lapis_lazuli" }
+    },
+    "result": { "item": "zombie:mario_blue_square_rock"}
+  }
+}

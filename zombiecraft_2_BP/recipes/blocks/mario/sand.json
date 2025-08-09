@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_sand_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:sand" }],
+    "pattern": ["SSS","SDS","SSS"],
+    "key": {
+      "S": { "item": "minecraft:sand" },
+      "D": { "item": "minecraft:yellow_dye" }
+    },
+    "result": { "item": "zombie:mario_sand"}
+  }
+}

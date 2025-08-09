@@ -21,7 +21,7 @@
         },
         "tag:minecraft:is_shovel_item_destructible": {},
         "minecraft:custom_components": ["zombie:demonGrass"],
-        "minecraft:tick": {"interval_range": [10,20],
+        "minecraft:tick": {"interval_range": [100,200],
     "looping": true}
         }
 }

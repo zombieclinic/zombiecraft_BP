@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:fools_gold_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [
+      { "item": "minecraft:gold_nugget" }
+    ],
+    "pattern": [
+      "GGG",
+      "GIG",
+      "GGG"
+    ],
+    "key": {
+      "G": { "item": "minecraft:gold_nugget" },
+      "I": { "item": "minecraft:iron_nugget" }
+    },
+    "result": { "item": "zombie:fools_gold"}
+  }
+}

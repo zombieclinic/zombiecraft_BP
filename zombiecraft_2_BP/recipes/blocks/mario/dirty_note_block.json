@@ -1,0 +1,22 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:dirty_musicblock_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [
+			{
+				"item": "minecraft:dirt"
+			}
+		],
+    "pattern": [
+      "DDD",
+      "DND",
+      "DDD"
+    ],
+    "key": {
+      "D": { "item": "minecraft:dirt" },
+      "N": { "item": "minecraft:noteblock" }
+    },
+    "result": { "item": "zombie:dirty_musicblock"}
+  }
+}

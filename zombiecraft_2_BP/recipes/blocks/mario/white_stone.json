@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_white_stone_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:stone" }],
+    "pattern": ["SSS","SDS","SSS"],
+    "key": {
+      "S": { "item": "minecraft:stone" },
+      "D": { "item": "minecraft:white_dye" }
+    },
+    "result": { "item": "zombie:mario_white_stone"}
+  }
+}

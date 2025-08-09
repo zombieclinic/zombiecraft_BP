@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_dungeon_brick_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:brick_block" }],
+    "pattern": [
+      "BBB",
+      "BKB",
+      "BBB"
+    ],
+    "key": {
+      "B": { "item": "minecraft:brick_block" },
+      "K": { "item": "minecraft:blackstone" }
+    },
+    "result": { "item": "zombie:mario_dungeon_brick"}
+  }
+}

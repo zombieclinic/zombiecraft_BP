@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_green_rock_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [
+      { "item": "minecraft:green_dye" }
+    ],
+    "pattern": [
+      "CCC",
+      "CDC",
+      "CCC"
+    ],
+    "key": {
+      "C": { "item": "minecraft:cobblestone" },
+      "D": { "item": "minecraft:green_dye" }
+    },
+    "result": { "item": "zombie:mario_green_rock"}
+  }
+}

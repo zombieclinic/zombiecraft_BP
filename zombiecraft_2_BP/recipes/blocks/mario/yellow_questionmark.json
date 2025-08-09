@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_yellow_questionmark_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:gold_ingot" }],
+    "pattern": ["GGG","GgG","GGG"],
+    "key": {
+      "G": { "item": "minecraft:gold_ingot" },
+      "g": { "item": "minecraft:glowstone_dust" }
+    },
+    "result": { "item": "zombie:mario_yellow_questionmark"}
+  }
+}

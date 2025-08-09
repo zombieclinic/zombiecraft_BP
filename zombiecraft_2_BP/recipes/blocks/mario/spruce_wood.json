@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_spruce_wood_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:spruce_planks" }],
+    "pattern": ["PPP","PDP","PPP"],
+    "key": {
+      "P": { "item": "minecraft:spruce_planks" },
+      "D": { "item": "minecraft:brown_dye" }
+    },
+    "result": { "item": "zombie:mario_spruce_wood"}
+  }
+}

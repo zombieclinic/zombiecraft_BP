@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:mario_red_square_recipe" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:red_dye" }],
+    "pattern": ["SSS","SDS","SSS"],
+    "key": {
+      "S": { "item": "minecraft:stone_bricks" },
+      "D": { "item": "minecraft:red_dye" }
+    },
+    "result": { "item": "zombie:mario_red_square"}
+  }
+}
