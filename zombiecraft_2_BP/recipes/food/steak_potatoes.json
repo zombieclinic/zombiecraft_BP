@@ -1,0 +1,28 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:steak_and_potatoes_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:cooked_beef"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:cooked_beef"
+			},
+			{
+				"item": "minecraft:baked_potato"
+			}
+		],
+		"result": {
+			"item": "zombie:steak_and_potatoes"
+		}
+	}
+}

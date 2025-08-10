@@ -1,0 +1,27 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:avocado_toast"
+		},
+		"unlock": [
+			{
+				"item": "zombie:avocado"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:bread"
+			},
+			{
+				"item": "zombie:avocado"
+			}
+		],
+		"result": {
+			"item": "zombie:avocado_toast"
+		}
+	}
+}

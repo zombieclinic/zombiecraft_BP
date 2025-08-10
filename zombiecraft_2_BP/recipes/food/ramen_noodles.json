@@ -1,0 +1,37 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"tags": [
+			"crafting_table"
+		],
+		"description": {
+			"identifier": "zombie:romannoodlesitem"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:wheat"
+			}
+		],
+		"group": "food",
+		"ingredients": [
+			{
+				"item": "zombie:fried_egg"
+			},
+			{
+				"item": "minecraft:wheat"
+			},
+			{
+				"item": "minecraft:kelp"
+			},
+			{
+				"item": "minecraft:porkchop"
+			}
+		],
+		"result": [
+			{
+				"item": "zombie:romannoodlesitem"
+			}
+		]
+	}
+}

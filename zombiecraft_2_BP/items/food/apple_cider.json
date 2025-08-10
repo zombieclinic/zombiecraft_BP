@@ -1,0 +1,33 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:apple_cider",
+			"menu_category": {
+				"category": "equipment",
+				"group": "minecraft:itemGroup.name.cookedFood"
+			}
+		},
+		"components": {
+			"minecraft:display_name": {
+				"value": "Apple Cider"
+			},
+			"minecraft:icon": {
+				"textures": {
+					"default": "zombie_apple_cider"
+				}
+			},
+			"minecraft:food": {
+				"nutrition": 2,
+				"saturation_modifier": 0.2,
+				"using_converts_to": "minecraft:glass_bottle",
+				"can_always_eat": false
+			},
+			"minecraft:use_animation":{"value": "drink"},
+			"minecraft:use_modifiers": {
+				"movement_modifier": 1,
+				"use_duration": 1
+			}
+		}
+	}
+}

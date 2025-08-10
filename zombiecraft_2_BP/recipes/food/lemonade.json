@@ -1,0 +1,28 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:lemonade_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:sugar"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:sugar"
+			},
+			{
+				"item": "minecraft:yellow_flower"
+			}
+		],
+		"result": {
+			"item": "zombie:lemonade"
+		}
+	}
+}

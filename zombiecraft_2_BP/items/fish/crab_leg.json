@@ -12,8 +12,8 @@
 			"minecraft:allow_off_hand": false,
 			"minecraft:food": {
 				"can_always_eat": true,
-				"nutrition": 0,
-				"saturation_modifier": 0
+				"nutrition": 2,
+				"saturation_modifier": 0.5
 			},
 			"minecraft:rarity": "common",
 			"minecraft:tags": {

@@ -1,0 +1,30 @@
+{
+    "format_version": "1.21.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "zombie:butcher_knife"
+        },
+        "components": {
+            
+            "minecraft:icon": "zombie_knife",
+            "minecraft:damage": {
+                "value": 7
+            },
+            "minecraft:enchantable": {
+                "value": 10,
+                "slot": "sword"
+            },
+            "minecraft:display_name": {
+                "value": "Butcher Knife"
+            },
+            "minecraft:hand_equipped": true,
+            "minecraft:durability": {
+                "damage_chance": {
+                    "min": 10,
+                    "max": 50
+                },
+                "max_durability": 200
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:chocolate_pie"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:sugar"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:egg"
+			},
+			{
+				"item": "minecraft:sugar"
+			},
+			{
+				"item": "zombie:chocolate"
+			}
+		],
+		"result": {
+			"item": "zombie:chocolate_pie"
+		}
+	}
+}

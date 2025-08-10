@@ -1,0 +1,28 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "zombie:bacon"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:porkchop"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"pattern": [
+			"P"
+		],
+		"key": {
+			"P": {
+				"item": "minecraft:porkchop"
+			}
+		},
+		"result": 	{
+				"item": "zombie:bacon",
+				"count": 2
+			}
+	}
+}

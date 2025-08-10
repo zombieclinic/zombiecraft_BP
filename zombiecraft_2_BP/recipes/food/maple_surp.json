@@ -1,0 +1,28 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:syrup_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:sugar"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:honey_bottle"
+			},
+			{
+				"item": "minecraft:sugar"
+			}
+		],
+		"result": {
+			"item": "zombie:syrup"
+		}
+	}
+}

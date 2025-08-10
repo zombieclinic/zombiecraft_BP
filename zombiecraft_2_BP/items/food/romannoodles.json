@@ -1,0 +1,30 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:romannoodlesitem",
+			"menu_category": {
+				"category": "equipment",
+				"group": "minecraft:itemGroup.name.cookedFood"
+			}
+		},
+		"components": {
+			"minecraft:max_stack_size": 64,
+			"minecraft:icon": "zombie_roman_noodlesitem",
+			"minecraft:food": {
+				"nutrition": 8,
+				"can_always_eat": false,
+				"saturation_modifier": 1
+			},
+			"minecraft:use_animation": "eat",
+			"minecraft:display_name": {
+				"value": "Ramen Noodles"
+			},
+			"minecraft:use_modifiers": {
+				"use_duration": 1.6,
+				"movement_modifier": 1
+			}
+		}
+	}
+}

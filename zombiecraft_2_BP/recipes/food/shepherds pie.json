@@ -1,0 +1,31 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:shepherds_pie_recipe"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:wheat"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:wheat"
+			},
+			{
+				"item": "minecraft:cooked_beef"
+			},
+			{
+				"item": "minecraft:baked_potato"
+			}
+		],
+		"result": {
+			"item": "zombie:shepherds_pie"
+		}
+	}
+}

@@ -1,0 +1,32 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:pizza"
+		},
+		"tags": [
+			"crafting_table"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:wheat"
+			}
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:wheat",
+				"count": 3
+			},
+			{
+				"item": "minecraft:beetroot"
+			},
+			{
+				"item": "zombie:cheese"
+			}
+		],
+		"result": {
+			"item": "zombie:pizza"
+		}
+	}
+}

@@ -29,7 +29,7 @@
 			},
 			"minecraft:cooldown": {
 				"category": "magic_cookies",
-				"duration": 1
+				"duration": 2
 			},
 			"zombie:tporb": {},
 			"minecraft:display_name": {

@@ -1,11 +1,11 @@
 {
-	"format_version": "1.21.10",
+	"format_version": "1.21.100",
 	"minecraft:item": {
 		"description": {
 			"identifier": "zombie:bear_cooked_meat",
 			"menu_category": {
 				"category": "equipment",
-				"group": "itemGroup.name.cookedFood"
+				"group": "minecraft:itemGroup.name.cookedFood"
 			}
 		},
 		"components": {
@@ -13,6 +13,7 @@
 			"minecraft:display_name": {
 				"value": "Bear Cooked Meat"
 			},
+			
 			"minecraft:food": {
 				"can_always_eat": false,
 				"nutrition": 7,
@@ -29,7 +30,7 @@
 					"minecraft:is_meat"
 				]
 			},
-			"minecraft:use_animation": "eat"
+			"minecraft:use_animation": {"value": "eat"}
 		}
 	}
 }

@@ -1,0 +1,27 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:fish_and_chips_recipe"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:cooked_cod"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:cooked_cod"
+			},
+			{
+				"item": "zombie:fries"
+			}
+		],
+		"result": {
+			"item": "zombie:fish_and_chips"
+		}
+	}
+}

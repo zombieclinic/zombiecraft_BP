@@ -1,0 +1,33 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "zombie:seafoodstew",
+			"menu_category": {
+				"category": "equipment",
+				"group": "minecraft:itemGroup.name.cookedFood"
+			}
+		},
+		"components": {
+			"minecraft:display_name": {
+				"value": "Sea Food Stew"
+			},
+			"minecraft:icon": {
+				"textures": {
+					"default": "zombie_seafoodstew"
+				}
+			},
+			"minecraft:food": {
+				"nutrition": 5,
+				"saturation_modifier": 0.4,
+				"can_always_eat": false
+			},
+			"minecraft:use_modifiers": {
+				"movement_modifier": 1,
+				"use_duration": 1
+			},
+			"minecraft:use_animation": "eat"
+		}
+	}
+}

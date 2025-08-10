@@ -1,0 +1,21 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_furnace": {
+		"description": {
+			"identifier": "zombie:fried_egg"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:egg"
+			}
+		],
+		"tags": [
+			"furnace",
+			"smoker",
+			"campfire",
+			"soul_campfire"
+		],
+		"input": "minecraft:egg",
+		"output": "zombie:fried_egg"
+	}
+}

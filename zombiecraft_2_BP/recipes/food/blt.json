@@ -1,0 +1,27 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:blt_recipe"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:bread"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"ingredients": [
+			{
+				"item": "zombie:cooked_bacon"
+			},
+			{
+				"item": "minecraft:bread"
+			}
+		],
+		"result": {
+			"item": "zombie:blt"
+		}
+	}
+}

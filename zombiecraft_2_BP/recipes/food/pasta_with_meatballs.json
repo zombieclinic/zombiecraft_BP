@@ -1,0 +1,28 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:pasta_with_meatballs"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:wheat"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:wheat"
+			},
+			{
+				"item": "minecraft:cooked_beef"
+			}
+		],
+		"result": {
+			"item": "zombie:pasta_with_meatballs"
+		}
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_brewing_mix": {
+	"description": {
+		"identifier": "zombie:icecoffee_recipe"
+		},
+		"tags": [
+			"brewing_stand"
+		],
+		"unlock": [
+			{
+				"item": "minecraft:bread"
+			}
+		],
+
+		"output": "zombie:icecoffee",
+		"input": "zombie:hot_cocoa",
+		"reagent": "minecraft:packed_ice"
+	}
+}

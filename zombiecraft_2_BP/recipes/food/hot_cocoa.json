@@ -1,0 +1,28 @@
+
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:hot_cocoa_recipe"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:cooked_cod"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"ingredients": [
+			{
+				"item": "minecraft:cocoa_beans"
+			},
+			{
+				"item": "minecraft:glass_bottle"
+			}
+		],
+		"result": {
+			"item": "zombie:hot_cocoa"
+		}
+	}
+}

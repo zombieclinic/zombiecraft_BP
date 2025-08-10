@@ -1,0 +1,40 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "zombie:chocolate"
+		},
+		"unlock": [
+			{
+				"item": "minecraft:cocoa_beans"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"pattern": [
+			"CCC",
+			"CBC",
+			"CCC"
+		],
+		"key": {
+			"B": {
+				"item": "minecraft:bucket",
+				"data": 1
+			},
+			"C": {
+				"item": "minecraft:cocoa_beans"
+			}
+		},
+		"result": [
+			{
+				"item": "zombie:chocolate"
+			},
+			{
+				"item": "minecraft:bucket",
+				"count": 1,
+				"data": 0
+			}
+		]
+	}
+}
