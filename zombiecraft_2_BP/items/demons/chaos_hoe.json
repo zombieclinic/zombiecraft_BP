@@ -10,6 +10,9 @@
         },
         "components": {
             "minecraft:icon": "zombie_chaos_hoe"
+        },
+            "minecraft:display_name": {
+                "value": "Choas Hoe"
         }
     }
 }
