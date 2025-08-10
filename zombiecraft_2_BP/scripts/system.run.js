@@ -1,9 +1,54 @@
 
-import { world } from "@minecraft/server";
+import { world,  GameMode } from "@minecraft/server";
 
 
 export function worldsettings() {
   const overworld = world.getDimension("overworld");
+
+  // ─── 0) Creative restricted to admins (plus zombieclinic) ───
+for (const p of world.getAllPlayers()) {
+  try {
+    // robust check for creative across API variants
+    let gm;
+    try { gm = p.getGameMode?.(); } catch {}
+    const gmStr = String(gm ?? "").toLowerCase();
+    const isCreative = gmStr === "creative" || gm === GameMode?.creative;
+
+    if (!isCreative) continue;
+
+    const isAdmin = world.getDynamicProperty(`admin_${p.name}`) === true;
+    const isOwner = p.name.toLowerCase() === "zombieclinic"; // your allowlist test
+    if (isAdmin || isOwner) continue;
+
+    let ok = false;
+
+    // 1) Native API if available
+    if (typeof p.setGameMode === "function" && GameMode) {
+      try { p.setGameMode(GameMode.survival); ok = true; } catch {}
+    }
+
+    // 2) Command as the player
+    if (!ok) {
+      try {
+        const r = p.runCommand("gamemode s @s");
+        ok = !!(r && r.successCount);
+      } catch {}
+    }
+
+    // 3) Server-level fallback
+    if (!ok) {
+      try {
+        const safeName = p.name.replace(/"/g, '\\"');
+        const r2 = overworld.runCommand(`gamemode s "${safeName}"`);
+        ok = !!(r2 && r2.successCount);
+      } catch {}
+    }
+
+    if (ok) {
+      try { p.sendMessage("§cCreative is restricted to admins. You were set to Survival."); } catch {}
+    }
+  } catch {}
+}
 
   // ─── 1) Spawn‑area cleanup ───
   const spawnRadius = world.getDynamicProperty("spawnprotection");

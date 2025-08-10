@@ -4,20 +4,20 @@
     "name": "zombiecraft_2_dev",
     "description": "Dev zombiecraft 2 ",
     "uuid": "0908a176-1bbd-48dd-b0b5-87c5d5ec26c2",
-    "version": [1, 0, 3],
-    "min_engine_version": [1, 21, 90]
+    "version": [1, 0, 4],
+    "min_engine_version": [1, 21, 100]
   },
 
   "modules": [
     {
       "type": "data",
       "uuid": "9e053c79-b4d3-4f0a-84e5-7e9efe452c22",
-      "version": [1, 0, 3]
+      "version": [1, 0, 4]
     },
     {
       "type": "script",
       "uuid": "1303b4af-a30e-4aaf-bf04-45b0dced3f89",
-      "version": [1, 0, 3],
+      "version": [1, 0, 4],
       "entry": "scripts/zombiecraft_world_ui.js"
     }
   ],
@@ -27,11 +27,11 @@
   "dependencies": [
     {
       "uuid": "78eff29f-e236-4251-88d6-fefea597f006",
-      "version": [1, 0, 3]
+      "version": [1, 0, 4]
     },
     {
       "module_name": "@minecraft/server",
-      "version": "2.0.0"
+      "version": "2.1.0"
     },
     {
       "module_name": "@minecraft/server-ui",

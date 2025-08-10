@@ -147,6 +147,9 @@
 			}
 		},
 		"components": {
+			"minecraft:loot": {
+				"table": "loot_tables/custom_mobs/peeper.json"
+			},
 			"minecraft:is_hidden_when_invisible": {},
 			"minecraft:experience_reward": {
 				"on_death": "query.last_hit_by_player ? Math.Random(1,3) : 0"

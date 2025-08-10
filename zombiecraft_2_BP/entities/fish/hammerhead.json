@@ -70,6 +70,9 @@
             }
         },
         "components": {
+             "minecraft:loot": {
+                "table": "loot_tables/custom_mobs/shark.json"
+            },
             "minecraft:behavior.melee_box_attack": {
                 "can_spread_on_fire": false,
                 "priority": 3

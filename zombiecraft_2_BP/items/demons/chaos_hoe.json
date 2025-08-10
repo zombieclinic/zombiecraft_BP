@@ -1,5 +1,5 @@
 {
-    "format_version": "1.21.60",
+    "format_version": "1.21.100",
     "minecraft:item": {
         "description": {
             "identifier": "zombie:chaos_hoe",
@@ -9,10 +9,11 @@
             }
         },
         "components": {
-            "minecraft:icon": "zombie_chaos_hoe"
-        },
+            "minecraft:icon": "zombie_chaos_hoe",
             "minecraft:display_name": {
                 "value": "Choas Hoe"
         }
+        }
+            
     }
 }

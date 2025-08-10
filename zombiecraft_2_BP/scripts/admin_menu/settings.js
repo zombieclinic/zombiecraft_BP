@@ -1,14 +1,7 @@
 import { world } from "@minecraft/server";
 import { ActionFormData, ModalFormData, MessageFormData } from "@minecraft/server-ui";
 
-export class AdminMenu {
-  onUse(arg) {
-    const player = arg.source;
-    mainMenu(player);
-  }
-}
-
-function mainMenu(player) {
+export function mainMenu(player) {
   const spawnCoords   = world.getDynamicProperty("worldspawn")     ?? "not set";
   const spawnProtect  = world.getDynamicProperty("spawnprotection")?? "none";
   const baseRadius    = world.getDynamicProperty("baseRadius")     ?? "none";
