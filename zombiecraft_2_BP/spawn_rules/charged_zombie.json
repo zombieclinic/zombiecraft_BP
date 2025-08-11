@@ -1,0 +1,35 @@
+
+{
+	"format_version": "1.8.0",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "zombie:charged_zombie",
+			"population_control": "monster"
+		},
+		"conditions": [
+			{
+				"minecraft:height_filter": {
+					"min": -64,
+					"max": 0
+				},
+				"minecraft:weight": {
+					"default": 50
+				},
+				"minecraft:herd": {
+					"min_size": 1,
+					"max_size": 2
+				},
+				"minecraft:brightness_filter": {
+					"min": 0,
+					"max": 0,
+					"adjust_for_weather": false
+				},
+				"minecraft:spawns_underground": {},
+				"minecraft:difficulty_filter": {
+					"min": "easy",
+					"max": "hard"
+				}
+			}
+		]
+	}
+}

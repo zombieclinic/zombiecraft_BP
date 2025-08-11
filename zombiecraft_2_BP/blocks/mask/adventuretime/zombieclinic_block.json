@@ -40,7 +40,7 @@
 				"explosion_resistance": 13
 			},
 			"minecraft:geometry": "geometry.zombieclinic_block",
-			"minecraft:loot": "loot_tables/mask/adventuretime/berry_mask.json"
+			"minecraft:loot": "loot_tables/mask/adventuretime/zombieclinic.json"
 		},
 		"permutations": [
 			{

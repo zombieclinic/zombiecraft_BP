@@ -1,0 +1,301 @@
+{
+	"format_version": "1.20.40",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "zombie:puker",
+			"is_summonable": true,
+			"is_spawnable": true
+		},
+		"component_groups": {
+			"zombie:attack": {
+				"minecraft:behavior.ranged_attack": {
+					"priority": 0,
+					"charge_charged_trigger": 0,
+					"charge_shoot_trigger": 1,
+					"attack_interval_min": 5,
+					"attack_interval_max": 9,
+					"attack_radius": 10
+				},
+				"minecraft:behavior.move_towards_target": {
+					"priority": 0,
+					"speed_multiplier": 2,
+					"within_radius": 15
+				},
+				"minecraft:behavior.nearest_attackable_target": {
+					"priority": 0,
+					"must_see": true,
+					"reselect_targets": true,
+					"within_radius": 25,
+					"must_see_forget_duration": 17,
+					"entity_types": [
+						{
+							"filters": {
+								"subject": "other",
+								"test": "is_family",
+								"value": "player"
+							}
+						}
+					]
+				},
+				"minecraft:behavior.nearest_prioritized_attackable_target": {
+					"priority": 2,
+					"entity_types": [
+						{
+							"priority": 2,
+							"filters": {
+								"any_of": [
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "player"
+									}
+								]
+							},
+							"must_see": true,
+							"max_dist": 30
+						}
+					],
+					"reselect_targets": true
+				}
+			},
+			"1player": {
+				"minecraft:health": {
+					"value": 20
+				},
+				"minecraft:movement": {
+					"value": 0.3
+				},
+				"minecraft:attack": {
+					"damage": 10
+				},
+				"minecraft:entity_sensor": {
+					"sensor_range": 40,
+					"minimum_count": 2,
+					"maximum_count": 2,
+					"event_filters": {
+						"subject": "other",
+						"test": "is_family",
+						"value": "player"
+					},
+					"event": "2player"
+				}
+			},
+			"2player": {
+				"minecraft:health": {
+					"value": 30
+				},
+				"minecraft:movement": {
+					"value": 0.4
+				},
+				"minecraft:attack": {
+					"damage": 10,
+					"effect_name": "poison",
+					"effect_duration": 5
+				},
+				"minecraft:entity_sensor": {
+					"sensor_range": 40,
+					"minimum_count": 3,
+					"maximum_count": 3,
+					"event_filters": {
+						"subject": "other",
+						"test": "is_family",
+						"value": "player"
+					},
+					"event": "2player"
+				}
+			},
+			"3player": {
+				"minecraft:health": {
+					"value": 40
+				},
+				"minecraft:movement": {
+					"value": 0.5
+				},
+				"minecraft:attack": {
+					"damage": 10,
+					"effect_duration": 5,
+					"effect_name": "fatal_poison"
+				},
+				"minecraft:entity_sensor": {
+					"sensor_range": 40,
+					"minimum_count": 1,
+					"maximum_count": 2,
+					"event_filters": {
+						"subject": "other",
+						"test": "is_family",
+						"value": "player"
+					},
+					"event": "player1"
+				}
+			}
+		},
+		"components": {
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:type_family": {
+				"family": [
+					"mutated",
+					"berry",
+					"monster"
+				]
+			},
+			"minecraft:physics": {
+				"has_collision": true,
+				"has_gravity": true
+			},
+			"minecraft:collision_box": {
+				"width": 1,
+				"height": 1
+			},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:health": {
+				"value": 6
+			},
+			"minecraft:experience_reward": {
+				"on_death": "query.last_hit_by_player ? 4 : 0"
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:movement": {
+				"value": 0.3
+			},
+			"minecraft:behavior.random_stroll": {
+				"priority": 4
+			},
+			"minecraft:behavior.look_at_player": {
+				"priority": 3,
+				"look_distance": 10
+			},
+			"minecraft:behavior.look_at_target": {
+				"priority": 3,
+				"look_distance": 5
+			},
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1,
+				"alert_same_type": true
+			},
+			"minecraft:damage_sensor": {
+				"triggers": [
+					{
+						"cause": "fall",
+						"deals_damage": false
+					}
+				]
+			},
+			"minecraft:navigation.generic": {
+				"is_amphibious": true,
+				"avoid_damage_blocks": true,
+				"can_break_doors": true,
+				"can_open_doors": true,
+				"can_pass_doors": true,
+				"can_swim": true
+			},
+			"minecraft:can_climb": {},
+			"minecraft:jump.static": {
+				"jump_power": 0.5
+			},
+			"minecraft:shooter": {
+				"def": "zombie:spit"
+			},
+			"minecraft:loot": {
+				"table": "loot_tables/entities/zombie.json"
+			},
+			"minecraft:behavior.ranged_attack": {
+				"priority": 0,
+				"charge_charged_trigger": 0,
+				"charge_shoot_trigger": 1,
+				"attack_interval_min": 5,
+				"attack_interval_max": 9,
+				"attack_radius": 10
+			},
+			"minecraft:entity_sensor": {
+				"sensor_range": 40,
+				"minimum_count": 1,
+				"maximum_count": 1,
+				"event_filters": {
+					"subject": "other",
+					"test": "is_family",
+					"value": "player"
+				}
+			},
+			"minecraft:burns_in_daylight": {},
+			"minecraft:movement.basic": {},
+			"minecraft:despawn": {
+				"despawn_from_distance": {},
+				"despawn_from_simulation_edge": true
+			},
+			"minecraft:nameable": {}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+				"add": {
+					"component_groups": [
+						"zombie:attack",
+						"1player"
+					]
+				}
+			},
+			"3player": {
+				"add": {
+					"component_groups": [
+						"3player"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"1player",
+						"2player"
+					]
+				}
+			},
+			"2player": {
+				"add": {
+					"component_groups": [
+						"2player"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"1player",
+						"3player"
+					]
+				}
+			},
+			"player1": {
+				"add": {
+					"component_groups": [
+						"1player"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"2player",
+						"3player"
+					]
+				}
+			},
+			"minecraft:entity_born": {
+				"add": {
+					"component_groups": [
+						"zombie:attack",
+						"1player"
+					]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,40 @@
+
+{
+	"format_version": "1.8.0",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "zombie:bloater",
+			"population_control": "monster"
+		},
+		"conditions": [
+			{
+				"minecraft:spawns_underground": {},
+				"minecraft:weight": {
+					"default": 100
+				},
+				"minecraft:height_filter": {
+					"min": -64,
+					"max": 0
+				},
+				"minecraft:herd": {
+					"min_size": 2,
+					"max_size": 4
+				},
+				"minecraft:brightness_filter": {
+					"min": 0,
+					"max": 0,
+					"adjust_for_weather": false
+				},
+				"minecraft:biome_filter": {
+					"test": "has_biome_tag",
+					"operator": "==",
+					"value": "monster"
+				},
+				"minecraft:difficulty_filter": {
+					"min": "easy",
+					"max": "hard"
+				}
+			}
+		]
+	}
+}

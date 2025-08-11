@@ -1,0 +1,400 @@
+{
+	"format_version": "1.19.10",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "zombie:mutated_drowned",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false,
+			"runtime_identifier": "minecraft:drowned"
+		},
+		"component_groups": {
+			"minecraft:baby_drowned": {
+				"minecraft:experience_reward": {
+					"on_death": "query.last_hit_by_player ? 12 + (query.equipment_count * Math.Random(1,3)) : 0"
+				},
+				"minecraft:is_baby": {},
+				"minecraft:scale": {
+					"value": 0.5
+				},
+				"minecraft:movement": {
+					"value": 0.25
+				},
+				"minecraft:underwater_movement": {
+					"value": 0.08
+				}
+			},
+			"minecraft:adult_drowned": {
+				"minecraft:experience_reward": {
+					"on_death": "query.last_hit_by_player ? 5 + (query.equipment_count * Math.Random(1,3)) : 0"
+				},
+				"minecraft:loot": {
+					"table": "loot_tables/entities/drowned.json"
+				},
+				"minecraft:underwater_movement": {
+					"value": 0.1
+				}
+			},
+			"envirement": {
+				"minecraft:environment_sensor": {
+					"triggers": [
+						{
+							"filters": {
+								"operator": "==",
+								"test": "in_water_or_rain",
+								"value": false
+							},
+							"event": "minecraft:start_transforming"
+						}
+					]
+				}
+			},
+			"minecraft:start_drowned_transformation": {
+				"minecraft:environment_sensor": {
+					"triggers": {
+						"filters": {
+							"test": "is_underwater",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"event": "minecraft:stop_transforming"
+					}
+				},
+				"minecraft:timer": {
+					"looping": false,
+					"time": [
+						10,
+						10
+					],
+					"time_down_event": {
+						"event": "minecraft:convert_to_mutated_zombie"
+					}
+				}
+			},
+			"minecraft:convert_to_mutated_zombie": {
+				"minecraft:transformation": {
+					"into": "zombie:mutated_zombie<minecraft:as_adult>",
+					"drop_equipment": true,
+					"delay": {
+						"value": 5
+					},
+					"keep_level": true,
+					"keep_owner": true
+				},
+				"minecraft:is_shaking": {}
+			},
+			"minecraft:convert_to_baby_mutated_zombie": {
+				"minecraft:transformation": {
+					"into": "zombie:mutated_zombie<minecraft:as_baby>",
+					"drop_equipment": true,
+					"delay": {
+						"value": 15
+					},
+					"keep_owner": true,
+					"keep_level": true
+				}
+			},
+			"minecraft:charged_zombie": {
+				"minecraft:transformation": {
+					"into": "zombie:charged_zombie",
+					"drop_equipment": true,
+					"delay": {
+						"value": 0
+					},
+					"keep_owner": true,
+					"keep_level": true
+				}
+			}
+		},
+		"components": {
+			"minecraft:is_hidden_when_invisible": {},
+			"minecraft:nameable": {},
+			"minecraft:type_family": {
+				"family": [
+					"undead",
+					"mutated",
+					"monster"
+				]
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.9
+			},
+			"minecraft:movement.basic": {},
+			"minecraft:navigation.walk": {
+				"is_amphibious": true,
+				"can_pass_doors": true,
+				"can_walk": true,
+				"can_break_doors": true,
+				"avoid_sun": true
+			},
+			"minecraft:jump.static": {},
+			"minecraft:can_climb": {},
+			"minecraft:health": {
+				"value": 50,
+				"max": 50
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:breathable": {
+				"total_supply": 15,
+				"suffocate_time": 0,
+				"breathes_air": true,
+				"breathes_water": true
+			},
+			"minecraft:despawn": {
+				"despawn_from_distance": {},
+				"despawn_from_simulation_edge": true
+			},
+			"minecraft:behavior.random_stroll": {
+				"priority": 7,
+				"speed_multiplier": 1
+			},
+			"minecraft:physics": {
+				"has_collision": true,
+				"has_gravity": true
+			},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:behavior.random_look_around": {
+				"priority": 9
+			},
+			"minecraft:behavior.look_at_player": {
+				"priority": 8,
+				"look_distance": 6,
+				"probability": 0.02
+			},
+			"minecraft:behavior.stomp_turtle_egg": {
+				"priority": 4,
+				"speed_multiplier": 1,
+				"search_range": 10,
+				"search_height": 2,
+				"goal_radius": 1.14,
+				"interval": 20
+			},
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:behavior.melee_attack": {
+				"priority": 3
+			},
+			"minecraft:behavior.nearest_attackable_target": {
+				"priority": 2,
+				"must_see": true,
+				"reselect_targets": true,
+				"within_radius": 25,
+				"must_see_forget_duration": 17,
+				"entity_types": [
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "player"
+								},
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "snowgolem"
+								},
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "irongolem"
+								}
+							]
+						},
+						"max_dist": 35
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "villager"
+								},
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "wandering_trader"
+								}
+							]
+						},
+						"max_dist": 35,
+						"must_see": false
+					},
+					{
+						"filters": {
+							"all_of": [
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "baby_turtle"
+								},
+								{
+									"test": "in_water",
+									"subject": "other",
+									"operator": "!=",
+									"value": true
+								}
+							]
+						},
+						"max_dist": 35
+					}
+				]
+			},
+			"minecraft:burns_in_daylight": {},
+			"minecraft:attack": {
+				"damage": 12
+			},
+			"minecraft:damage_sensor": {
+				"triggers": {
+					"on_damage": {
+						"filters": {
+							"test": "is_family",
+							"subject": "other",
+							"value": "lightning"
+						},
+						"event": "minecraft:become_charged"
+					},
+					"deals_damage": false
+				}
+			},
+			"minecraft:loot": {
+				"table": "loot_tables/entities/zombie.json"
+			}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+				"randomize": [
+					{
+						"weight": 85,
+						"randomize": [
+							{
+								"weight": 95,
+								"add": {
+									"component_groups": [
+										"minecraft:adult_drowned",
+										"envirement"
+									]
+								}
+							},
+							{
+								"weight": 5,
+								"remove": {},
+								"add": {
+									"component_groups": [
+										"minecraft:baby_drowned",
+										"envirement"
+									]
+								}
+							}
+						]
+					}
+				]
+			},
+			"minecraft:as_baby": {
+				"add": {
+					"component_groups": [
+						"minecraft:baby_drowned",
+						"envirement"
+					]
+				}
+			},
+			"minecraft:as_adult": {
+				"add": {
+					"component_groups": [
+						"minecraft:adult_drowned",
+						"envirement"
+					]
+				}
+			},
+			"minecraft:start_transforming": {
+				"add": {
+					"component_groups": [
+						"minecraft:start_drowned_transformation"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"envirement"
+					]
+				}
+			},
+			"minecraft:stop_transforming": {
+				"add": {
+					"component_groups": [
+						"envirement"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"minecraft:start_drowned_transformation"
+					]
+				}
+			},
+			"minecraft:convert_to_mutated_zombie": {
+				"sequence": [
+					{
+						"filters": {
+							"test": "has_component",
+							"operator": "!=",
+							"value": "minecraft:is_baby"
+						},
+						"add": {
+							"component_groups": [
+								"minecraft:convert_to_mutated_zombie"
+							]
+						},
+						"remove": {
+							"component_groups": [
+								"minecraft:start_drowned_transformation"
+							]
+						}
+					},
+					{
+						"filters": {
+							"test": "has_component",
+							"value": "minecraft:is_baby"
+						},
+						"add": {
+							"component_groups": [
+								"minecraft:convert_to_baby_mutated_zombie"
+							]
+						},
+						"remove": {
+							"component_groups": [
+								"minecraft:start_drowned_transformation"
+							]
+						}
+					}
+				]
+			},
+			"minecraft:become_charged": {
+				"add": {
+					"component_groups": [
+						"minecraft:charged_zombie"
+					]
+				}
+			}
+		}
+	}
+}
