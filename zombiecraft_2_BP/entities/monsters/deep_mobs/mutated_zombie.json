@@ -172,7 +172,6 @@
 			"minecraft:movement": {
 				"value": 0.24
 			},
-			"minecraft:fire_immune": true,
 			"minecraft:behavior.flee_sun": {
 				"priority": 1,
 				"speed_multiplier": 0.1

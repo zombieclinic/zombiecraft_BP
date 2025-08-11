@@ -9,6 +9,7 @@
 		},
 		"component_groups": {},
 		"components": {
+			
 			"minecraft:is_hidden_when_invisible": {},
 			"minecraft:nameable": {},
 			"minecraft:type_family": {
@@ -172,7 +173,6 @@
 			"minecraft:movement": {
 				"value": 0.24
 			},
-			"minecraft:fire_immune": true,
 			"minecraft:behavior.flee_sun": {
 				"priority": 1,
 				"speed_multiplier": 0.1
