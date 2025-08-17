@@ -10,7 +10,7 @@
     "components": {
       "minecraft:display_name": "Crying Obsidian Green",
       "minecraft:destructible_by_mining": {
-        "seconds_to_destroy": 50
+        "seconds_to_destroy": 1.5
       },
       "minecraft:destructible_by_explosion": {
         "explosion_resistance": 1200
@@ -24,7 +24,9 @@
           "face_dimming": true,
           "render_method": "opaque"
         }
-      }
+      },
+       "tag:minecraft:diamond_tier_destructible": {},
+      "tag:minecraft:netherite_tier_destructible": {}
     }
   }
 }

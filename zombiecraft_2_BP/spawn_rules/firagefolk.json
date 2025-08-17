@@ -1,5 +1,5 @@
 {
-    "format_version": "1.19.10",
+    "format_version": "1.12.0",
     "minecraft:spawn_rules": {
         "description": {
             "identifier": "zombie:foragefolk",
@@ -14,7 +14,7 @@
                     "max": "hard"
                 },
                 "minecraft:weight": {
-                    "default": 0.5
+                    "default": 1
                 },
                 "minecraft:herd": {
                     "min_size": 1,
@@ -61,7 +61,7 @@
                 },
                 "minecraft:brightness_filter": {
                     "min": 0,
-                    "max": 15,
+                    "max": 7,
                     "adjust_for_weather": true
                 }
             }

@@ -35,6 +35,7 @@ import {TeleportBlock} from "./magic/teleport_block_script.js"
 import {DayDream } from "./custom_components/food.js"
 import {Mailbox} from "./magic/mailbox.js"
 import {RedstoneComponent} from "./custom_components/redstone.js"
+import {AlligatorEgg} from "./custom_components/alligator_egg.js"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -57,7 +58,8 @@ const BLOCK_COMPONENTS = [
   ["zombie:warpstone",            WarpMenu],
   ["zombie:teleportblock",        TeleportBlock],
   ["zombie:mailbox",              Mailbox],
-  ["zombie:redstone",             RedstoneComponent]
+  ["zombie:redstone",             RedstoneComponent],
+  ["zombie:alligator_egg",        AlligatorEgg]
 ];
 
 const ITEM_COMPONENTS = [

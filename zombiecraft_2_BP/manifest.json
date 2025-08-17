@@ -1,11 +1,11 @@
 {
   "format_version": 2,
   "header": {
-    "name": "zombiecraft_2_dev",
-    "description": "Dev zombiecraft 2 ",
+    "name": "zombiecraft",
+    "description": "update 8.10.25 ",
     "uuid": "0908a176-1bbd-48dd-b0b5-87c5d5ec26c2",
     "version": [1, 0, 4],
-    "min_engine_version": [1, 21, 100]
+    "min_engine_version": [1, 21, 90]
   },
 
   "modules": [

@@ -1,0 +1,43 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "zombie:alligator_egg",
+      "menu_category": {
+        "category": "nature"
+      }
+    },
+    "components": {
+      "minecraft:collision_box": {
+	      "origin": [-3, 0, -2],
+	      "size": [4, 6, 4]
+      },
+      "minecraft:selection_box" :{
+         "origin": [-3, 0, -2],
+	      "size": [4, 6, 4]
+      },
+      "minecraft:display_name": "alligator_egg",
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 20
+      },
+      "minecraft:map_color": "#214D21",
+      "minecraft:geometry": "geometry.alligator_egg",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "zombie_alligator_egg",
+          "ambient_occlusion": true,
+          "face_dimming": true,
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:tick": {
+        "interval_range": [20,20],
+        "looping": true
+      },
+      "zombie:alligator_egg": {}
+    }
+  }
+}

@@ -431,41 +431,196 @@ function setSystemTick(player) {
     });
 }
 
+// ───────────────── Restore / Backup helpers ─────────────────
+
+function getDefaults(player) {
+  // sensible fallbacks if keys vanished
+  const { x, y, z } = player.location ?? { x: 0, y: 64, z: 0 };
+  const here = `${Math.floor(x)} ${Math.floor(y)} ${Math.floor(z)}`;
+  return {
+    worldspawn: here,                 // we'll also /setworldspawn
+    spawnprotection: 32,
+    baseRadius: 32,
+    baseDistance: 250,
+    xyDistance: 250,
+    systemTickInterval: 3,
+
+    economy_currencyName: "Coins",
+    economy_startBonus: 100,
+    economy_tpSpawnCost: 10,
+    economy_tpBaseCost: 15,
+    economy_tpFriendsCost: 5,
+    economy_displayType: "belowname",
+    economy_listOrder: "ascending",
+  };
+}
+
+function safeCmd(dim, cmd) {
+  try { dim.runCommand(cmd); } catch (_) {}
+}
+
+function rebuildScoreboards() {
+  const name       = world.getDynamicProperty("economy_currencyName") ?? "Coins";
+  const disp       = world.getDynamicProperty("economy_displayType")   ?? "belowname";
+  const overworld  = world.getDimension("overworld");
+
+  // Ensure objectives exist and titles match currency name
+  safeCmd(overworld, `scoreboard objectives add Money dummy`);
+  safeCmd(overworld, `scoreboard objectives remove Display`);
+  safeCmd(overworld, `scoreboard objectives add Display dummy "${name}"`);
+
+  // Set display position
+  const slot = (disp === "list") ? "list" : (disp === "sidebar" ? "sidebar" : "belowname");
+  safeCmd(overworld, `scoreboard objectives setdisplay ${slot} Display`);
+}
+
+function createBackupNow(player) {
+  // 0) Collect ALL keys once
+  const before = world.getDynamicPropertyIds();
+
+  // 1) Purge any existing backup entries (full overwrite)
+  let purged = 0;
+  for (const k of before) {
+    if (k === "backup_keys" || k.startsWith("backup|")) {
+      world.setDynamicProperty(k, undefined);
+      purged++;
+    }
+  }
+
+  // 2) Fresh list of current (non-backup) keys to save
+  const keys = world.getDynamicPropertyIds()
+    .filter(k => k !== "backup_keys" && !k.startsWith("backup|"));
+
+  // 3) Write the index
+  world.setDynamicProperty("backup_keys", JSON.stringify(keys));
+
+  // 4) Copy values into backup namespace (same primitive types)
+  let saved = 0;
+  for (const k of keys) {
+    world.setDynamicProperty(`backup|${k}`, world.getDynamicProperty(k));
+    saved++;
+  }
+
+  player.sendMessage(`§aBackup created. Overwrote old backup (purged ${purged}), saved ${saved} keys.`);
+}
+
+
+function restoreAllSettings(player) {
+  // 1) Prefer restoring from a saved backup (full restore: admins, shops, mailboxes, bases…)
+  const keyIndex = world.getDynamicProperty("backup_keys");
+  if (typeof keyIndex === "string") {
+    try {
+      const keys = JSON.parse(keyIndex);
+      let restored = 0;
+      for (const k of keys) {
+        const v = world.getDynamicProperty(`backup|${k}`);
+        world.setDynamicProperty(k, v);
+        restored++;
+      }
+      // Rebuild derived stuff
+      rebuildScoreboards();
+
+      // If worldspawn was restored, mirror it to actual spawn
+      const ws = world.getDynamicProperty("worldspawn");
+      if (typeof ws === "string" && ws.trim()) {
+        safeCmd(world.getDimension("overworld"), `setworldspawn ${ws}`);
+      }
+
+      player.sendMessage(`§aRestored ${restored} keys from backup.`);
+      return;
+    } catch (e) {
+      player.sendMessage("§cBackup index was corrupt. Falling back to defaults…");
+    }
+  }
+
+  // 2) No backup — recreate ONLY missing keys with defaults (non-destructive)
+  const defaults = getDefaults(player);
+  let created = 0;
+  for (const [k, v] of Object.entries(defaults)) {
+    if (world.getDynamicProperty(k) === undefined) {
+      world.setDynamicProperty(k, v);
+      created++;
+    }
+  }
+  rebuildScoreboards();
+
+  // If worldspawn was missing and we just set it, mirror to actual spawn
+  const ws = world.getDynamicProperty("worldspawn");
+  if (typeof ws === "string" && ws.trim()) {
+    safeCmd(world.getDimension("overworld"), `setworldspawn ${ws}`);
+  }
+
+  player.sendMessage(`§aRecreated ${created} missing key${created === 1 ? "" : "s"} with defaults.`);
+}
+
+// ───────────────── UI wiring ─────────────────
+
+// Add a "Restore All Settings" and an optional "Create Backup Now" button
 function openDynamicDatabase(player) {
   new ActionFormData()
     .title("Dynamic Database")
     .body("Choose an action:")
-    .button("Remove All Dynamic Data")
-    .button("View Dynamic Data")
-    .button("Back")
+    .button("Restore All Settings")     // 0
+    .button("Create Backup Now")        // 1  (optional but recommended)
+    .button("Remove All Dynamic Data")  // 2
+    .button("View Dynamic Data")        // 3
+    .button("Back")                     // 4
     .show(player)
     .then(res => {
-      if (res.canceled || res.selection === 2) return mainMenu(player);
-      if (res.selection === 0)      return confirmRemoveAllData(player);
-      if (res.selection === 1)      return viewDynamicDataMenu(player);
+      if (res.canceled || res.selection === 4) return mainMenu(player);
+      if (res.selection === 0) return confirmRestoreAll(player);
+      if (res.selection === 1) { createBackupNow(player); return openDynamicDatabase(player); }
+      if (res.selection === 2) return confirmRemoveAllData(player);
+      if (res.selection === 3) return viewDynamicDataMenu(player);
     })
     .catch(console.error);
 }
 
-// ─── “Remove All Dynamic Data” flow ─────────────────────────────────────────────────────────────
+function confirmRestoreAll(player) {
+  new MessageFormData()
+    .title("Restore All Settings")
+    .body(
+      "§eThis will restore:\n" +
+      "§7• If a backup exists: ALL saved keys (admins, shops, mailboxes, bases, settings, etc.)\n" +
+      "§7• If no backup: only missing keys will be recreated with safe defaults\n\n" +
+      "Also rebuilds scoreboards/display.\n\nProceed?"
+    )
+    .button1("Yes, restore")
+    .button2("No, cancel")
+    .show(player)
+    .then(res => {
+      if (res.selection === 0) restoreAllSettings(player);
+      openDynamicDatabase(player);
+    })
+    .catch(console.error);
+}
+
+// Optional: before wiping, strongly suggest a backup
 function confirmRemoveAllData(player) {
   new MessageFormData()
     .title("Remove All Data")
-    .body("§cThis will delete **every** dynamic property ever saved!\n\nAre you sure?")
-    .button1("Yes, delete all")
+    .body("§cThis deletes every dynamic property §7except§c the backup.\n\nProceed?")
+    .button1("Yes, delete non-backup keys")
     .button2("No, cancel")
     .show(player)
     .then(res => {
       if (res.selection === 0) {
-        world.getDynamicPropertyIds().forEach(key => {
+        const keys = world.getDynamicPropertyIds();
+        let removed = 0;
+        for (const key of keys) {
+          if (key === "backup_keys") continue;
+          if (key.startsWith("backup|")) continue; // keep backup copies
           world.setDynamicProperty(key, undefined);
-        });
-        player.sendMessage("§aAll dynamic data removed.");
+          removed++;
+        }
+        player.sendMessage(`§aRemoved ${removed} keys. Backup retained.`);
       }
       openDynamicDatabase(player);
     })
     .catch(console.error);
 }
+
+
 
 function viewDynamicDataMenu(player) {
   const allKeys = world.getDynamicPropertyIds();
