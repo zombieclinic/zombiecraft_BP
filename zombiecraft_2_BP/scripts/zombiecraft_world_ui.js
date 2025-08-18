@@ -28,7 +28,7 @@ import {CustomFishingRod} from "./custom_components/chaos_components/fishingpool
 import { ChaosXp} from "./custom_components/chaos_components/xp"
 import {TppAxeSwing, BerserkerAxeController} from "./custom_components/chaos_components/battleaxe"
 import {arrowEffect} from "./custom_components/chaos_components/chaos_arrow"
-import {DemonGrass,TestDemon} from "./custom_components/chaos_components/generation"
+import {DemonGrass} from "./custom_components/chaos_components/generation"
 import {AdminMenu} from "./admin_menu/adminmenu"
 import {WarpMenu} from "./warpalter/warpalter_main"
 import {TeleportBlock} from "./magic/teleport_block_script.js"
@@ -141,3 +141,8 @@ system.runInterval(() => {
     }
   }
 }, 1);
+
+
+
+
+

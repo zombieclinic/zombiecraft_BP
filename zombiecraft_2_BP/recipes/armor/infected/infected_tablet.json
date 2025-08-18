@@ -1,0 +1,19 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:infected_tablet_crafting" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "minecraft:nether_wart" }],
+    "pattern": [
+      "RWR",
+      "QQQ",
+      "RWR"
+    ],
+    "key": {
+      "R": { "item": "minecraft:rotten_flesh" },
+      "W": { "item": "minecraft:nether_wart" },
+      "Q": { "item": "zombie:infected_goo" }
+    },
+    "result": { "item": "zombie:infected_tablet", "count": 1 }
+  }
+}

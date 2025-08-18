@@ -251,7 +251,7 @@
           "damage": 5
         },
         "minecraft:loot": {
-          "table": "loot_tables/entities/zombie.json"
+          "table": "loot_tables/monsters/infected_zombie.json"
         }, 
   
       "minecraft:despawn": {

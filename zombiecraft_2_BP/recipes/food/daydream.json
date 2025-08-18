@@ -9,7 +9,7 @@
 				"item": "minecraft:cookie"
 			}
 		],
-    "tags": ["minecraft:ender_pearl"],
+    "tags": ["crafting_table"],
     "ingredients": [
       { "item": "minecraft:cookie" },
       { "item": "glowstone_dust" },

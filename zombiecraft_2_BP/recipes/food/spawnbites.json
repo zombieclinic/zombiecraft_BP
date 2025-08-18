@@ -2,18 +2,17 @@
   "format_version": "1.21.90",
   "minecraft:recipe_shapeless": {
     "description": {
-      "identifier": "zombie:spawn_bite"
+      "identifier": "zombie:spawn_bite_recipe"
     },
     "unlock": [
 			{
 				"item": "minecraft:cookie"
 			}
 		],
-    "tags": ["minecraft:ender_pearl"],
+    "tags": ["crafting_table"],
     "ingredients": [
       { "item": "minecraft:cookie" },
-      { "item": "minecraft:ender_pearl" },
-      { "item": "minecraft:lapis_lazuli" }
+      { "item": "minecraft:ender_pearl" }
     ],
     "result": {
       "item": "zombie:spawnbite",

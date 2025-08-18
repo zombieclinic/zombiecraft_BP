@@ -1,0 +1,30 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "zombie_test",
+		"description": "zombie_test Behavior Pack",
+		"uuid": "57c4082e-d2f2-25e9-de28-99341cd4d05d",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 20, 0]
+	},
+	"metadata": {
+		"authors": ["zombie_test"],
+		"generated_with": {
+			"blockbench_item_wizard": ["1.2.1"]
+		}
+	},
+	"modules": [
+		{
+			"description": "Behavior",
+			"version": [1, 0, 0],
+			"uuid": "e5878449-d155-78bd-5579-506f01f9aaba",
+			"type": "data"
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "f4a04481-2664-1879-227e-f82a1714c149",
+			"version": [1, 0, 0]
+		}
+	]
+}

@@ -309,21 +309,45 @@ export class ZombieSlab {
 
 export class PaintBrush {
   onUseOn(event) {
-    const { block, source } = event;
+    const { block, source: player } = event;
+    if (!(player instanceof Player)) return;
     if (block.typeId !== "zombie:painting_easel") return;
 
+    // Uncomment if you only want this in Survival
+    // if (!player.matches({ gameMode: GameMode.survival })) return;
+
+    // Consume ONE zombie:canvus from inventory
+    const inv = player.getComponent("minecraft:inventory")?.container;
+    if (!inv) return;
+
+    let consumed = false;
+    for (let i = 0; i < inv.size; i++) {
+      const stack = inv.getItem(i);
+      if (stack?.typeId === "zombie:canvus") {
+        if (stack.amount > 1) {
+          stack.amount -= 1;
+          inv.setItem(i, stack);
+        } else {
+          inv.setItem(i); // clear slot
+        }
+        consumed = true;
+        break;
+      }
+    }
+
+    if (!consumed) {
+      player.sendMessage("§cYou need a canvas to use the easel.");
+      return;
+    }
+
+    // Swap the easel state + sound
     const states = block.permutation.getAllStates();
-    const newPerm = BlockPermutation.resolve("zombie:painting_easel_canvus", states);
-    
-    block.setPermutation(newPerm);
+    block.setPermutation(BlockPermutation.resolve("zombie:painting_easel_canvus", states));
 
     const { x, y, z } = block.location;
-    block.dimension.runCommand(
-      `playsound dig.wood @a ${x} ${y} ${z}`
-    );
+    block.dimension.runCommand(`playsound dig.wood @a ${x} ${y} ${z}`);
   }
 }
-
 
 
 

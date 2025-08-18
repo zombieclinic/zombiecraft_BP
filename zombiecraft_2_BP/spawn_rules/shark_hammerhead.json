@@ -10,7 +10,7 @@
 				"minecraft:spawns_on_surface": {},
 				"minecraft:spawns_underwater": {},
 				"minecraft:weight": {
-					"default": 0.5
+					"default": 1
 				},
 				"minecraft:herd": {
 					"min_size": 2,
@@ -42,7 +42,7 @@
 				"minecraft:spawns_on_surface": {},
 				"minecraft:spawns_underwater": {},
 				"minecraft:weight": {
-					"default": 0.5
+					"default": 1
 				},
 				"minecraft:herd": {
 					"min_size": 2,
@@ -73,7 +73,7 @@
 				"minecraft:spawns_on_surface": {},
 				"minecraft:spawns_underwater": {},
 				"minecraft:weight": {
-					"default": 0.5
+					"default": 1
 				},
 				"minecraft:herd": {
 					"min_size": 2,
