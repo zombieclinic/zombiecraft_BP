@@ -9,17 +9,88 @@
     },
 
     "component_groups": {
+      "wild": {
+        
+        "minecraft:behavior.nearest_attackable_target": {
+        "priority": 2,
+        "must_see": true,
+        "reselect_targets": true,
+        "within_radius": 25.0,
+        "must_see_forget_duration": 17.0,
+        "entity_types": [
+          {
+            "filters": {
+              "any_of": [
+                { "test": "is_family", "subject": "other", "value": "player" },
+                { "test": "is_family", "subject": "other", "value": "snowgolem" },
+                { "test": "is_family", "subject": "other", "value": "irongolem" }
+              ]
+            },
+            "max_dist": 35
+          },
+          {
+            "filters": {
+              "any_of": [
+                { "test": "is_family", "subject": "other", "value": "villager" },
+                { "test": "is_family", "subject": "other", "value": "wandering_trader" }
+              ]
+            },
+            "max_dist": 35,
+            "must_see": false
+          },
+          {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "baby_turtle" },
+                { "test": "in_water", "subject": "other", "operator": "!=", "value": true }
+              ]
+            },
+            "max_dist": 35
+          }
+        ]
+      }
+      },
+      "tamed": {
+        "minecraft:behavior.follow_owner": {
+					"priority": 6,
+					"speed_multiplier": 1,
+					"start_distance": 10,
+					"stop_distance": 2
+				},
+        "minecraft:behavior.owner_hurt_target": {
+					"priority": 2
+				},
+        "minecraft:behavior.owner_hurt_by_target": {
+					"priority": 1
+				}
+      },
       "minecraft:baby": {
+        "minecraft:tameable": {
+          "probability": 1,
+          "tame_items":[
+            "minecraft:beef",
+            "minecraft:chicken",
+            "minecraft:porkchop",
+            "minecraft:mutton",
+            "minecraft:rabbit",
+            "minecraft:salmon",
+            "minecraft:cod"
+          ],
+          "tame_event": {
+            "event": "tamed",
+            "target": "self"
+          }
+        },
      "minecraft:health": {
-        "value": 100
+        "value": 50
       },
         "minecraft:type_family": {
           "family": [ "aquatic", "alligator", "baby_alligator", "mob" ]
         },
         "minecraft:collision_box": {
-	"width": 2.5,
-	"height": 1.5
-},
+        	"width": 2.5,
+        	"height": 1.5
+        },
         "minecraft:underwater_movement": {
           "value": 0.06
         },
@@ -55,7 +126,7 @@
 
       "minecraft:adult": {
               "minecraft:health": {
-        "value": 200
+        "value": 100
       },
         "minecraft:experience_reward": {
           "on_bred": "Math.Random(1,10)",
@@ -160,44 +231,7 @@
       },
       "minecraft:is_hidden_when_invisible": {
       },
-      "minecraft:behavior.nearest_attackable_target": {
-        "priority": 2,
-        "must_see": true,
-        "reselect_targets": true,
-        "within_radius": 25.0,
-        "must_see_forget_duration": 17.0,
-        "entity_types": [
-          {
-            "filters": {
-              "any_of": [
-                { "test": "is_family", "subject": "other", "value": "player" },
-                { "test": "is_family", "subject": "other", "value": "snowgolem" },
-                { "test": "is_family", "subject": "other", "value": "irongolem" }
-              ]
-            },
-            "max_dist": 35
-          },
-          {
-            "filters": {
-              "any_of": [
-                { "test": "is_family", "subject": "other", "value": "villager" },
-                { "test": "is_family", "subject": "other", "value": "wandering_trader" }
-              ]
-            },
-            "max_dist": 35,
-            "must_see": false
-          },
-          {
-            "filters": {
-              "all_of": [
-                { "test": "is_family", "subject": "other", "value": "baby_turtle" },
-                { "test": "in_water", "subject": "other", "operator": "!=", "value": true }
-              ]
-            },
-            "max_dist": 35
-          }
-        ]
-      },
+      
       "minecraft:breathable": {
         "total_supply": 15,
         "suffocate_time": 0,
@@ -308,7 +342,8 @@
             "weight": 9,
             "add": {
               "component_groups": [
-                "minecraft:adult"
+                "minecraft:adult",
+                "wild"
               ]
             }
           },
@@ -316,7 +351,8 @@
             "weight": 1,
             "add": {
               "component_groups": [
-                "minecraft:baby"
+                "minecraft:baby",
+                "wild"
               ]
             }
           }
@@ -369,6 +405,18 @@
         "remove": {
           "component_groups": [
             "minecraft:wants_to_lay_egg"
+          ]
+        }
+      },
+      "tamed": {
+        "remove": {
+          "component_groups": [
+            "wild"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "tamed"
           ]
         }
       }

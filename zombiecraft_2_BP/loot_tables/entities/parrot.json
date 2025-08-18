@@ -1,0 +1,64 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "loot_tables/entities/parrot_red_chance.json"
+        }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 0 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "loot_tables/entities/parrot_blue_chance.json"
+        }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 1 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "loot_tables/entities/parrot_green_chance.json"
+        }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 2 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "loot_tables/entities/parrot_cyan_chance.json"
+        }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 3 }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "loot_tables/entities/parrot_silver_chance.json"
+        }
+      ],
+      "conditions": [
+        { "condition": "has_variant", "value": 4 }
+      ]
+    }
+  ]
+}
