@@ -1,0 +1,32 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "zombie:infected_gate_recipe"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "group": "wooden_fence_gate",
+    "pattern": [
+      "#W#",
+      "#W#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:stick"
+      },
+      "W": {
+        "item": "zombie:infected_planks"
+      }
+    },
+	"unlock": [
+          {
+             "item": "zombie:infected_planks"
+          }
+        ],
+    "result": {
+      "item": "zombie:infected_gate"
+    }
+  }
+}

@@ -5,7 +5,7 @@
 	"format_version": "1.21.100",
 	"minecraft:recipe_shapeless": {
 		"description": {
-			"identifier": "zombie:tortilla"
+			"identifier": "zombie:tortilla_recipe"
 		},
 		"unlock": [
 			{

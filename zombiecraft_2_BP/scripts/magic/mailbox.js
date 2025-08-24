@@ -1,5 +1,9 @@
 import { world, ItemStack, EnchantmentType } from "@minecraft/server";
-import { MessageFormData }                  from "@minecraft/server-ui";
+import { MessageFormData } from "@minecraft/server-ui";
+
+/** Config */
+const MAX_MAIL_SLOTS  = 27; // how many entries a mailbox can hold
+const SEND_PER_CLICK  = 1;  // send exactly one item per interaction
 
 export class Mailbox {
   onPlayerInteract(event) {
@@ -30,41 +34,30 @@ export class Mailbox {
     const invComp = player.getComponent("minecraft:inventory");
     if (!invComp) return;
 
-    // **THIS** is the reliable “hot-bar slot index”
-    const slot = typeof player.selectedSlotIndex === "number"
-               ? player.selectedSlotIndex
-               : 0;
-
-    const inv     = invComp.container;
-    const held    = inv.getItem(slot);
+    // reliable hotbar slot index
+    const slot = typeof player.selectedSlotIndex === "number" ? player.selectedSlotIndex : 0;
+    const inv  = invComp.container;
+    const held = inv.getItem(slot);
     if (!held) {
       player.sendMessage("§cHold an item in your hotbar and interact to mail it.");
       return;
     }
 
+    // load existing mail
     const stored = world.getDynamicProperty(itemsKey);
     const mail   = stored ? JSON.parse(stored) : [];
-    if (mail.length >= 27) {
+    if (mail.length >= MAX_MAIL_SLOTS) {
       player.sendMessage("§cThis mailbox is full.");
       return;
     }
 
-    // Extract NBT: nameTag, lore, enchantments
-    const enchArr = (held.getComponent("minecraft:enchantable")?.getEnchantments() || [])
-      .map(e => ({ id: e.type.id, level: e.level }));
-
-    mail.push({
-      typeId:       held.typeId,
-      amount:       held.amount,
-      nameTag:      held.nameTag,
-      lore:         held.getLore(),
-      enchantments: enchArr
-    });
-
+    // capture metadata BEFORE mutating the stack
+    const entry = serializeStack(held, SEND_PER_CLICK);
+    mail.push(entry);
     world.setDynamicProperty(itemsKey, JSON.stringify(mail));
 
-    // Remove one from that slot
-    const newCount = held.amount - 1;
+    // remove exactly what we stored
+    const newCount = held.amount - SEND_PER_CLICK;
     if (newCount > 0) {
       inv.setItem(slot, new ItemStack(held.typeId, newCount));
     } else {
@@ -118,42 +111,79 @@ function promptRegisterMailbox(player, key) {
   });
 }
 
+/** Build a serializable snapshot of a stack (for exactly qty items) */
+function serializeStack(stack, qty) {
+  const enchArr =
+    (stack.getComponent("minecraft:enchantable")?.getEnchantments() || [])
+      .map(e => ({ id: e.type.id, level: e.level }));
+
+  return {
+    typeId:       stack.typeId,
+    amount:       qty,
+    nameTag:      stack.nameTag,
+    lore:         stack.getLore(),
+    enchantments: enchArr
+  };
+}
+
+/** Rebuild an ItemStack from serialized data */
+function rebuildStack(data) {
+  const out = new ItemStack(data.typeId, Math.max(1, data.amount | 0));
+  if (data.nameTag) out.nameTag = data.nameTag;
+  if (data.lore)    out.setLore(data.lore);
+
+  const cmp = out.getComponent("minecraft:enchantable");
+  if (cmp && data.enchantments?.length) {
+    for (const e of data.enchantments) {
+      try {
+        // accept either "minecraft:sharpness" or "sharpness"
+        const shortId = (e.id?.includes(":")) ? e.id.split(":").pop() : e.id;
+        cmp.addEnchantment({ type: new EnchantmentType(shortId), level: e.level });
+      } catch {
+        // skip incompatible enchantments
+      }
+    }
+  }
+  return out;
+}
+
+/** Deliver mail: tries to merge; only keeps leftovers in storage */
 function deliverMailboxItems(player, mail, itemsKey) {
-  const inv = player.getComponent("minecraft:inventory").container;
-  let delivered = 0;
+  const inv = player.getComponent("minecraft:inventory")?.container;
+  if (!inv) return;
+
+  let deliveredEntries = 0;
+  const remaining = [];
 
   for (const data of mail) {
-    if (inv.emptySlotsCount <= 0) break;
+    const stack     = rebuildStack(data);
+    const leftover  = inv.addItem(stack); // returns leftover ItemStack if not fully added
 
-    // Rebuild the stack with all NBT
-    const stack = new ItemStack(data.typeId, data.amount);
-    if (data.nameTag) stack.nameTag = data.nameTag;
-    if (data.lore)    stack.setLore(data.lore);
-
-    const cmp = stack.getComponent("minecraft:enchantable");
-    for (const e of data.enchantments || []) {
-      cmp.addEnchantment({
-        type:  new EnchantmentType(e.id.split(":").pop()),
-        level: e.level
+    if (!leftover) {
+      // fully delivered
+      deliveredEntries++;
+    } else {
+      // none or partial delivered (with SEND_PER_CLICK=1, this means none)
+      remaining.push({
+        ...data,
+        amount: leftover.amount ?? data.amount
       });
     }
-
-    inv.addItem(stack);
-    delivered++;
   }
 
-  if (delivered === 0) {
-    player.sendMessage("§cNo free space. Clear inventory and try again.");
-    return;
-  }
-
-  // Remove delivered mail from storage
-  mail.splice(0, delivered);
-  if (mail.length === 0) {
+  if (remaining.length === 0) {
     world.setDynamicProperty(itemsKey, undefined);
   } else {
-    world.setDynamicProperty(itemsKey, JSON.stringify(mail));
+    world.setDynamicProperty(itemsKey, JSON.stringify(remaining));
   }
 
-  player.sendMessage(`§aYou retrieved ${delivered} item(s).`);
+  if (deliveredEntries === 0) {
+    player.sendMessage("§cNo space. Clear inventory and try again.");
+  } else {
+    const pending = remaining.length;
+    player.sendMessage(
+      `§aYou retrieved ${deliveredEntries} item${deliveredEntries === 1 ? "" : "s"}.` +
+      (pending ? ` §e(${pending} more waiting.)` : "")
+    );
+  }
 }

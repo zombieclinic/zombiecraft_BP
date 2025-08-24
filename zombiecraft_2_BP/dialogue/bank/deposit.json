@@ -1,0 +1,70 @@
+{
+    "format_version":"1.21.100",
+    "minecraft:npc_dialogue":{
+        "scenes":[
+            {
+                "scene_tag":"deposit_bank",
+                "npc_name":"§1Zombie§4Bank",
+               "text": "§2§lZombie§4Bank§r — §0Deposits\n\n.\n§0“Grrreetings, investor… Hand me your shiny stones and I’ll fatten your §4Z§2Coins§0 ledger.”§r\n\n§0Choose a preset amount below\n§8(We’ll remove that many diamonds from your inventory and add the same amount to §4Z§2Coins§8.)§r",
+                "on_open_commands":[
+                ],
+                "on_close_commands":[
+                    ""
+                ],
+                "buttons":[
+                    {
+                        "name":"§01 Diamond",
+                        "commands":[
+                        "/execute as @initiator[hasitem={item=diamond,quantity=1..}] run scoreboard players add @s Money 1",
+                        "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=1..}]",
+                         "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=1..}]",
+                         "/clear @initiator[hasitem={item=diamond,quantity=1..}] minecraft:diamond 0 1"
+                        ]
+                     },
+                      {
+                        "name":"§05 Diamond",
+                        "commands":[
+                        "/execute as @initiator[hasitem={item=diamond,quantity=5..}] run scoreboard players add @s Money 5",
+                        "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=5..}]",
+                         "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=5..}]",
+                         "/clear @initiator[hasitem={item=diamond,quantity=5..}] minecraft:diamond 0 5"
+                        ]
+                     },
+                     {
+                        "name":"§010 Diamond",
+                        "commands":[
+                        "/execute as @initiator[hasitem={item=diamond,quantity=10..}] run scoreboard players add @s Money 10",
+                        "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=10..}]",
+                         "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=10..}]",
+                         "/clear @initiator[hasitem={item=diamond,quantity=10..}] minecraft:diamond 0 10"
+                        ]
+                     },
+                     {
+                        "name":"§032 Diamond",
+                        "commands":[
+                        "/execute as @initiator[hasitem={item=diamond,quantity=32..}] run scoreboard players add @s Money 32",
+                        "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=32..}]",
+                         "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=32..}]",
+                         "/clear @initiator[hasitem={item=diamond,quantity=32..}] minecraft:diamond 0 32"
+                        ]
+                     },
+                      {
+                        "name":"§064 Diamond",
+                        "commands":[
+                        "/execute as @initiator[hasitem={item=diamond,quantity=64..}] run scoreboard players add @s Money 64",
+                        "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=64..}]",
+                         "/playsound random.levelup @initiator[hasitem={item=diamond,quantity=64..}]",
+                         "/clear @initiator[hasitem={item=diamond,quantity=64..}] minecraft:diamond 0 64"
+                        ]
+                     },
+                     {
+                        "name":"§4Back",
+                        "commands":[
+                         "/dialogue open @e[type=npc,r=1] @initiator bank_dude"
+                        ]
+                     }
+                ]
+            }
+        ]
+    }
+}

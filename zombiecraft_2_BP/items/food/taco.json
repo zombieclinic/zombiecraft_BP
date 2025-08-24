@@ -19,7 +19,7 @@
 				}
 			},
 			"minecraft:food": {
-				"nutrition": 3,
+				"nutrition": 5,
 				"saturation_modifier": 0.4,
 				"can_always_eat": false
 			},

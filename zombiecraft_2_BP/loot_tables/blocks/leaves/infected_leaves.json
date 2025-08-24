@@ -1,0 +1,36 @@
+{
+	"pools": [
+		{
+			"conditions": [
+				{
+					"condition": "match_tool",
+					"enchantments": [
+						{
+							"silk_touch": {
+								"level": 1
+							}
+						}
+					]
+				}
+			],
+			"rolls": {
+				"min": 1,
+				"max": 2
+			},
+			"entries": [
+				{
+					"type": "item",
+					"name": "zombie:infected_leaves_no_tick",
+					"weight": 1
+				},
+				{
+					"type": "item",
+					"name": "minecraft:stick"
+				},
+				{
+					"type": "empty"
+				}
+			]
+		}
+	]
+}

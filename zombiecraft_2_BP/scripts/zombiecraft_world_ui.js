@@ -19,7 +19,7 @@ import { BowHold, chaosCrossbowExplosion} from "./custom_components/chaos_compon
 import {TheSight} from "./custom_components/chaos_components/sight";
 import {Firefly2, FireflyFlicker,} from "./fireflys";
 import {RedwoodGrowthComponent} from "./custom_components/plants/custom_trees";
-import {Atlantis, OpenableComponent, FencePlaceComponent, ZombieDoor, ZombieSlab, PaintBrush, Painting} from "./blocks";
+import {Atlantis, OpenableComponent, FenceConnectComponent, ZombieDoor, ZombieSlab, PaintBrush, Painting} from "./blocks";
 import { CropGrowthComponent } from "./custom_components/plants/grow";
 import {  BlockShop } from "./playertoplayershop";
 import {ChaosBookComponent} from "./magic/chaos";
@@ -32,10 +32,12 @@ import {DemonGrass} from "./custom_components/chaos_components/generation"
 import {AdminMenu} from "./admin_menu/adminmenu"
 import {WarpMenu} from "./warpalter/warpalter_main"
 import {TeleportBlock} from "./magic/teleport_block_script.js"
-import {DayDream } from "./custom_components/food.js"
+import {DayDream, Joint } from "./custom_components/food.js"
 import {Mailbox} from "./magic/mailbox.js"
 import {RedstoneComponent} from "./custom_components/redstone.js"
 import {AlligatorEgg} from "./custom_components/alligator_egg.js"
+import {InfectedGrass} from "./custom_components/infected/infected_generation"
+import {LeavesSelfDestructNearLog} from "./custom_components/plants/leaves.js"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -51,7 +53,7 @@ const BLOCK_COMPONENTS = [
   ["zombie:demonGrass",           DemonGrass],
   ["zombie:strippedlog",          LogStripper],
   ["zombie:is_open",              OpenableComponent],
-  ["zombie:fence_place",          FencePlaceComponent],
+  ["zombie:fence_place",          FenceConnectComponent],
   ["zombie:door",                 ZombieDoor],
   ["zombie:slab",                 ZombieSlab],
   ["zombie:ores",                 CustomOres],
@@ -59,7 +61,9 @@ const BLOCK_COMPONENTS = [
   ["zombie:teleportblock",        TeleportBlock],
   ["zombie:mailbox",              Mailbox],
   ["zombie:redstone",             RedstoneComponent],
-  ["zombie:alligator_egg",        AlligatorEgg]
+  ["zombie:alligator_egg",        AlligatorEgg],
+  ["zombie:infected_spread",      InfectedGrass],
+  ["zombie:leaves",               LeavesSelfDestructNearLog]
 ];
 
 const ITEM_COMPONENTS = [
@@ -84,7 +88,8 @@ const ITEM_COMPONENTS = [
   ["zombie:paintbrush",          PaintBrush],
   ["zombie:paintings",           Painting],
   ["zombie:adminmenu",           AdminMenu],
-  ["zombie:daydream",            DayDream]
+  ["zombie:daydream",            DayDream],
+  ["zombie:joint",               Joint]
 ];
 
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {
@@ -145,4 +150,49 @@ system.runInterval(() => {
 
 
 
+world.afterEvents?.scriptEventReceive?.subscribe(ev => {
+  if (ev.id !== "zombie:mail_migrate") return;
+  const r = clampLegacyMailboxStacksToOne();
+  world.sendMessage(doneMsg(r));
+});
 
+
+
+function clampLegacyMailboxStacksToOne() {
+  let mailboxes = 0, changedMailboxes = 0, changedEntries = 0;
+
+  for (const id of world.getDynamicPropertyIds()) {
+    if (!id.endsWith("|items")) continue;
+    mailboxes++;
+
+    const raw = world.getDynamicProperty(id);
+    if (!raw) continue;
+
+    let arr;
+    try { arr = JSON.parse(raw); } catch { continue; }
+
+    let changed = false;
+    for (const m of arr) {
+      if (!m) continue;
+      // Legacy entries may have inflated amounts; clamp to 1 and mark version
+      if (typeof m.amount === "number" && m.amount > 1) {
+        m.amount = 1;
+        if (!m.v) m.v = 2;
+        changed = true;
+        changedEntries++;
+      }
+    }
+
+    if (changed) {
+      world.setDynamicProperty(id, JSON.stringify(arr));
+      changedMailboxes++;
+    }
+  }
+
+  return { mailboxes, changedMailboxes, changedEntries };
+}
+
+function doneMsg(r) {
+  return `§aMailbox migration complete: checked ${r.mailboxes} boxes, `
+       + `fixed ${r.changedEntries} entries in ${r.changedMailboxes} boxes.`;
+}

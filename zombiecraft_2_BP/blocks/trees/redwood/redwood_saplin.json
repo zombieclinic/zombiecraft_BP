@@ -1,5 +1,5 @@
 {
-	"format_version": "1.21.10",
+	"format_version": "1.21.100",
 	"minecraft:block": {
 		"description": {
 			"identifier": "zombie:redwood_saplin",
@@ -164,6 +164,8 @@
 			"minecraft:destructible_by_mining": {
 				"seconds_to_destroy": 0.4
 			},
+			"minecraft:tick": {"interval_range": [30, 200],
+		"looping": true},
 			"minecraft:destructible_by_explosion": {
 				"explosion_resistance": 15
 			},
@@ -184,9 +186,7 @@
 				}
 			},
 			"minecraft:geometry": "geometry.red_wood_saplin",
-			"minecraft:custom_components": [
-				"zombie:redwood_saplin"
-			]
+			"zombie:redwood_saplin" : {}
 		}
 	}
 }

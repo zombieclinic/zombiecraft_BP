@@ -1,4 +1,4 @@
-import { system, world } from "@minecraft/server";
+import { Effect, system, world } from "@minecraft/server";
 
 export class DayDream {
   onConsume(event) {
@@ -13,5 +13,20 @@ export class DayDream {
       world.getDimension("overworld").runCommand("gamerule playersSleepingPercentage 100");
       player.sendMessage("§7Sleep requirement restored. All must now rest again.");
     }, 1200);
+  }
+}
+
+
+
+export class Joint {
+  onConsume(event) {
+    const player = event.source;
+    if (!player) return;
+
+    // 30s of levitation
+    player.addEffect("minecraft:levitation", 100, { amplifier: 0, showParticles: true });
+    player.addEffect("minecraft:slow_falling", 200, { amplifier: 0, showParticles: true });
+    // After 30s, give 30s of slow falling (30s = 600 ticks)
+   
   }
 }

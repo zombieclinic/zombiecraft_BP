@@ -1,0 +1,30 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "minecraft:infected_trapdoor"
+    },
+    "tags": [ 
+      "crafting_table" 
+    ],
+    "group": "wooden_trap_door",
+    "pattern": [
+      "###",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "zombie:infected_planks"
+      }
+    },
+    "unlock": [
+      {
+        "item": "zombie:infected_planks"
+      }
+    ],
+    "result": {
+      "item": "zombie:infected_trapdoor",
+      "count": 2
+    }
+  }
+}

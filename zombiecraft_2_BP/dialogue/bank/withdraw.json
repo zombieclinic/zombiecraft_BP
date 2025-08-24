@@ -1,0 +1,66 @@
+{
+    "format_version":"1.21.100",
+    "minecraft:npc_dialogue":{
+        "scenes":[
+            {
+                "scene_tag":"withdraw_bank",
+                "npc_name":"§1Zombie§4Bank",
+               "text": "§2§lZombie§4Bank§r — /n\n§0“Grrreetings, valued depositor… Need diamonds in hand? I can make your §4Z§2Coins§1 jingle.”§r\n\n§0Choose a preset amount to withdraw.",
+                "on_open_commands":[
+                     "/playsound mob.villager.yes @initiator"
+                ],
+                "on_close_commands":[
+                    ""
+                ],
+                "buttons": [
+                    {
+                    "name": "§01 Diamond",
+                    "commands": [
+                        "/execute as @initiator[scores={Money=1..}] run scoreboard players remove @s Money 1",
+                        "/execute as @initiator[scores={Money=1..}] run give @s minecraft:diamond 1",
+                        "/playsound random.levelup @initiator[scores={Money=1..}]"
+                    ]
+                    },
+                    {
+                    "name": "§05 Diamonds",
+                    "commands": [
+                        "/execute as @initiator[scores={Money=5..}] run scoreboard players remove @s Money 5",
+                        "/execute as @initiator[scores={Money=5..}] run give @s minecraft:diamond 5",
+                        "/playsound random.levelup @initiator[scores={Money=5..}]"
+                    ]
+                    },
+                    {
+                    "name": "§010 Diamonds",
+                    "commands": [
+                        "/execute as @initiator[scores={Money=10..}] run scoreboard players remove @s Money 10",
+                        "/execute as @initiator[scores={Money=10..}] run give @s minecraft:diamond 10",
+                        "/playsound random.levelup @initiator[scores={Money=10..}]"
+                    ]
+                    },
+                    {
+                    "name": "§032 Diamonds",
+                    "commands": [
+                        "/execute as @initiator[scores={Money=32..}] run scoreboard players remove @s Money 32",
+                        "/execute as @initiator[scores={Money=32..}] run give @s minecraft:diamond 32",
+                        "/playsound random.levelup @initiator[scores={Money=32..}]"
+                    ]
+                    },
+                    {
+                    "name": "§064 Diamonds",
+                    "commands": [
+                        "/execute as @initiator[scores={Money=64..}] run scoreboard players remove @s Money 64",
+                        "/execute as @initiator[scores={Money=64..}] run give @s minecraft:diamond 64",
+                        "/playsound random.levelup @initiator[scores={Money=64..}]"
+                    ]
+                    },
+                    {
+                    "name": "§4Back",
+                    "commands": [
+                        "/dialogue open @e[type=npc,r=1] @initiator bank_dude"
+                    ]
+                    }
+                ]
+            }
+        ]
+    }
+}

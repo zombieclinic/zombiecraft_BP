@@ -31,6 +31,10 @@
 			}
 		},
 		"components": {
+			"minecraft:tick": {
+                "interval_range": [20,20],
+                "looping": true
+            },
 			"minecraft:display_name": "Demon Fence",
 			"minecraft:flammable": {
 				"destroy_chance_modifier": 45,

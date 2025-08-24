@@ -13,7 +13,7 @@ function toRoman(num) {
 function getShops() {
   const raw = world.getDynamicProperty(SHOP_PROP) || "{}";
   const shops = JSON.parse(raw);
-  // backfill missing stats
+  // backfill missing stats / fields
   for (const key in shops) {
     const shop = shops[key];
     shop.profit = shop.profit || 0;
@@ -21,6 +21,7 @@ function getShops() {
     shop.totalRevenue   = shop.totalRevenue   || 0;
     shop.items.forEach(it => {
       it.sold = it.sold || 0;
+      it.packSize = it.packSize || 1;  // NEW: default pack size
     });
   }
   return shops;
@@ -38,7 +39,7 @@ function getKey(block) {
 // ─── Give block item back and remove block ────────────────────────
 function reclaimBlock(block, player) {
   const blockItem = new ItemStack(block.typeId, 1);
-  player.getComponent("inventory").container.addItem(blockItem);
+  player.getComponent("minecraft:inventory").container.addItem(blockItem);
   const { x, y, z } = block.location;
   block.dimension.runCommand(`setblock ${x} ${y} ${z} air`);
 }
@@ -127,11 +128,9 @@ async function storeMenu(player, block) {
     case 2: return viewInventory(player, block);
     case 3: return closeShop(player, block);
     case 4: return claimBalance(player, block);
-    case 6: return;
+    case 5: return; // Exit
   }
 }
-
-
 
 // ─── Set store name ───────────────────────────────────────────────
 async function nameStore(player, block) {
@@ -149,7 +148,7 @@ async function nameStore(player, block) {
 
 // ─── Add inventory ────────────────────────────────────────────────
 async function addInventory(player, block) {
-  const inv   = player.getComponent("inventory").container;
+  const inv   = player.getComponent("minecraft:inventory").container;
   const slots = [];
   const form  = new ActionFormData().title("Select Item to Sell");
 
@@ -201,24 +200,29 @@ async function addInventory(player, block) {
   const qty = Math.min(chosen.amount, parseInt(qtyRes.formValues[0]) || 0);
   if (qty <= 0) return storeMenu(player, block);
 
+  // NEW: price + pack size in a single "Price" modal (like your screenshot)
   const priceRes = await new ModalFormData()
     .title("Price")
-    .textField("Price each?","0")
+    .textField("Price (per pack):", "0")
+    .textField("Pack size (how many items per purchase):", "1")
     .show(player);
   if (priceRes.canceled) return storeMenu(player, block);
-  const price = parseFloat(priceRes.formValues[0]) || 0;
-  if (price <= 0) return storeMenu(player, block);
+
+  const price = Math.max(0, parseFloat(priceRes.formValues[0]) || 0);
+  const packSize = Math.max(1, parseInt(priceRes.formValues[1]) || 1);
+  if (price <= 0 || packSize <= 0) return storeMenu(player, block);
 
   const shops = getShops();
   shops[getKey(block)].items.push({
     typeId:       chosen.typeId,
     count:        qty,
-    price,
+    price,                    // price per pack
+    packSize,                 // NEW
     enchanted:    !!enchCopy.length,
     name:         chosen.nameTag,
     lore:         chosen.getLore(),
     enchantments: enchCopy,
-    sold:         0            // initialize per-item sales
+    sold:         0
   });
 
   const remain = chosen.amount - qty;
@@ -228,7 +232,7 @@ async function addInventory(player, block) {
 
   await new MessageFormData()
     .title("Added")
-    .body(`${qty}× ${chosen.nameTag||chosen.typeId.split(":").pop()} @ $${price}` + enchText)
+    .body(`${qty}× ${chosen.nameTag||chosen.typeId.split(":").pop()} @ $${price} for ${packSize}` + enchText)
     .button1("OK")
     .show(player);
 
@@ -254,7 +258,7 @@ async function viewInventory(player, block) {
   items.forEach(it => {
     const name   = it.name || it.typeId.split(":").pop();
     const suffix = it.enchanted ? "\n§9Enchanted" : "";
-    form.button(`${it.count}× ${name} - $${it.price}${suffix}`);
+    form.button(`${it.count}× ${name} - $${it.price} for ${it.packSize}${suffix}`);
   });
   form.button("Back").button("Exit");
 
@@ -286,13 +290,17 @@ async function viewInventory(player, block) {
   if (subRes.selection===3) return;
 
   if (subRes.selection===0) {
-    // edit price...
+    // edit price + pack size
     const pr = await new ModalFormData()
-      .title("New Price")
-      .textField("Price:", it.price.toString())
+      .title("Edit Price")
+      .textField("Price (per pack):", it.price.toString())
+      .textField("Pack size:", (it.packSize||1).toString())
       .show(player);
     if (!pr.canceled) {
-      it.price = parseFloat(pr.formValues[0]) || it.price;
+      const newPrice = parseFloat(pr.formValues[0]);
+      const newPack  = parseInt(pr.formValues[1]);
+      if (!isNaN(newPrice) && newPrice > 0) it.price = newPrice;
+      if (!isNaN(newPack) && newPack > 0)   it.packSize = newPack;
       saveShops(shops);
     }
     return viewInventory(player, block);
@@ -316,7 +324,7 @@ async function viewInventory(player, block) {
             level: e.level
           });
         }
-        player.getComponent("inventory").container.addItem(ret);
+        player.getComponent("minecraft:inventory").container.addItem(ret);
 
         it.count -= rem;
         if (it.count <= 0) shops[key].items.splice(res.selection, 1);
@@ -352,7 +360,7 @@ async function closeShop(player, block) {
           level: e.level
         });
       }
-      player.getComponent("inventory").container.addItem(ret);
+      player.getComponent("minecraft:inventory").container.addItem(ret);
     }
 
     delete shops[key];
@@ -429,7 +437,7 @@ async function customerMenu(player, block) {
   items.forEach(it => {
     const name   = it.name || it.typeId.split(":").pop();
     const suffix = it.enchanted ? "\n§9Enchanted" : "";
-    form.button(`${it.count}× ${name} - $${it.price}${suffix}`);
+    form.button(`${it.count}× ${name} - $${it.price} for ${it.packSize}${suffix}`);
   });
   form.button("Exit");
   const res = await form.show(player);
@@ -438,14 +446,18 @@ async function customerMenu(player, block) {
   return customerDetail(player, block, res.selection);
 }
 
-// ─── Customer detail & buy flow ─────────────────────────────────
+// ─── Customer detail & buy flow (bundle packs) ───────────────────
 async function customerDetail(player, block, idx) {
   const key   = getKey(block);
   const shops = getShops();
   const it    = shops[key].items[idx];
 
+  const pack = it.packSize || 1;
+  const packsAvailable = Math.floor(it.count / pack);
+
   // build detail body
-  let body = `Price: $${it.price}\nQty: ${it.count}`;
+  let body = `Price: $${it.price} for ${pack}\n` +
+             `In stock: ${it.count} items (~${packsAvailable} packs)`;
   if (it.enchantments?.length) {
     body += "\n\nEnchantments:\n" + it.enchantments.map(e => {
       const raw = e.id.split(":").pop().replace(/_/g, " ");
@@ -464,29 +476,46 @@ async function customerDetail(player, block, idx) {
   const res = await form.show(player);
   if (res.canceled || res.selection === 1) return customerMenu(player, block);
 
-  // Buy → ask quantity
+  if (packsAvailable <= 0) {
+    await new MessageFormData()
+      .title("Out of Packs")
+      .body("Not enough stock to make a full pack.")
+      .button1("OK")
+      .show(player);
+    return customerMenu(player, block);
+  }
+
+  // Ask packs (not items)
   const qtyRes = await new ModalFormData()
-    .title("Purchase Quantity")
-    .textField(`Have ${it.count}. How many to buy?`, "0")
+    .title("Purchase Packs")
+    .textField(`Packs available: ${packsAvailable}. How many packs?`, "1")
     .show(player);
   if (qtyRes.canceled) return customerDetail(player, block, idx);
-  const qty = Math.min(it.count, parseInt(qtyRes.formValues[0]) || 0);
-  if (qty <= 0) return customerDetail(player, block, idx);
 
-  const total = qty * it.price;
+  const packs = Math.min(packsAvailable, parseInt(qtyRes.formValues[0]) || 0);
+  if (packs <= 0) return customerDetail(player, block, idx);
+
+  const itemsToGive = packs * pack;
+  const total = packs * it.price;
+
   // confirm cost
   const cf = await new MessageFormData()
     .title("Confirm Purchase")
-    .body(`Buy ${qty}× ${it.name||it.typeId.split(":").pop()} for $${total}?`)
+    .body(`Buy ${packs} pack(s) (${itemsToGive} items) for $${total}?`)
     .button1("Yes")
     .button2("No")
     .show(player);
   if (cf.selection !== 0) return customerDetail(player, block, idx);
 
-  // check funds
-  const hasFunds = block.dimension.runCommand(
-    `scoreboard players test "${player.name}" Money ${total}`
-  );
+  // check funds via scoreboard test
+  let hasFunds = false;
+  try {
+    block.dimension.runCommand(
+      `scoreboard players test "${player.name}" Money ${total}`
+    );
+    hasFunds = true;
+  } catch (_) { hasFunds = false; }
+
   if (!hasFunds) {
     await new MessageFormData()
       .title("Insufficient Funds")
@@ -496,8 +525,8 @@ async function customerDetail(player, block, idx) {
     return customerMenu(player, block);
   }
 
-  // check inventory space
-  const inv = player.getComponent("inventory").container;
+  // quick space check (at least 1 free slot)
+  const inv = player.getComponent("minecraft:inventory").container;
   let empty = 0;
   for (let i = 0; i < inv.size; i++) {
     if (!inv.getItem(i)) empty++;
@@ -511,38 +540,42 @@ async function customerDetail(player, block, idx) {
     return customerMenu(player, block);
   }
 
-  // execute purchase
+  // charge & update stats
   block.dimension.runCommand(
     `scoreboard players remove "${player.name}" Money ${total}`
   );
 
-  // update shop stats
   shops[key].profit         = (shops[key].profit         || 0) + total;
   shops[key].totalRevenue   = (shops[key].totalRevenue   || 0) + total;
-  shops[key].totalItemsSold = (shops[key].totalItemsSold || 0) + qty;
-  it.sold                   = (it.sold                   || 0) + qty;
+  shops[key].totalItemsSold = (shops[key].totalItemsSold || 0) + itemsToGive;
+  it.sold                   = (it.sold                   || 0) + itemsToGive;
 
-  // give items
-  const ret = new ItemStack(it.typeId, qty);
-  if (it.name) ret.nameTag = it.name;
-  if (it.lore) ret.setLore(it.lore);
-  const cmp = ret.getComponent("minecraft:enchantable");
-  for (const e of it.enchantments || []) {
-    cmp.addEnchantment({
-      type: new EnchantmentType(e.id.split(":").pop()),
-      level: e.level
-    });
+  // give items (split into stacks if needed)
+  let remaining = itemsToGive;
+  while (remaining > 0) {
+    const give = Math.min(remaining, 64);
+    const ret = new ItemStack(it.typeId, give);
+    if (it.name) ret.nameTag = it.name;
+    if (it.lore) ret.setLore(it.lore);
+    const cmp = ret.getComponent("minecraft:enchantable");
+    for (const e of it.enchantments || []) {
+      cmp.addEnchantment({
+        type: new EnchantmentType(e.id.split(":").pop()),
+        level: e.level
+      });
+    }
+    inv.addItem(ret);
+    remaining -= give;
   }
-  inv.addItem(ret);
 
   // deduct stock
-  it.count -= qty;
+  it.count -= itemsToGive;
   if (it.count <= 0) shops[key].items.splice(idx, 1);
   saveShops(shops);
 
   await new MessageFormData()
     .title("Purchase Successful")
-    .body(`You bought ${qty}× ${it.name||it.typeId.split(":").pop()} for $${total}.`)
+    .body(`You bought ${packs} pack(s) (${itemsToGive} items) for $${total}.`)
     .button1("OK")
     .show(player);
 

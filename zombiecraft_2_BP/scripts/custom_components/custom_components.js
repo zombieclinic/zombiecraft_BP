@@ -667,41 +667,42 @@ export class LogStripper{
   }
 }
 
+function isAxeId(id) {
+  if (!id) return false;
+  const name = id.split(":").pop();     // e.g. "wooden_axe"
+  return name.endsWith("_axe");         // won't match "pickaxe"
+}
+
 function strippedLog(event) {
   const { player, block, dimension } = event;
 
-  const invComp = player.getComponent("minecraft:inventory");
-  if (!invComp) return;
+  const inv = player.getComponent("minecraft:inventory");
+  if (!inv) return;
 
-  const handItem = invComp.container.getItem(player.selectedSlotIndex);
-  if (!handItem) return; 
-  const validAxes = new Set([
-    "minecraft:wooden_axe",
-    "minecraft:stone_axe",
-    "minecraft:iron_axe",
-    "minecraft:golden_axe",
-    "minecraft:diamond_axe",
-    "minecraft:netherite_axe",
-  ]);
-
-  if (!validAxes.has(handItem.typeId)) return;
-
+  const hand = inv.container.getItem(player.selectedSlotIndex);
+  if (!hand || !isAxeId(hand.typeId)) return;
 
   const mapping = {
-    "zombie:demon_log": "zombie:demon_log_stripped",
-    "zombie:demon_fire_log": "zombie:demon_fire_log_stripped",
+    "zombie:demon_log":         "zombie:demon_log_stripped",
+    "zombie:demon_fire_log":    "zombie:demon_fire_log_stripped",
+    "zombie:infected_tree_log": "zombie:infected_tree_log_stripped",
   };
 
   const stripped = mapping[block.typeId];
   if (!stripped) return;
 
- 
   try {
-    const targetBlock = dimension.getBlock(block.location);
-    targetBlock.setType(stripped);
-  } catch (err) {
-   
-  }
+    const target = dimension.getBlock(block.location);
+    if (!target) return;
+
+    // preserve axis / other states
+    const states = target.permutation.getAllStates();
+    const newPerm = BlockPermutation.resolve(stripped, states);
+    target.setPermutation(newPerm);
+
+    // optional feedback
+    player.runCommandAsync(`playsound item.axe.strip @s`);
+  } catch (_) {}
 }
 //////////////////////////////////////////////////////////
 export class ZombieSlab {

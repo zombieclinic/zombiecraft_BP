@@ -31,6 +31,10 @@
 					"vertical_closed": false
 				}
 			},
+			"minecraft:tick": {
+                "interval_range": [20,20],
+                "looping": true
+            },
 			"minecraft:display_name": "Demon Fence Gate",
 			"minecraft:flammable": {
 				"destroy_chance_modifier": 45,

@@ -3,7 +3,7 @@
 	"format_version": "1.21.100",
 	"minecraft:recipe_shapeless": {
 		"description": {
-			"identifier": "zombie:bacon_eggs"
+			"identifier": "zombie:bacon_eggs_recipe"
 		},
 		"unlock": [
 			{

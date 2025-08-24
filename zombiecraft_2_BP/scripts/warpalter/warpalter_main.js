@@ -1,15 +1,60 @@
-import { world, system } from '@minecraft/server';
-import { ActionFormData, ModalFormData, MessageFormData } from '@minecraft/server-ui';
+// warpalter_main.js
+import { world } from "@minecraft/server";
+import { ActionFormData, ModalFormData, MessageFormData } from "@minecraft/server-ui";
 
+/*──────────────────────────── Warp component ────────────────────────────*/
 export class WarpMenu {
   onPlayerInteract(arg) {
-    const player = arg.player
-    mainMenu(player);
+    const player = arg.player;
+    openWarpMain(player);
   }
 }
 
+/*──────────────────────────── Money helpers ─────────────────────────────*/
+const MONEY_OBJ = "Money";
 
-function mainMenu(player) {
+function getObjective(name) {
+  let o = world.scoreboard.getObjective(name);
+  if (!o) o = world.scoreboard.addObjective(name, name);
+  return o;
+}
+function getMoney(player) {
+  try {
+    const o = getObjective(MONEY_OBJ);
+    const id = player.scoreboardIdentity;
+    const s = o.getScore(id);
+    return typeof s === "number" ? s : 0;
+  } catch { return 0; }
+}
+function setMoney(player, value) {
+  try {
+    const o = getObjective(MONEY_OBJ);
+    o.setScore(player.scoreboardIdentity, Math.max(0, value|0));
+    return true;
+  } catch { return false; }
+}
+/** charge the player; returns true if paid (or free), false if insufficient */
+function charge(player, amount, label = "teleport") {
+  const cost = Number.isFinite(amount) ? Math.max(0, amount) : 0;
+  if (cost <= 0) return true; // free
+  const bal = getMoney(player);
+  if (bal < cost) {
+    player.sendMessage(`§cNot enough §4Z§2Coins. Need §e${cost}§c, you have §e${bal}§c.`);
+    return false;
+  }
+  setMoney(player, bal - cost);
+  player.sendMessage(`§aPaid §e${cost}§a §4Z§2Coins for ${label}. New balance: §e${bal - cost}§a.`);
+  return true;
+}
+function numDP(key, def = 0) {
+  const v = world.getDynamicProperty(key);
+  if (typeof v === "number") return v;
+  const n = parseInt(v ?? "", 10);
+  return Number.isFinite(n) ? n : def;
+}
+
+/*──────────────────────────── Warp Main Menu ────────────────────────────*/
+function openWarpMain(player) {
   const tpRequest = world.getDynamicProperty(`tpRequest_${player.name}`);
   const hasRequest = typeof tpRequest === "string";
 
@@ -20,100 +65,158 @@ function mainMenu(player) {
   new ActionFormData()
     .title("Warp Menu")
     .body(bodyText)
-    .button("TP to Spawn")
-    .button("TP to Player")
-    .button("Player Requests")
-    .button("Base Management")
-    .button("Exit")
+    .button("TP to Spawn")     // 0
+    .button("TP to Base")      // 1
+    .button("TP to Player")    // 2
+    .button("Player Requests") // 3
+    .button("Base Management") // 4
+    .button("Exit")            // 5
     .show(player)
     .then(result => {
       if (result.canceled) return;
       switch (result.selection) {
         case 0: return confirmSpawnTeleport(player);
-        case 1: return tpToPlayerMenu(player);
-        case 2: return handlePlayerRequests(player);
-        case 3: return baseManagement(player);
-        case 4: return;
+        case 1: return tpToOwnBase(player);
+        case 2: return tpToPlayerMenu(player);
+        case 3: return handlePlayerRequests(player);
+        case 4: return baseManagement(player);
+        case 5: return;
       }
     });
 }
 
-// Confirm TP to Spawn
+/*────────────────────────── Teleport: Spawn (charge) ───────────────────*/
 function confirmSpawnTeleport(player) {
+  const cost = numDP("economy_tpSpawnCost", 0);
   new MessageFormData()
     .title("Teleport to Spawn")
-    .body("Confirm teleporting to spawn?")
+    .body(`Confirm teleporting to spawn?\n§7Cost: §e${cost} §4Z§2Coins`)
     .button1("Yes")
     .button2("No")
     .show(player)
     .then(confirm => {
-      if (confirm.selection === 0) {
-        const spawnCoords = world.getDynamicProperty("worldspawn");
-        if (!spawnCoords) {
-          player.sendMessage("§cSpawn not set.");
-          return;
-        }
-        const [x, y, z] = spawnCoords.split(" ").map(Number);
-        player.teleport({ x, y, z });
+      if (confirm.selection !== 0) return;
+      const spawnCoords = world.getDynamicProperty("worldspawn");
+      if (!spawnCoords || typeof spawnCoords !== "string") {
+        player.sendMessage("§cSpawn not set.");
+        return;
       }
+      if (!charge(player, cost, "TP to Spawn")) return;
+
+      const [x, y, z] = spawnCoords.split(" ").map(Number);
+      const overworld = world.getDimension("minecraft:overworld");
+      player.teleport({ x, y, z }, { dimension: overworld });
     });
 }
 
-// TP to Player Menu
+/*────────────────────────── Teleport: Own Base (charge) ─────────────────*/
+function tpToOwnBase(player) {
+  const baseKey = `base_${player.name}`;
+  const val = world.getDynamicProperty(baseKey);
+  if (typeof val !== "string" || !val.includes("|")) {
+    player.sendMessage("§cYou don’t have a base set.");
+    return;
+  }
+
+  const cost = numDP("economy_tpBaseCost", 0);
+  new MessageFormData()
+    .title("Teleport to Your Base")
+    .body(`Teleport to your base?\n§7Cost: §e${cost} §4Z§2Coins`)
+    .button1("Yes")
+    .button2("No")
+    .show(player)
+    .then(res => {
+      if (res.selection !== 0) return;
+      if (!charge(player, cost, "TP to Base")) return;
+
+      const [dim, coords] = val.split("|");
+      const [x, y, z] = coords.split(" ").map(Number);
+      const destDim = world.getDimension(dim) ?? player.dimension;
+      player.teleport({ x, y, z }, { dimension: destDim });
+    });
+}
+
+/*────────────────────── Teleport: Request to Player ─────────────────────*/
 function tpToPlayerMenu(player) {
   const players = [...world.getPlayers()].filter(p => p.name !== player.name);
-  const form = new ActionFormData().title("TP to Player");
+  const cost = numDP("economy_tpFriendsCost", 0);
+
+  const form = new ActionFormData()
+    .title("TP to Player")
+    .body(`§7Select a player to request a teleport.\n§7Cost on accept: §e${cost} §4Z§2Coins`);
+
   players.forEach(p => form.button(p.name));
   form.show(player).then(result => {
     if (result.canceled) return;
     const target = players[result.selection];
     if (target) {
-      target.sendMessage(`§e${player.name} wants to teleport to you. Type /warp to accept.`);
+      target.sendMessage(`§e${player.name} wants to teleport to you. Open Warp → Player Requests to accept.`);
       world.setDynamicProperty(`tpRequest_${target.name}`, player.name);
-      player.sendMessage(`§aRequest sent to ${target.name}.`);
+      player.sendMessage(`§aRequest sent to ${target.name}. §7(You will be charged §e${cost}§7 if they accept.)`);
     }
   });
 }
 
-// Handle Player Requests
+/*──────────────────── Receiver: Handle Player Requests ───────────────────*/
 function handlePlayerRequests(player) {
-  const requester = world.getDynamicProperty(`tpRequest_${player.name}`);
-  if (!requester) {
+  const requesterName = world.getDynamicProperty(`tpRequest_${player.name}`);
+  if (!requesterName) {
     player.sendMessage("§cNo teleport requests.");
     return;
   }
+
+  const cost = numDP("economy_tpFriendsCost", 0);
+
   new MessageFormData()
     .title("Teleport Request")
-    .body(`${requester} wants to TP to you.`)
+    .body(`${requesterName} wants to TP to you.\n§7Cost (paid by requester on accept): §e${cost} §4Z§2Coins`)
     .button1("Accept")
     .button2("Decline")
     .show(player)
     .then(confirm => {
-      if (confirm.selection === 0) {
-        const requestingPlayer = world.getPlayers().find(p => p.name === requester);
-        if (requestingPlayer) requestingPlayer.teleport(player.location);
-        player.sendMessage(`§a${requester} teleported.`);
-      } else {
-        player.sendMessage(`§cRequest from ${requester} declined.`);
-      }
+      // clear pending either way
       world.setDynamicProperty(`tpRequest_${player.name}`, undefined);
+
+      if (confirm.selection !== 0) {
+        player.sendMessage(`§cRequest from ${requesterName} declined.`);
+        const req = world.getPlayers().find(p => p.name === requesterName);
+        if (req) req.sendMessage(`§cYour TP request to ${player.name} was declined.`);
+        return;
+      }
+
+      const requestingPlayer = world.getPlayers().find(p => p.name === requesterName);
+      if (!requestingPlayer) {
+        player.sendMessage("§cRequester is no longer online.");
+        return;
+      }
+
+      // charge requester now
+      if (!charge(requestingPlayer, cost, `TP to ${player.name}`)) {
+        player.sendMessage(`§c${requesterName} couldn’t afford the teleport.`);
+        requestingPlayer.sendMessage("§cTeleport cancelled — insufficient funds.");
+        return;
+      }
+
+      requestingPlayer.teleport(player.location, { dimension: player.dimension });
+      player.sendMessage(`§a${requesterName} teleported to you.`);
+      requestingPlayer.sendMessage(`§aTeleported to §f${player.name}§a.`);
     });
 }
 
+/*──────────────────────────── Base management UI ─────────────────────────*/
 function baseManagement(player) {
   const loc       = player.location;
   const dim       = player.dimension.id;
   const coords    = `${Math.floor(loc.x)} ${Math.floor(loc.y)} ${Math.floor(loc.z)}`;
-  const scanRad   = 500;                             // how far we scan for existing bases
+  const scanRad   = 500;
   const spawnProp = world.getDynamicProperty("worldspawn");
   const xyDist    = world.getDynamicProperty("xyDistance");
   const baseDist  = world.getDynamicProperty("baseDistance");
   const baseRad   = world.getDynamicProperty("baseRadius");
-  const xyCushion = world.getDynamicProperty("xyCushion"); // NEW (optional)
-  const xyMin     = (typeof xyDist === "number" ? xyDist : 0) +
-                    (typeof xyCushion === "number" ? xyCushion : 0);
+  const xyCushion = world.getDynamicProperty("xyCushion");
+  const xyMin     = (typeof xyDist === "number" ? xyDist : 0) + (typeof xyCushion === "number" ? xyCushion : 0);
 
-  // ─── 1) Find any base within scanRad ───
+  // 1) any base nearby?
   let nearbyOwner = null;
   for (const key of world.getDynamicPropertyIds()) {
     if (!key.startsWith("base_") || key.endsWith("_mates")) continue;
@@ -123,13 +226,9 @@ function baseManagement(player) {
     if (bDim !== dim) continue;
     const [bx,, bz] = bCoords.split(" ").map(Number);
     const d = Math.hypot(loc.x - bx, loc.z - bz);
-    if (d <= scanRad) {
-      nearbyOwner = { owner: key.replace("base_", ""), dist: d };
-      break;
-    }
+    if (d <= scanRad) { nearbyOwner = { owner: key.replace("base_", ""), dist: d }; break; }
   }
 
-  // 1a) someone else's base nearby
   if (nearbyOwner && nearbyOwner.owner !== player.name) {
     return new MessageFormData()
       .title("Nearby Base")
@@ -137,14 +236,11 @@ function baseManagement(player) {
       .button1("Exit")
       .show(player);
   }
-  // 1b) your own base nearby
   if (nearbyOwner && nearbyOwner.owner === player.name) {
     return showOwnBaseUI(player);
   }
 
-  // ─── 2) Distance rules ───
-
-  // 2a) Origin guard (± from 0,0) using xyDistance + xyCushion → BOTH axes must clear
+  // 2) dist rules
   if (xyMin > 0) {
     const dx0 = Math.abs(loc.x);
     const dz0 = Math.abs(loc.z);
@@ -163,27 +259,21 @@ function baseManagement(player) {
     }
   }
 
-  // 2b) Spawn guard (± from world spawn) using baseDistance → EITHER axis may qualify
   if (typeof baseDist === "number" && baseDist > 0 && typeof spawnProp === "string") {
     const [sx,, sz] = spawnProp.split(" ").map(Number);
     const dx = Math.abs(loc.x - sx);
     const dz = Math.abs(loc.z - sz);
-    // block only if BOTH axes are inside the limit
     if (dx < baseDist && dz < baseDist) {
       return new MessageFormData()
         .title("Too Close to Spawn")
-        .body(
-          `§cYou must be >= ${baseDist} from spawn on X or Z (+/-).` +
-          `\n§7(Spawn: ${sx}, ${sz})` +
-          `\n§fYou’re |ΔX|=${Math.floor(dx)}, |ΔZ|=${Math.floor(dz)}.`
-        )
+        .body(`§cYou must be >= ${baseDist} from spawn on X or Z (+/-).\n§7(Spawn: ${sx}, ${sz})\n§fYou’re |X|=${Math.floor(dx)}, |Z|=${Math.floor(dz)}.`)
         .button1("Exit")
         .show(player);
     }
   }
 
-  // ─── 3) Base-to-base separation (no overlap) ───
-  const cushion = 50; // your current base-to-base buffer
+  // 3) base-to-base separation (no overlap)
+  const cushion = 50;
   if (typeof baseRad === "number") {
     for (const key of world.getDynamicPropertyIds()) {
       if (!key.startsWith("base_") || key.endsWith("_mates") || key === `base_${player.name}`) continue;
@@ -194,7 +284,6 @@ function baseManagement(player) {
 
       const [bx,, bz] = bCoords.split(" ").map(Number);
       const d = Math.hypot(loc.x - bx, loc.z - bz);
-
       const requiredSeparation = baseRad * 2 + cushion;
       if (d < requiredSeparation) {
         const needMove = Math.ceil(requiredSeparation - d);
@@ -212,7 +301,7 @@ function baseManagement(player) {
     }
   }
 
-  // ─── 4) All clear! → ask to place, then hand off to confirmBaseCoords ───
+  // 4) clear to claim
   return new ActionFormData()
     .title("Place New Base?")
     .body(`Coords: ${coords}\n\nThis spot is clear to claim.`)
@@ -220,16 +309,11 @@ function baseManagement(player) {
     .button("Cancel")
     .show(player)
     .then(res => {
-      if (!res.canceled && res.selection === 0) {
-        return confirmBaseCoords(player); // go through your confirm+save flow
-      }
+      if (!res.canceled && res.selection === 0) return confirmBaseCoords(player);
     });
 }
 
-
-
-
-
+/*──────────────────────── base helpers / UIs (unchanged) ───────────────*/
 function confirmBaseCoords(player) {
   new MessageFormData()
     .title("Set Base Coords")
@@ -252,28 +336,23 @@ function confirmBaseCoords(player) {
       const [spawnX,, spawnZ] = spawnProp.split(" ").map(Number);
 
       const xyDistance   = world.getDynamicProperty("xyDistance");
-      const xyCushion    = world.getDynamicProperty("xyCushion"); // NEW (optional)
-      const xyMin        = (typeof xyDistance === "number" ? xyDistance : 0) +
-                           (typeof xyCushion === "number" ? xyCushion : 0);
+      const xyCushion    = world.getDynamicProperty("xyCushion");
+      const xyMin        = (typeof xyDistance === "number" ? xyDistance : 0) + (typeof xyCushion === "number" ? xyCushion : 0);
       const baseDistance = world.getDynamicProperty("baseDistance");
 
-      // ─────── Origin guard (xyDistance + xyCushion) — BOTH axes must clear ───────
       if (xyMin > 0) {
         const dx0 = Math.abs(loc.x);
         const dz0 = Math.abs(loc.z);
         if (dx0 < xyMin || dz0 < xyMin) {
           player.sendMessage(
             `§cBase must be >= ${xyMin} from 0 on X and Z (+/-). ` +
-            (typeof xyDistance === "number"
-              ? `(dist ${xyDistance} + cushion ${typeof xyCushion === "number" ? xyCushion : 0}) `
-              : "") +
+            (typeof xyDistance === "number" ? `(dist ${xyDistance} + cushion ${typeof xyCushion === "number" ? xyCushion : 0}) ` : "") +
             `You’re |ΔX|=${Math.floor(dx0)}, |ΔZ|=${Math.floor(dz0)}.`
           );
           return baseManagement(player);
         }
       }
 
-      // ─────── Spawn guard (baseDistance) — EITHER axis may qualify ───────
       if (typeof baseDistance === "number" && baseDistance > 0) {
         const dx = Math.abs(loc.x - spawnX);
         const dz = Math.abs(loc.z - spawnZ);
@@ -286,7 +365,6 @@ function confirmBaseCoords(player) {
         }
       }
 
-      // ─────── Proximity to other bases ───────
       const baseRadius = world.getDynamicProperty("baseRadius");
       if (typeof baseRadius !== "number" || baseRadius <= 0) {
         player.sendMessage("§cAdmins must set a valid base radius first.");
@@ -307,14 +385,11 @@ function confirmBaseCoords(player) {
         const dist = Math.hypot(loc.x - bx, loc.z - bz);
         if (dist < baseRadius) {
           const owner = prop.replace("base_", "");
-          player.sendMessage(
-            `§cToo close to ${owner}'s base. Must be >= ${baseRadius} blocks apart (you’re at ${Math.floor(dist)}).`
-          );
+          player.sendMessage(`§cToo close to ${owner}'s base. Must be >= ${baseRadius} blocks apart (you’re at ${Math.floor(dist)}).`);
           return baseManagement(player);
         }
       }
 
-      // ─────── Save/move base ───────
       const coords = `${Math.floor(loc.x)} ${Math.floor(loc.y)} ${Math.floor(loc.z)}`;
       const newBaseData = `${dimName}|${coords}`;
       const oldBaseData = world.getDynamicProperty(baseKey);
@@ -333,30 +408,22 @@ function confirmBaseCoords(player) {
             }
             baseManagement(player);
           })
-          .catch(err => {
-            console.error("moveBase confirm error:", err);
-            baseManagement(player);
-          });
+          .catch(err => { console.error("moveBase confirm error:", err); baseManagement(player); });
       } else {
         world.setDynamicProperty(baseKey, newBaseData);
         player.sendMessage(`§aBase saved in ${dimName} at ${coords}`);
         baseManagement(player);
       }
     })
-    .catch(err => {
-      console.error("confirmBaseCoords error:", err);
-      player.sendMessage("§cAn error occurred. Try again.");
-      baseManagement(player);
-    });
+    .catch(err => { console.error("confirmBaseCoords error:", err); player.sendMessage("§cAn error occurred. Try again."); baseManagement(player); });
 }
-
 
 function manageBaseMateAdding(player) {
   const players = [...world.getPlayers()].filter(p => p.name !== player.name);
   const form    = new ActionFormData().title("Add Base Mate");
 
   players.forEach(p => form.button(p.name));
-  form.button("Everyone");           // ← still pushes “Everyone” into the list
+  form.button("Everyone");
   form.button("Type Name Manually");
 
   form.show(player).then(result => {
@@ -373,20 +440,18 @@ function manageBaseMateAdding(player) {
         .textField("Enter player's name:", "")
         .show(player)
         .then(input => {
-          if (!input.canceled) addBaseMate(player, input.formValues[0].trim());
+          if (!input.canceled) addBaseMate(player, (input.formValues[0] ?? "").trim());
         });
     }
   });
 }
 
-
-
 function addBaseMate(player, mateName) {
+  if (!mateName) return;
   const baseKey = `base_${player.name}_mates`;
   let raw       = world.getDynamicProperty(baseKey) || "";
   let list      = raw.split("|").filter(Boolean);
 
-  // avoid duplicates (case‑insensitive)
   const lower = mateName.toLowerCase();
   if (!list.some(m => m.toLowerCase() === lower)) {
     list.push(mateName);
@@ -407,7 +472,7 @@ function showOwnBaseUI(player) {
 
   if (typeof baseLoc !== "string" || !baseLoc.includes("|")) {
     player.sendMessage("§cYou haven't claimed a base yet.");
-    return; // nothing to manage
+    return;
   }
 
   const [dimName, coords] = baseLoc.split("|");
@@ -434,13 +499,10 @@ function showOwnBaseUI(player) {
         case 1: return manageBaseMateAdding(player);
         case 2: return manageBaseMatesList(player);
         case 3: return confirmRemoveBase(player);
-        case 4: return baseManagement(player); // back to the placement/check screen
+        case 4: return baseManagement(player);
       }
     })
-    .catch(err => {
-      console.error("showOwnBaseUI error:", err);
-      player.sendMessage("§cCouldn't open base menu.");
-    });
+    .catch(err => { console.error("showOwnBaseUI error:", err); player.sendMessage("§cCouldn't open base menu."); });
 }
 
 function manageBaseMatesList(player) {
@@ -459,12 +521,9 @@ function manageBaseMatesList(player) {
   form.button("Back");
   
   form.show(player).then(result => {
-    if (result.canceled || result.selection === mates.length) {
-      return baseManagement(player);
-    }
+    if (result.canceled || result.selection === mates.length) return baseManagement(player);
     const mateToRemove = mates[result.selection];
 
-    // Confirmation dialog
     new MessageFormData()
       .title("Confirm Removal")
       .body(`Remove ${mateToRemove} from your base mates?`)
@@ -479,21 +538,14 @@ function manageBaseMatesList(player) {
         }
         baseManagement(player);
       })
-      .catch(err => {
-        console.error("manageBaseMates confirmation error:", err);
-        baseManagement(player);
-      });
+      .catch(err => { console.error("manageBaseMates confirmation error:", err); baseManagement(player); });
   })
-  .catch(err => {
-    console.error("manageBaseMates form error:", err);
-    baseManagement(player);
-  });
+  .catch(err => { console.error("manageBaseMates form error:", err); baseManagement(player); });
 }
 
 function confirmRemoveBase(player) {
   const prefix = `base_${player.name}`;
 
-  // Check if they actually have a base:
   if (!world.getDynamicProperty(prefix)) {
     player.sendMessage("§cYou do not have a base set.");
     return;
@@ -511,7 +563,6 @@ function confirmRemoveBase(player) {
         return;
       }
 
-      // Remove all dynamic properties whose key starts with base_<player>
       const allKeys = world.getDynamicPropertyIds();
       for (const key of allKeys) {
         if (key === prefix || key.startsWith(`${prefix}_mates`)) {
@@ -521,8 +572,5 @@ function confirmRemoveBase(player) {
 
       player.sendMessage("§aBase and all base mates removed.");
     })
-    .catch(err => {
-      console.error("Base removal error:", err);
-      player.sendMessage("§cAn error occurred during base removal.");
-    });
+    .catch(err => { console.error("Base removal error:", err); player.sendMessage("§cAn error occurred during base removal."); });
 }

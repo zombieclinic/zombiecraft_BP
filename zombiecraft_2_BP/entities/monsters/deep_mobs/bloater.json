@@ -135,38 +135,30 @@
 					"target": "self"
 				}
 			},
+			
 			"minecraft:interact": {
-				"interactions": {
-					"on_interact": {
-						"filters": {
-							"all_of": [
-								{
+				"interactions":[
+					{
+						"on_interact": {
+							"filters": [
+							{
+								"all_of":{
 									"test": "is_family",
-									"subject": "other",
-									"value": "player"
+									"value": "player",
+									"subject": "other"
 								},
-								{
-									"test": "has_equipment",
-									"domain": "hand",
-									"subject": "other",
-									"value": "flint_and_steel"
-								},
-								{
-									"test": "has_component",
-									"operator": "!=",
-									"value": "minecraft:explode"
-								}
-							]
-						},
-						"event": "minecraft:start_exploding_forced",
-						"target": "self"
-					},
-					"hurt_item": 1,
-					"swing": true,
-					"play_sounds": "ignite",
-					"interact_text": "action.interact.bloater"
-				}
+								"test": "has_equipment",
+								"value": "minecraft:flint_and_steel"
+							}
+							
+							],
+							"target": "self",
+							"event": "minecraft:start_exploding_forced"
+						}
+				 }
+				]
 			},
+	
 			"minecraft:behavior.float": {
 				"priority": 0
 			},

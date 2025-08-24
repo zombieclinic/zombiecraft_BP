@@ -2,7 +2,7 @@
 	"format_version": "1.21.100",
 	"minecraft:recipe_furnace": {
 		"description": {
-			"identifier": "zombie:fried_egg"
+			"identifier": "zombie:fried_egg_recipe"
 		},
 		"unlock": [
 			{

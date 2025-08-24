@@ -32,7 +32,7 @@
 			},
 			"minecraft:light_emission": 5,
 			"minecraft:selection_box": true,
-			"minecraft:destructible_by_mining": true,
+			"minecraft:destructible_by_mining": false,
 			"minecraft:destructible_by_explosion": false,
 			"minecraft:liquid_detection": {
 				"detection_rules": [

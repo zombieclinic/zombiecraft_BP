@@ -1,0 +1,38 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:npc_dialogue": {
+    "scenes": [
+      {
+        "scene_tag": "bank_dude",
+        "npc_name": "§1Zombie§4Bank",
+        "text": "§2§lZombie§4Bank§r — §6Main Desk\n\n§0“Grrreetings, customer… Shall we fatten your Diamonds with a deposit, or fetch you shiny stones with a withdrawal?”§r\n\n§0Use the buttons below:\n§1Deposit → converts diamonds in your inventory into §4Z§2Coins.\n§dWithDraw§0 → converts §4Z§2Coins§0 back into diamonds (needs free inventory space).§r",
+        "on_open_commands": [
+          ""
+        ],
+        "on_close_commands": [
+          ""
+        ],
+        "buttons": [
+          {
+            "name": "§3Withdraw",
+            "commands": [
+              "/dialogue open @e[type=npc,r=1] @initiator withdraw_bank"
+            ]
+          },
+          {
+            "name": "§5Deposit",
+            "commands": [
+              "/dialogue open @e[type=npc,r=1] @initiator deposit_bank"
+            ]
+          },
+          {
+            "name": "§4Exit",
+            "commands": [
+              ""
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

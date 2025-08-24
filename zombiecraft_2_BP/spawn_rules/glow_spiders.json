@@ -3,7 +3,7 @@
 	"format_version": "1.12.0",
 	"minecraft:spawn_rules": {
 		"description": {
-			"identifier": "yyfool:glowing_spider",
+			"identifier": "zombie:glowing_spider",
 			"population_control": "animal"
 		},
 		"conditions": [
@@ -30,7 +30,7 @@
 				},
 				"minecraft:brightness_filter": {
 					"min": 0,
-					"max": 0
+					"max": 7
 				}
 			}
 		]

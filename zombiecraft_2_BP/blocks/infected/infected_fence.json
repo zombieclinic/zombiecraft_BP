@@ -1,0 +1,119 @@
+{
+	"format_version": "1.21.60",
+	"minecraft:block": {
+		"description": {
+			"identifier": "zombie:infected_fence",
+			"states": {
+				"zombie:north": [
+					false,
+					true
+				],
+				"zombie:south": [
+					false,
+					true
+				],
+				"zombie:east": [
+					false,
+					true
+				],
+				"zombie:west": [
+					false,
+					true
+				],
+				"zombie:on_placed": [
+					false,
+					true
+				]
+			},
+			"menu_category": {
+				"category": "construction",
+				"group": "minecraft:itemGroup.name.fence"
+			}
+		},
+		"components": {
+            "minecraft:tick": {
+                "interval_range": [20,20],
+                "looping": true
+            },
+            "zombie:fence_place": {},
+			"minecraft:display_name": "Infected Fence",
+			"minecraft:flammable": {
+				"destroy_chance_modifier": 45,
+				"catch_chance_modifier": 80
+			},
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 3
+			},
+			"tag:minecraft:is_axe_item_destructible": {},
+			"minecraft:collision_box": {
+				"origin": [
+					-6,
+					0,
+					-6
+				],
+				"size": [
+					12,
+					16,
+					12
+				]
+			},
+			"minecraft:selection_box": {
+				"origin": [
+					-2,
+					0,
+					-2
+				],
+				"size": [
+					4,
+					12,
+					4
+				]
+			},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "zombie_infected_planks",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:geometry": {
+				"identifier": "geometry.zombie_fence",
+				"bone_visibility": {
+					"preview": "query.block_state('zombie:on_placed') == false",
+					"fence": "query.block_state('zombie:on_placed') == true",
+					"north": "query.block_state('zombie:north') == true",
+					"south": "query.block_state('zombie:south') == true",
+					"east": "query.block_state('zombie:east') == true",
+					"west": "query.block_state('zombie:west') == true"
+				}
+			},
+			"minecraft:transformation": {
+				"translation": [
+					0,
+					0.255,
+					0
+				]
+			},
+			"minecraft:destructible_by_explosion": true,
+			"tag:wood": {}
+
+		},
+		"permutations": [
+			{
+				"condition": "q.block_state('zombie:on_placed') == true",
+				"components": {
+					"minecraft:geometry": {
+						"identifier": "geometry.zombie_fence",
+						"bone_visibility": {
+							"north": "query.block_state('zombie:north')",
+							"south": "query.block_state('zombie:south')",
+							"east": "query.block_state('zombie:east')",
+							"west": "query.block_state('zombie:west')",
+							"preview": false,
+							"fence": true
+						}
+					}
+				}
+			}
+		]
+	}
+}

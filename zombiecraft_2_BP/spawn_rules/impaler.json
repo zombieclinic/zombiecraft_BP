@@ -1,0 +1,27 @@
+{
+  "format_version": "1.8.0",
+  "minecraft:spawn_rules": {
+    "description": {
+      "identifier": "zombie:impaler",
+      "population_control": "monster"
+    },
+    "conditions": [
+      
+      {
+        "minecraft:brightness_filter": {
+          "max": 7,
+          "min": 0
+        },
+        "minecraft:spawns_above_block_filter": {
+          "blocks": "zombie:infected_grass_block",
+          "distance": 10
+        },
+        "minecraft:weight": {
+            "default": 100
+        },
+        "minecraft:spawns_on_surface": {},
+        "minecraft:spawns_underground": {}
+      }
+    ]
+  }
+}

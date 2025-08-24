@@ -1,0 +1,35 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "zombie:infected_leaves_no_tick",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:display_name": "Infected Leaves",
+       "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1.5
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 1200
+      },
+      "minecraft:map_color": "#3C44AA",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "zombie_infected_leaves",
+          "render_method": "blend_to_opaque",
+          "tint_method": "default_foliage",
+          "ambient_occlusion": true,
+          "face_dimming": true,
+          "isotropic": true
+        }
+      },
+      "minecraft:redstone_conductivity": {"allows_wire_to_step_down": true,
+    "redstone_conductor": false},
+    "minecraft:light_dampening": 4
+    }
+  }
+}

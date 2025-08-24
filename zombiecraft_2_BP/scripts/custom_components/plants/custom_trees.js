@@ -4,7 +4,7 @@ import { world} from "@minecraft/server";
 export class RedwoodGrowthComponent {
     static tryGrowBlock(block /** @type Block */) {
         const perm = block.permutation;
-        const age = perm.getState("starter:crop_age");
+        const age = perm.getState("zombie:crop_age");
         if (age === undefined || typeof age !== "number") {
             return;
         }
@@ -12,65 +12,104 @@ export class RedwoodGrowthComponent {
             RedwoodGrowthComponent.growRedwoodTree(block.location.x, block.location.y, block.location.z);
             return; // already at max age
         }
-        block.setPermutation(perm.withState("starter:crop_age", age + 1));
+        block.setPermutation(perm.withState("zombie:crop_age", age + 1));
     }
 
-    static growRedwoodTree(x, y, z) {
-        // Define size variants for trunk height and canopy size
-        const minTrunkHeight = 10;  // Minimum trunk height
-        const maxTrunkHeight = 30;  // Maximum trunk height
-        const trunkHeight = minTrunkHeight + Math.floor(Math.random() * (maxTrunkHeight - minTrunkHeight + 1));
+static growRedwoodTree(x, y, z) {
+  const dim = world.getDimension("overworld");
+  const LOG = "zombie:redwood_log";
+  const LEAVES = "zombie:redwood_leaves";
 
-        const minLeafRadius = 2;  // Minimum leaf radius
-        const maxLeafRadius = 6;  // Maximum leaf radius
-        const leafRadius = minLeafRadius + Math.floor(Math.random() * (maxLeafRadius - minLeafRadius + 1));
+  const trunkHeight = 38 + Math.floor(Math.random() * 12); // 28–39
+  const baseX = x - 1, baseZ = z - 1;
 
-        const leafDensity = Math.floor(trunkHeight / 2); // Canopy extends down to midway down the trunk
-
-        const dimension = world.getDimension("overworld");
-
-        // Grow the trunk up to the height needed to accommodate the canopy
-        const trunkTopY = y + trunkHeight - leafDensity - 1; // Adjusted trunk height
-
-        for (let i = 0; i <= trunkTopY - y; i++) {
-            const block = dimension.getBlock({ x: x, y: y + i, z: z });
-            if (block) {
-                block.setType("zombie:redwood");
-            }
-        }
-
-        // Create the leaf canopy, outer layer only, wider at the bottom
-        const leafTopY = trunkTopY + leafDensity;
-
-        for (let dy = 0; dy <= leafDensity; dy++) {
-            const currentRadius = leafRadius - dy * (leafRadius / (leafDensity + 1)); // Narrower as you go up
-            const outerRadius = Math.ceil(currentRadius);
-
-            for (let dx = -outerRadius; dx <= outerRadius; dx++) {
-                for (let dz = -outerRadius; dz <= outerRadius; dz++) {
-                    const distance = Math.sqrt(dx * dx + dz * dz); // Distance from center in horizontal plane
-
-                    const leafX = x + dx;
-                    const leafY = trunkTopY + dy; // Start from the top of the trunk and move upwards
-                    const leafZ = z + dz;
-
-                    const block = dimension.getBlock({ x: leafX, y: leafY, z: leafZ });
-
-                    if (block) {
-                        // Place leaves only on the outermost layer and ensure trunk remains solid
-                        if (distance >= currentRadius - 1 && distance <= currentRadius) {
-                            if (block.typeId === "minecraft:air") { // Check only for "minecraft:air"
-                                block.setType("zombie:redwood_leaves");
-                            }
-                        } else if (dx === 0 && dz === 0) {
-                            // Ensure trunk blocks are placed in the center
-                            block.setType("zombie:redwood");
-                        }
-                    }
-                }
-            }
-        }
+  // 4×4 trunk
+  for (let yy = 0; yy < trunkHeight; yy++) {
+    for (let tx = 0; tx < 4; tx++) {
+      for (let tz = 0; tz < 4; tz++) {
+        dim.getBlock({ x: baseX + tx, y: y + yy, z: baseZ + tz })?.setType(LOG);
+      }
     }
+  }
+  const trunkTopY = y + trunkHeight - 1;
+
+  // Top canopy dome
+  const capBaseR = 10 + Math.floor(Math.random() * 3); // 6–8
+  const capH = 5 + Math.floor(Math.random() * 2);     // 4–5
+  placeLeafDisc(x, trunkTopY - 1, z, Math.max(2, capBaseR - 1), false);
+  for (let h = 0; h < capH; h++) {
+    const r = capBaseR - Math.floor((capBaseR - 1) * (h / capH));
+    placeLeafDisc(x, trunkTopY + h, z, r, false);
+  }
+
+  // Whorled branches (unchanged)
+  const dirs = [
+    { dx:  1, dz:  0 }, { dx: -1, dz:  0 }, { dx: 0, dz:  1 }, { dx: 0, dz: -1 },
+    { dx:  1, dz:  1 }, { dx: -1, dz:  1 }, { dx: 1, dz: -1 }, { dx: -1, dz: -1 },
+  ];
+  const whorls = 2 + Math.floor(Math.random() * 2);
+  const crownBaseY = trunkTopY - 4;
+  for (let w = 0; w < whorls; w++) {
+    const levelY = crownBaseY - w * 4 - Math.floor(Math.random() * 2);
+    for (const d of dirs) {
+      const len = 4 + Math.floor(Math.random() * 4);
+      let bx = x, by = levelY, bz = z;
+      for (let t = 0; t < len; t++) {
+        bx += d.dx; bz += d.dz;
+        if (t % 2 === 0 && Math.random() < 0.7) by++;
+        dim.getBlock({ x: bx, y: by, z: bz })?.setType(LOG);
+      }
+      placeLeafBall(bx, by, bz, 2 + (Math.random() < 0.35 ? 1 : 0));
+      placeLeafBall(bx, by - 1, bz, 1);
+    }
+  }
+
+  // --- FIX: spire wrapped with leaves + collar so no exposed logs ---
+  const spireH = 3 + Math.floor(Math.random() * 3); // 3–5
+  for (let i = 0; i < spireH; i++) {
+    const sy = trunkTopY + capH + i;
+    dim.getBlock({ x, y: sy, z })?.setType(LOG);
+    const r = Math.max(1, 2 - Math.floor(i / 2));
+    // was skipCore=true — change to false so leaves hug the spire/log
+    placeLeafDisc(x, sy, z, r, false);
+  }
+  // collar right under the spire base to fully cap the top
+  placeLeafDisc(x, trunkTopY + capH - 1, z, 3, false);
+  placeLeafDisc(x, trunkTopY + capH,     z, 2, false);
+
+  // soft tip
+  placeLeafBall(x, trunkTopY + capH + spireH, z, 1);
+
+  // helpers
+  function placeLeafBall(cx, cy, cz, r) {
+    const r2 = r * r;
+    for (let dx = -r; dx <= r; dx++) {
+      for (let dy = -r; dy <= r; dy++) {
+        for (let dz = -r; dz <= r; dz++) {
+          if (dx * dx + dy * dy + dz * dz > r2) continue;
+          // keep leaves from replacing trunk core
+          if (Math.abs(cx + dx - x) <= 2 && Math.abs(cz + dz - z) <= 2 && cy + dy >= y) continue;
+          const b = dim.getBlock({ x: cx + dx, y: cy + dy, z: cz + dz });
+          if (b && b.typeId === "minecraft:air") b.setType(LEAVES);
+        }
+      }
+    }
+  }
+
+  function placeLeafDisc(cx, cy, cz, r, skipCore) {
+    const r2 = r * r;
+    for (let dx = -r; dx <= r; dx++) {
+      for (let dz = -r; dz <= r; dz++) {
+        if (dx * dx + dz * dz > r2) continue;
+        if (skipCore && Math.abs(cx + dx - x) <= 2 && Math.abs(cz + dz - z) <= 2) continue;
+        const b = dim.getBlock({ x: cx + dx, y: cy, z: cz + dz });
+        if (b && b.typeId === "minecraft:air") b.setType(LEAVES);
+      }
+    }
+  }
+}
+
+
 
 
 

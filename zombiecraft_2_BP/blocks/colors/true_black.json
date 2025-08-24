@@ -1,0 +1,25 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "zombie:true_black",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "minecraft:display_name": "True Black",
+       "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 1200
+      },
+      "minecraft:map_color": "#1D1D21",
+      
+    "minecraft:redstone_conductivity": {"allows_wire_to_step_down": true,
+    "redstone_conductor": true},
+    "minecraft:light_dampening": 15
+    }
+  }
+}

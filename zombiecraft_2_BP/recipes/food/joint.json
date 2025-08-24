@@ -1,0 +1,30 @@
+{
+	"format_version": "1.21.100",
+	"minecraft:recipe_shapeless": {
+		"description": {
+			"identifier": "zombie:joint_recipe"
+		},
+		"unlock": [
+			{
+				"item": "zombie:happy_green_nug"
+			},
+			{
+				"item": "zombie:happy_purple_nug"
+			}
+		],
+		"tags": [
+			"crafting_table"
+		],
+		"ingredients": [
+			{
+				"item": "zombie:happy_green_nug"
+			},
+			{
+				"item": "zombie:happy_purple_nug"
+			}
+		],
+		"result": {
+			"item": "zombie:joint"
+		}
+	}
+}
