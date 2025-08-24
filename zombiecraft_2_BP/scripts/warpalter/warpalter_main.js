@@ -86,8 +86,9 @@ function openWarpMain(player) {
 }
 
 /*────────────────────────── Teleport: Spawn (charge) ───────────────────*/
-function confirmSpawnTeleport(player) {
+export function confirmSpawnTeleport(player) {
   const cost = numDP("economy_tpSpawnCost", 0);
+
   new MessageFormData()
     .title("Teleport to Spawn")
     .body(`Confirm teleporting to spawn?\n§7Cost: §e${cost} §4Z§2Coins`)
@@ -96,14 +97,33 @@ function confirmSpawnTeleport(player) {
     .show(player)
     .then(confirm => {
       if (confirm.selection !== 0) return;
-      const spawnCoords = world.getDynamicProperty("worldspawn");
-      if (!spawnCoords || typeof spawnCoords !== "string") {
+
+      let raw = world.getDynamicProperty("worldspawn");
+      if (typeof raw !== "string") {
         player.sendMessage("§cSpawn not set.");
         return;
       }
-      if (!charge(player, cost, "TP to Spawn")) return;
 
-      const [x, y, z] = spawnCoords.split(" ").map(Number);
+      // Inline parse: JSON OR "dim|x y z" OR "x y z"
+      let x, y, z;
+      let s = raw.trim();
+      if (s.startsWith("{")) {
+        try {
+          const o = JSON.parse(s);
+          x = Number(o?.x); y = Number(o?.y); z = Number(o?.z);
+        } catch { /* fall through */ }
+      }
+      if (![x, y, z].every(Number.isFinite)) {
+        if (s.includes("|")) s = s.split("|", 2)[1].trim();
+        const parts = s.split(/\s+/);
+        x = Number(parts[0]); y = Number(parts[1]); z = Number(parts[2]);
+      }
+      if (![x, y, z].every(Number.isFinite)) {
+        player.sendMessage("§cSpawn not set.");
+        return;
+      }
+
+      if (!charge(player, cost, "TP to Spawn")) return;
       const overworld = world.getDimension("minecraft:overworld");
       player.teleport({ x, y, z }, { dimension: overworld });
     });

@@ -3,11 +3,14 @@
   "minecraft:block": {
     "description": {
       "identifier": "zombie:infected_leaves",
-      "menu_category": {
-        "category": "construction"
+        "menu_category": { "category": "nature" },
+      "states": {
+        "zombie:leaves_state": [0, 1, 2] 
       }
     },
     "components": {
+      
+      "minecraft:flammable": { "destroy_chance_modifier": 20, "catch_chance_modifier": 5 },
       "minecraft:display_name": "Infected Leaves_ticking",
        "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 1.5
@@ -36,6 +39,25 @@
       "interval_range": [100,150],
       "looping": true
     }
-    }
+    },
+    
+    "permutations": [
+      {
+        "condition": "query.block_state('zombie:leaves_state') == 0",
+        "components": {
+          "minecraft:tick": { "interval_range": [5, 10], "looping": true },
+		  "zombie:leaves": {}
+        }
+      },
+      {
+        "condition": "query.block_state('zombie:leaves_state') == 2",
+        "components": {
+          "minecraft:tick": { "interval_range": [150, 300], "looping": true },
+		  "zombie:leaves": {}
+        }
+      }
+    ]
   }
 }
+
+  

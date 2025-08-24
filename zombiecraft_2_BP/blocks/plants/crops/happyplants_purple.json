@@ -113,6 +113,7 @@
 			}
 		],
 		"components": {
+			"minecraft:flammable": { "destroy_chance_modifier": 20, "catch_chance_modifier": 5 },
 			"minecraft:geometry": "geometry.happy_plant",
 			"minecraft:custom_components": [
 				"zombie:crop_grow"

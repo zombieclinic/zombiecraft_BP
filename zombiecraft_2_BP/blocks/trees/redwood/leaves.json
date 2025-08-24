@@ -1,29 +1,21 @@
 {
-	"format_version": "1.21.100",
-	"minecraft:block": {
-		"description": {
-			"identifier": "zombie:redwood_leaves",
-			"menu_category": {
-				"category": "nature"
-			},
-			"states": {
-				"zombie:leaves_state": [
-					0,
-					1
-				]
-			}
-		},
-		"components": {
-			"minecraft:collision_box": true,
-			"minecraft:selection_box": true,
-			"minecraft:destructible_by_mining": {
-				"seconds_to_destroy": 0.4
-			},
-			"minecraft:destructible_by_explosion": {
-				"explosion_resistance": 15
-			},
-			 "minecraft:material_instances": {
-        	"*": {
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "zombie:redwood_leaves",
+      "menu_category": { "category": "nature" },
+      "states": {
+        "zombie:leaves_state": [0, 1, 2] 
+      }
+    },
+
+    "components": {
+      "minecraft:collision_box": true,
+      "minecraft:selection_box": true,
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.4 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 15 },
+      "minecraft:material_instances": {
+        "*": {
           "texture": "zombie_redwood_leaves",
           "render_method": "blend_to_opaque",
           "tint_method": "default_foliage",
@@ -32,25 +24,33 @@
           "isotropic": true
         }
       },
-			"minecraft:flammable": {
-				"destroy_chance_modifier": 20,
-				"catch_chance_modifier": 5
-			},
-			"minecraft:geometry": "minecraft:geometry.full_block",
-			"minecraft:map_color": "#1C9414",
-			"minecraft:display_name": "Redwood Leaves",
-			"tag:wood": {},
-			"minecraft:light_dampening": 1,
-			"minecraft:light_emission": 0,
-			"minecraft:loot": "loot_tables/blocks/leaves/redwood_leaves_black.json",
-			"minecraft:tick": {
-      "interval_range": [200,250],
-      "looping": true
+      "minecraft:flammable": { "destroy_chance_modifier": 20, "catch_chance_modifier": 5 },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:map_color": "#1C9414",
+      "minecraft:display_name": "Redwood Leaves",
+      "tag:wood": {},
+      "minecraft:light_dampening": 1,
+      "minecraft:light_emission": 0,
+      "minecraft:loot": "loot_tables/blocks/leaves/redwood_leaves_black.json",
+      "minecraft:redstone_conductivity": { "allows_wire_to_step_down": true, "redstone_conductor": false }
+      
     },
-			"minecraft:redstone_conductivity": {"allows_wire_to_step_down": true,
-		"redstone_conductor": false},
-		"zombie:leaves": {}
-		
-		}
-	}
+
+    "permutations": [
+      {
+        "condition": "query.block_state('zombie:leaves_state') == 0",
+        "components": {
+          "minecraft:tick": { "interval_range": [5, 10], "looping": true },
+		  "zombie:leaves": {}
+        }
+      },
+      {
+        "condition": "query.block_state('zombie:leaves_state') == 2",
+        "components": {
+          "minecraft:tick": { "interval_range": [150, 300], "looping": true },
+		  "zombie:leaves": {}
+        }
+      }
+    ]
+  }
 }

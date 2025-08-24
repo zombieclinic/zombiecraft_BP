@@ -16,6 +16,7 @@
 			}
     },
     "components": {
+		"minecraft:flammable": { "destroy_chance_modifier": 20, "catch_chance_modifier": 5 },
       "minecraft:display_name": "Infected Log Stripped",
        "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 1
