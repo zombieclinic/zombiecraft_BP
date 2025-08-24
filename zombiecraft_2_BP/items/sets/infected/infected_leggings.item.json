@@ -10,7 +10,9 @@
 		},
 		"components": {
 			"minecraft:max_stack_size": 1,
-			
+			 "minecraft:display_name": {
+                "value": "Infected Leggings"
+            },
 			"minecraft:wearable": {
 				"slot": "slot.armor.legs",
 				"protection": 6

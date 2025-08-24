@@ -36,7 +36,7 @@ import {DayDream, Joint } from "./custom_components/food.js"
 import {Mailbox} from "./magic/mailbox.js"
 import {RedstoneComponent} from "./custom_components/redstone.js"
 import {AlligatorEgg} from "./custom_components/alligator_egg.js"
-import {InfectedGrass} from "./custom_components/infected/infected_generation"
+import {InfectedGrass, infectedAttack} from "./custom_components/infected/infected_generation"
 import {LeavesSelfDestructNearLog} from "./custom_components/plants/leaves.js"
 
 // ——— define your component‐lists ———
@@ -89,7 +89,8 @@ const ITEM_COMPONENTS = [
   ["zombie:paintings",           Painting],
   ["zombie:adminmenu",           AdminMenu],
   ["zombie:daydream",            DayDream],
-  ["zombie:joint",               Joint]
+  ["zombie:joint",               Joint],
+  ["zombie:infected_attack",      infectedAttack]
 ];
 
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry, itemComponentRegistry }) => {

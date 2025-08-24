@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "zombie:infected_sword_crafting" },
+    "tags": ["crafting_table"],
+    "unlock": [{ "item": "zombie:infected_tablet" }],
+    "pattern": [
+      "TD ",
+      " N ",
+      " S "
+    ],
+    "key": {
+      "T": { "item": "zombie:infected_tablet" },
+      "D": { "item": "minecraft:diamond" },
+      "N": { "item": "minecraft:netherite_ingot" },
+      "S": { "item": "minecraft:stick" }
+    },
+    "result": { "item": "zombie:infected_sword", "count": 1 }
+  }
+}
