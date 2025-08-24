@@ -38,6 +38,7 @@ import {RedstoneComponent} from "./custom_components/redstone.js"
 import {AlligatorEgg} from "./custom_components/alligator_egg.js"
 import {InfectedGrass, infectedAttack} from "./custom_components/infected/infected_generation"
 import {LeavesSelfDestructNearLog} from "./custom_components/plants/leaves.js"
+import {elfmenu} from "./christmas/elfmenu.js"
 
 // ——— define your component‐lists ———
 const BLOCK_COMPONENTS = [
@@ -151,49 +152,29 @@ system.runInterval(() => {
 
 
 
-world.afterEvents?.scriptEventReceive?.subscribe(ev => {
-  if (ev.id !== "zombie:mail_migrate") return;
-  const r = clampLegacyMailboxStacksToOne();
-  world.sendMessage(doneMsg(r));
+system.afterEvents.scriptEventReceive.subscribe(({ id, sourceEntity }) => {
+    // Ensure the event ID matches and the source entity (mob) exists
+    if (id !== "zombie:elfmenu" || !sourceEntity) return;
+
+    // Get the mob's position
+    const mobPos = sourceEntity.location;
+
+    // Find the nearest player to the mob
+    const nearestPlayer = [...world.getPlayers()].reduce((closest, player) => {
+        const distance = Math.sqrt(
+            Math.pow(player.location.x - mobPos.x, 2) +
+            Math.pow(player.location.y - mobPos.y, 2) +
+            Math.pow(player.location.z - mobPos.z, 2)
+        );
+        return !closest || distance < closest.distance
+            ? { player, distance }
+            : closest;
+    }, null)?.player;
+
+    // If a player is found, run the menu
+    if (nearestPlayer) {
+        elfmenu(nearestPlayer);
+    } else {
+        console.error("No player found near the mob.");
+    }
 });
-
-
-
-function clampLegacyMailboxStacksToOne() {
-  let mailboxes = 0, changedMailboxes = 0, changedEntries = 0;
-
-  for (const id of world.getDynamicPropertyIds()) {
-    if (!id.endsWith("|items")) continue;
-    mailboxes++;
-
-    const raw = world.getDynamicProperty(id);
-    if (!raw) continue;
-
-    let arr;
-    try { arr = JSON.parse(raw); } catch { continue; }
-
-    let changed = false;
-    for (const m of arr) {
-      if (!m) continue;
-      // Legacy entries may have inflated amounts; clamp to 1 and mark version
-      if (typeof m.amount === "number" && m.amount > 1) {
-        m.amount = 1;
-        if (!m.v) m.v = 2;
-        changed = true;
-        changedEntries++;
-      }
-    }
-
-    if (changed) {
-      world.setDynamicProperty(id, JSON.stringify(arr));
-      changedMailboxes++;
-    }
-  }
-
-  return { mailboxes, changedMailboxes, changedEntries };
-}
-
-function doneMsg(r) {
-  return `§aMailbox migration complete: checked ${r.mailboxes} boxes, `
-       + `fixed ${r.changedEntries} entries in ${r.changedMailboxes} boxes.`;
-}

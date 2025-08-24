@@ -378,57 +378,31 @@ export class ColorLights {
 
 
 export class SantaSword {
-    onUse(arg) {
-      const player      = arg.source;
-      const playerName  = player.name;
-      const objectiveId = "mana";
-  
-      // ── 1) ensure the objective exists ───────────────────────────────
-      let obj = world.scoreboard.getObjective(objectiveId);
-      if (!obj) {
-        // create it if missing
-        player.runCommand(
-          `scoreboard objectives add ${objectiveId} dummy Mana`
-        );
-        obj = world.scoreboard.getObjective(objectiveId);
-      }
-  
-      // ── 2) read current mana ────────────────────────────────────────
-      const currentMana = obj.getScore(player);
-  
-      // ── 3) bail out if <10 with red text (no animation/effects) ────
-      if (currentMana < 10) {
-        player.runCommand(
-          `tellraw ${playerName} {"rawtext":[{"text":"§cNot enough mana!"}]}`
-        );
-        return;
-      }
-  
-      // ── 4) deduct 10 mana & compute new total ───────────────────────
-      const newMana = currentMana - 10;
-      // you can use “remove” or “set”; here we’ll set to be exact:
-      player.runCommand(
-        `scoreboard players set ${playerName} ${objectiveId} ${newMana}`
-      );
-  
-      // ── 5) show the new total in blue §9 ────────────────────────────
-      player.runCommand(
-        `tellraw ${playerName} {"rawtext":[{"text":"§9Your mana: ${newMana}"}]}`
-      );
-  
-      // ── 6) now do your ability ──────────────────────────────────────
+  onUse(arg) {
+    const player = arg?.source;
+    if (!player) return;
+
+    try {
+      // play swing anim & mark self so we don't hit ourselves
       player.playAnimation("animation.santasword_swing_melee.tpp_swing_melee");
       player.runCommand("tag @s add dual");
-      player.runCommand(
-        "damage @e[r=3,tag=!dual] 15 entity_attack entity @s"
-      );
-      player.runCommand("effect @e[r=3,tag=!dual] slowness 2 5");
+
+      // hit nearby entities and slow them briefly
+      player.runCommand("damage @e[r=3,tag=!dual] 5 entity_attack entity @s");
+      player.runCommand("effect @e[r=3,tag=!dual] slowness 2 1");
       player.runCommand("playsound game.player.attack.nodamage @s");
+
+      // clear the safety tag next tick
       system.runTimeout(() => {
-        player.runCommand("tag @s remove dual");
+        // if the player died/despawned, this will just no-op
+        try { player.runCommand("tag @s remove dual"); } catch {}
       }, 1);
+    } catch (e) {
+      // swallow command errors quietly
     }
   }
+}
+
 
 
 export class Open2 {

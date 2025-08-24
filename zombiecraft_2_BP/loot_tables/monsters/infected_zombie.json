@@ -33,7 +33,7 @@
         },
         {
           "condition": "random_chance_with_looting",
-          "chance": 0.025,
+          "chance": 0.1,
           "looting_multiplier": 0.01
         }
       ],
@@ -42,6 +42,11 @@
         {
           "type": "item",
           "name": "zombie:infected_goo",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "zombie:infected_alive_grass",
           "weight": 1
         }
       ]

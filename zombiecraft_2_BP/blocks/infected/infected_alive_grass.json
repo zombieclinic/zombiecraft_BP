@@ -20,7 +20,7 @@
             "redstone_conductor": false
         },
         "tag:minecraft:is_shovel_item_destructible": {},
-        "minecraft:tick": {"interval_range": [150,200],
+        "minecraft:tick": {"interval_range": [350,400],
     "looping": true},
     "zombie:infected_spread": {}
         }

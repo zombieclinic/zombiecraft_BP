@@ -1,0 +1,35 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:spawn_rules": {
+    "description": {
+      "identifier": "zombie:smilodon",
+      "population_control": "monster"
+    },
+    "conditions": [
+      {
+        "minecraft:brightness_filter": { "min": 0, "max": 4, "adjust_for_weather": true },
+        "minecraft:spawns_on_surface": {},
+         "minecraft:height_filter": { "min": 0, "max": 320 },
+        "minecraft:spawns_underground": {},
+        "minecraft:herd": { "min_size": 1, "max_size": 2},
+        "minecraft:biome_filter": {
+          "any_of": [
+            { "test": "has_biome_tag", "operator": "==", "value": "savanna" },
+            { "test": "has_biome_tag", "operator": "==", "value": "plains"  },
+            { "test": "has_biome_tag", "operator": "==", "value": "forest"  },
+            { "test": "has_biome_tag", "operator": "==", "value": "jungle"  },
+            { "test": "has_biome_tag", "operator": "==", "value": "cold" },
+            { "test": "has_biome_tag", "operator": "==", "value": "frozen" },
+            { "test": "has_biome_tag", "operator": "==", "value": "snowy_slopes" },
+            { "test": "has_biome_tag", "operator": "==", "value": "frozen_peaks" },
+            { "test": "has_biome_tag", "operator": "==", "value": "jagged_peaks" },
+            { "test": "has_biome_tag", "operator": "==", "value": "grove" },
+            { "test": "has_biome_tag", "operator": "==", "value": "ice" },
+            { "test": "has_biome_tag", "operator": "==", "value": "ice_plains" },
+            { "test": "has_biome_tag", "operator": "==", "value": "mountain" }
+          ]
+        }
+      }
+    ]
+  }
+}

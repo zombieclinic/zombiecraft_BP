@@ -81,7 +81,10 @@
                     "value": 0.10
                 },
                 "minecraft:ageable": {
-                    "duration": 1200,
+                    "duration": 500,
+					"feed_items": [
+						"minecraft:bone_meal"
+					],
                     "grow_up": {
                         "event": "grow_up",
                         "target": "self"
@@ -90,6 +93,9 @@
 
             },
             "shroomling_tamed": {
+				"minecraft:behavior.stay_while_sitting": {
+				"priority": 0
+			},
 				"minecraft:is_tamed": {},
 				"minecraft:health": {
 					"value": 20,
@@ -199,10 +205,6 @@
 					"bone_meal"
 				]
 			},
-			"minecraft:behavior.follow_parent": {
-				"priority": 5,
-				"speed_multiplier": 1.1
-			},
 			"minecraft:behavior.random_stroll": {
 				"priority": 6,
 				"speed_multiplier": 0.8
@@ -217,15 +219,6 @@
 				"soft_distance": 4,
 				"hard_distance": 6,
 				"max_distance": 10
-			},
-			"minecraft:behavior.stay_while_sitting": {
-				"priority": 3
-			},
-			"minecraft:behavior.mount_pathing": {
-				"priority": 2,
-				"speed_multiplier": 1.5,
-				"target_dist": 0,
-				"track_target": true
 			}
 		},
         "events": {
@@ -300,7 +293,7 @@
                 },
                 "remove": {
                     "component_groups": [
-                        "shroomling_wild"
+                        "shroomling_baby"
                     ]
                 }
             }
